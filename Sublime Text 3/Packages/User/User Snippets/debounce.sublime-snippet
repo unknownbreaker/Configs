@@ -1,0 +1,37 @@
+<snippet>
+  <content><![CDATA[
+(function ($, sr) {
+  var debounce = function (func, threshold, execAsap) {
+    var timeout
+
+    return function debounced () {
+      var obj = this
+      var args = arguments
+      function delayed () {
+        if (!execAsap) {
+          func.apply(obj, args)
+        }
+        timeout = null
+      }
+
+      if (timeout) {
+        clearTimeout(timeout)
+      } else if (execAsap) {
+        func.apply(obj, args)
+      }
+      timeout = setTimeout(delayed, threshold || 100)
+    }
+  }
+
+  $.fn[sr] = function (fn) {
+    return fn ? this.bind('${1:event}.${2:namespace}', debounce(fn)) : this.trigger(sr)
+  }
+})($, '${3:custom event name}')
+
+]]></content>
+<tabTrigger>debounce</tabTrigger>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <!-- <tabTrigger>hello</tabTrigger> -->
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+</snippet>

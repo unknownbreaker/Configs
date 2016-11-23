@@ -1,0 +1,3 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/Users/robertyang/Documents/Repos/Marvel/_quiz_game_video_data_marvel'

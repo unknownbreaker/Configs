@@ -1,0 +1,15 @@
+<snippet>
+  <content><![CDATA[
+function getPageView () {
+  var e = window._qb_ss[0].trackingId
+  var pvRegex = new RegExp('_qPageNum_' + e + '=([^;]+);')
+  var t = document.cookie.match(pvRegex) && document.cookie.match(pvRegex)[1]
+  return (t ? parseInt(t, 10) : 0) + 1
+}
+]]></content>
+<tabTrigger>getpageview</tabTrigger>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <!-- <tabTrigger>hello</tabTrigger> -->
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+</snippet>

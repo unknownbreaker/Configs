@@ -1,0 +1,16 @@
+<snippet>
+  <content><![CDATA[
+function rememberPreview (minutes) {
+    minutes = minutes || 15;
+    if (document.location.href.indexOf("etcForceCreative=") !== -1) {
+      var creative = document.location.href.match(/etcForceCreative=([^\&]+)(&|$)/);
+      var date = new Date();
+      date.setTime(date.getTime() + (minutes * 60 * 1000));
+      document.cookie = "smartserve_preview=true; expires=" + date.toGMTString() + "; path=/";
+      document.cookie = "etcForceCreative=[" + creative[1] + "]; expires=" + date.toUTCString() + "; path=/";
+    }
+  }
+]]></content>
+  <tabTrigger>rememberPreview</tabTrigger>
+  <scope>source.javascript</scope>
+</snippet>

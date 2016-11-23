@@ -1,0 +1,15 @@
+<snippet>
+  <content><![CDATA[
+var sendUVEvent = require('@qubit/send-uv-event')
+function sendEvent (action, moreExtras) {
+  var extras = { 'experiment_name': '${1:test name}' }
+  if (moreExtras) extras.data = moreExtras
+  sendUVEvent(action, options.meta, extras)
+}
+]]></content>
+<tabTrigger>sendevent</tabTrigger>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <!-- <tabTrigger>hello</tabTrigger> -->
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+</snippet>

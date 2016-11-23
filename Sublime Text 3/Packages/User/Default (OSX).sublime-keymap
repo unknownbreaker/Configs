@@ -1,0 +1,5 @@
+[
+  { "keys": ["super+shift+r"],  "command": "reindent" }, // Reindent lines.
+  { "keys": ["super+v"], "command": "paste_and_indent" }, // Remapping normal paste to paste with indent.
+  { "keys": ["super+shift+v"], "command": "paste" }
+]
