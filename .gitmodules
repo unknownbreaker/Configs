@@ -1,6 +1,6 @@
 [submodule "Sublime Text 3/Packages/LiveReload"]
 	path = Sublime Text 3/Packages/LiveReload
-	url = https://github.com/dz0ny/LiveReload-sublimetext2
+	url = https://github.com/alepez/LiveReload-sublimetext3
 [submodule "Vim/.vim/bundle/ctrlp.vim"]
 	path = Vim/.vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim
