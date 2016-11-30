@@ -184,13 +184,17 @@ alias boom='be rake db:drop; be rake db:create && be rake db:migrate'
 alias seed='be rake db:drop; be rake db:create && be rake db:migrate && be rake db:seed'
 alias booms='be rake db:drop; be rake db:create && be rake db:migrate && rails s'
 alias seeds='be rake db:drop; be rake db:create && be rake db:migrate && be rake db:seed && rails s'
-alias mkqa='be rake s cms_uri=http://cms.qa.diznee.net'
-alias mkprod='be rake s mtt_cms_api_uri=http://cms.diznee.net/'
 
 # ========= NODE =========
 
 export NVM_DIR="/Users/robertyang/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# ========= MARVELKIDS =========
+
+alias mkqa='be rake s cms_uri=http://cms.qa.diznee.net'
+alias mkprod='be rake s mtt_cms_api_uri=http://cms.diznee.net/'
+alias mktag='be rake matterhorn:release'
 
 # ========= QUBIT =========
 
