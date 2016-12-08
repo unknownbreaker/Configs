@@ -1,7 +1,5 @@
 "======NOTES======
 ".vimrc is NOT located in ~/ anymore.
-"Symbolically linked to ~/.vim so all
-" vim files together in one directory.
 "======NOTES======
 
 execute pathogen#infect()
