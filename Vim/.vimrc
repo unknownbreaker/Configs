@@ -13,6 +13,9 @@ endif
 colorscheme solarized
 set background=dark
 
+"Git commit message format
+autocmd Filetype gitcommit setlocal spell textwidth=65
+
 "Git gutter settings
 let g:gitgutter_max_signs = 500  " default value
 
