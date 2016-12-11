@@ -191,7 +191,8 @@ export NVM_DIR="/Users/robertyang/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # ========= MARVELKIDS =========
-
+# this command shuts off zsh's bracket recognition
+unsetopt nomatch
 alias mkqa='be rake s cms_uri=http://cms.qa.diznee.net'
 alias mkprod='be rake s mtt_cms_api_uri=http://cms.diznee.net/'
 alias mktag='be rake matterhorn:release'

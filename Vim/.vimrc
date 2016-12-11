@@ -1,7 +1,5 @@
 "======NOTES======
 ".vimrc is NOT located in ~/ anymore.
-"Symbolically linked to ~/.vim so all
-" vim files together in one directory.
 "======NOTES======
 
 execute pathogen#infect()
@@ -14,6 +12,9 @@ if !has("gui_running")
 endif
 colorscheme solarized
 set background=dark
+
+"Git commit message format
+autocmd Filetype gitcommit setlocal spell textwidth=65
 
 "Git gutter settings
 let g:gitgutter_max_signs = 500  " default value
