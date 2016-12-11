@@ -9,11 +9,11 @@ from datetime import timedelta
 
 ST3 = int(sublime.version()) >= 3000
 if ST3:
-    from .APlainTasksCommon import PlainTasksBase, PlainTasksEnabled, PlainTasksFold, get_all_projects_and_separators
+    from .APlainTasksCommon import PlainTasksBase, PlainTasksEnabled, PlainTasksFold
     MARK_SOON = sublime.DRAW_NO_FILL
     MARK_INVALID = sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE | sublime.DRAW_SQUIGGLY_UNDERLINE
 else:
-    from APlainTasksCommon import PlainTasksBase, PlainTasksEnabled, PlainTasksFold, get_all_projects_and_separators
+    from APlainTasksCommon import PlainTasksBase, PlainTasksEnabled, PlainTasksFold
     MARK_SOON = MARK_INVALID = 0
     sublime_plugin.ViewEventListener = object
 
@@ -22,6 +22,10 @@ try:  # unavailable dependencies shall not break basic functionality
     from dateutil import parser as dateutil_parser
 except:
     dateutil_parser = None
+
+
+if ST3:
+    locale.setlocale(locale.LC_ALL, '')
 
 
 def _convert_date(matchstr, now):
@@ -149,7 +153,7 @@ def expand_short_date(view, start, end, now, date_format):
     if '+' in text:
         date, error = increase_date(view, region, text, now, date_format)
     else:
-        date, error = convert_date(text, now)
+        date, error = parse_date(text, date_format, yearfirst=date_format.startswith(('%y', '%Y')), default=now)
 
     return date, error, sublime.Region(start, end + 1)
 
@@ -166,31 +170,45 @@ def parse_date(date_string, date_format='(%y-%m-%d %H:%M)', yearfirst=True, defa
     default
         datetime object (now)
     '''
+    try:
+        return datetime.strptime(date_string, date_format), None
+    except ValueError as e:
+        # print(e)
+        pass
     bare_date_string = date_string.strip('( )')
-    expanded_date, error = convert_date(bare_date_string, default)
-    if dateutil_parser:
-        try:
-            date = dateutil_parser.parse(expanded_date.strftime(date_format).strip('( )') if expanded_date else bare_date_string,
+    items = len(bare_date_string.split('-' if '-' in bare_date_string else '.'))
+    try:
+        if items < 2 and len(bare_date_string) < 3:
+            # e.g. @due(1) is always first day of next month,
+            # but dateutil consider it 1st day of current month
+            raise Exception("Special case of short date: less than 2 numbers")
+        if items < 3 and any(s in date_string for s in '-.'):
+            # e.g. @due(2-1) is always Fabruary 1st of next year,
+            # but dateutil consider it this year
+            raise Exception("Special case of short date: less than 3 numbers")
+        date = dateutil_parser.parse(bare_date_string,
                                      yearfirst=yearfirst,
                                      default=default)
-        except Exception as e:
-            date, error = None, e
+    except Exception as e:
+        # print(e)
+        date, error = convert_date(bare_date_string, default)
     else:
-        date = expanded_date
+        error = None
     return date, error
 
 
 def format_delta(view, delta):
+    delta -= timedelta(microseconds=delta.microseconds)
     if view.settings().get('decimal_minutes', False):
         days = delta.days
-        delta = u'%s%s%s%.2f' % (days or '', ' day, ' if days == 1 else '', ' days, ' if days > 1 else '', delta.seconds/3600.0)
+        delta = u'%s%s%s%s' % (days or '', ' day, ' if days == 1 else '', ' days, ' if days > 1 else '', '%.2f' % (delta.seconds / 3600.0) if delta.seconds else '')
     else:
         delta = str(delta)
     if delta[~6:] == '0:00:00':  # strip meaningless time
         delta = delta[:~6]
     elif delta[~2:] == ':00':  # strip meaningless seconds
         delta = delta[:~2]
-    return delta
+    return delta.strip(' ,')
 
 
 class PlainTasksToggleHighlightPastDue(PlainTasksEnabled):
@@ -206,9 +224,11 @@ class PlainTasksToggleHighlightPastDue(PlainTasksEnabled):
         dates_strings = []
         dates_regions = self.view.find_all(pattern, 0, '\\1', dates_strings)
         if not dates_regions:
+            if ST3:
+                self.view.settings().set('plain_tasks_remain_time_phantoms', [])
             return
 
-        past_due, due_soon, misformatted = self.group_due_tags(dates_strings, dates_regions)
+        past_due, due_soon, misformatted, phantoms = self.group_due_tags(dates_strings, dates_regions)
 
         scope_past_due = self.view.settings().get('scope_past_due', 'string.other.tag.todo.critical')
         scope_due_soon = self.view.settings().get('scope_due_soon', 'string.other.tag.todo.high')
@@ -217,12 +237,19 @@ class PlainTasksToggleHighlightPastDue(PlainTasksEnabled):
         self.view.add_regions('due_soon', due_soon, scope_due_soon, 'dot', MARK_SOON)
         self.view.add_regions('misformatted', misformatted, scope_misformatted, '', MARK_INVALID)
 
+        if not ST3:
+            return
+        if self.view.settings().get('show_remain_due', True):
+            self.view.settings().set('plain_tasks_remain_time_phantoms', phantoms)
+        else:
+            self.view.settings().set('plain_tasks_remain_time_phantoms', [])
+
     def group_due_tags(self, dates_strings, dates_regions):
-        past_due, due_soon, misformatted = [], [], []
+        past_due, due_soon, misformatted, phantoms = [], [], [], []
         date_format = self.view.settings().get('date_format', '(%y-%m-%d %H:%M)')
         yearfirst = date_format.startswith(('(%y', '(%Y'))
         now = datetime.now()
-        default = now - timedelta(seconds=1)  # for short dates w/o time
+        default = now - timedelta(seconds=now.second)  # for short dates w/o time
         due_soon_threshold = self.view.settings().get('highlight_due_soon', 24) * 60 * 60
 
         for i, region in enumerate(dates_regions):
@@ -240,14 +267,16 @@ class PlainTasksToggleHighlightPastDue(PlainTasksEnabled):
             else:
                 if now >= date:
                     past_due.append(region)
+                    phantoms.append((region.a, '-' + format_delta(self.view, default - date)))
                 else:
+                    phantoms.append((region.a, format_delta(self.view, date - default)))
                     if due_soon_threshold:
                         td = (date - now)
                         # timedelta.total_seconds() is not available in 2.6.x
                         time_left = (td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10.0**6
                         if time_left < due_soon_threshold:
                             due_soon.append(region)
-        return past_due, due_soon, misformatted
+        return past_due, due_soon, misformatted, phantoms
 
 
 class PlainTasksHLDue(sublime_plugin.EventListener):
@@ -298,7 +327,7 @@ class PlainTasksCalculateTotalTimeForProject(PlainTasksEnabled):
             t = json.loads(lasted_strings[i].replace('""', '"0"'))
             total += timedelta(days=int(t['days']),
                                hours=int(t['hours']) or int(t['dhours']),
-                               minutes=int(t['minutes']) or int(t['dminutes'])*60,
+                               minutes=int(t['minutes']) or int(t['dminutes']) * 60,
                                seconds=int(t['seconds']))
         return total, eol
 
@@ -327,7 +356,10 @@ class PlainTaskInsertDate(PlainTasksBase):
     def runCommand(self, edit, region=None, date=None):
         if region:
             y, m, d, H, M = date
-            self.view.replace(edit, sublime.Region(*region), datetime(y, m, d, H, M, 0).strftime(self.date_format) + ' ')
+            region = sublime.Region(*region)
+            self.view.replace(edit, region, datetime(y, m, d, H, M, 0).strftime(self.date_format) + ' ')
+            self.view.sel().clear()
+            self.view.sel().add(sublime.Region(self.view.line(region).b))
             return
 
         for s in reversed(list(self.view.sel())):
@@ -340,7 +372,8 @@ class PlainTasksReplaceShortDate(PlainTasksBase):
         date, error, region = expand_short_date(self.view, s.a, s.b, datetime.now(), self.date_format)
 
         if not date:
-            sublime.error_message('PlainTasks:\n\n'
+            sublime.error_message(
+                'PlainTasks:\n\n'
                 '{0}:\n days:\t{1}\n hours:\t{2}\n minutes:\t{3}\n'.format(*error) if len(error) == 4 else
                 '{0}:\n year:\t{1}\n month:\t{2}\n day:\t{3}\n HH:\t{4}\n MM:\t{5}\n'.format(*error))
             return
@@ -352,14 +385,16 @@ class PlainTasksReplaceShortDate(PlainTasksBase):
         self.view.sel().add(sublime.Region(offset, offset))
 
 
-class PlainTasksPreviewShortDate(sublime_plugin.ViewEventListener):
-    def __init__(self, view):
-        self.view = view
-        self.phantoms = sublime.PhantomSet(view, 'plain_tasks_preview_short_date')
-
+class PlainTasksViewEventListener(sublime_plugin.ViewEventListener):
     @classmethod
     def is_applicable(cls, settings):
         return settings.get('syntax') in ('Packages/PlainTasks/PlainTasks.sublime-syntax', 'Packages/PlainTasks/PlainTasks.tmLanguage')
+
+
+class PlainTasksPreviewShortDate(PlainTasksViewEventListener):
+    def __init__(self, view):
+        self.view = view
+        self.phantoms = sublime.PhantomSet(view, 'plain_tasks_preview_short_date')
 
     def on_selection_modified_async(self):
         self.phantoms.update([])  # https://github.com/SublimeTextIssues/Core/issues/1497
@@ -397,32 +432,45 @@ class PlainTasksChooseDate(sublime_plugin.ViewEventListener):
 
     @classmethod
     def is_applicable(cls, settings):
-        return settings.get('syntax') in ('Packages/PlainTasks/PlainTasks.sublime-syntax', 'Packages/PlainTasks/PlainTasks.tmLanguage')
+        return settings.get('show_calendar_on_tags')
 
     def on_selection_modified_async(self):
         s = self.view.sel()[0]
         if not (s.empty() and any('meta.tag.todo ' in self.view.scope_name(n) for n in (s.a, s.a - 1))):
             return
+        self.view.run_command('plain_tasks_calendar', {'point': s.a})
 
-        self.region, tag = self.extract_tag(s.a)
 
+class PlainTasksCalendar(sublime_plugin.TextCommand):
+    def run(self, edit, point=None):
+        point = point or self.view.sel()[0].a
+        self.region, tag = self.extract_tag(point)
         content = self.generate_calendar()
         self.view.show_popup(content, sublime.COOPERATE_WITH_AUTO_COMPLETE, self.region.a, 555, 555, self.action)
 
     def extract_tag(self, point):
+        '''point is cursor
+        Return tuple of two elements
+        Region
+            which will be replaced with chosen date, it may be parentheses belong to tag, or end of tag, or point
+        Unicode
+            tag under cursor (i.e. point)
+        '''
         start = end = point
-        limit = self.view.size()
-        while all(self.view.substr(start) != c for c in '@ \n'):
-            start -= 1
-            if start == 0:
+        tag_pattern = r'(?<=\s)(\@[^\(\) ,\.]+)([\w\d\.\(\)\-!? :\+]*)'
+        line = self.view.line(point)
+        matches = re.finditer(tag_pattern, self.view.substr(line))
+        for match in matches:
+            m_start = line.a + match.start(1)
+            m_end   = line.a + match.end(2)
+            if m_start <= point <= m_end:
+                start = line.a + match.start(2)
+                end   = m_end
                 break
-        while all(self.view.substr(end) != c for c in '@\n '):
-            if end == limit:
-                break
-            end += 1
-        tag = self.view.substr(sublime.Region(start, end))
-        parens = re.search(r'\(.+\)', tag)
-        return sublime.Region(end - (len(parens.group(0)) if parens else 0), end), tag
+        else:
+            match = None
+        tag = match.group(0) if match else ''
+        return sublime.Region(start, end), tag
 
     def generate_calendar(self, date=None):
         date = date or datetime.now()
@@ -466,7 +514,7 @@ class PlainTasksChooseDate(sublime_plugin.ViewEventListener):
             y, m, d, H, M = (int(i) for i in stamp.split('-'))
             months = ['<br>{5}<a href="year:{0}-{1}-{2}-{3}-{4}">{0}</a><br><br>'.format(y, m, d, H, M, ' ' * 8)]
             for i in range(1, 13):
-                months.append('{6}<a href="calendar:{0}-{1}-{2}-{3}-{4}">{5}</a> '.format(y, i, d, H, M, datetime(y, i, d, H, M, 0).strftime('%b'), '•' if i == m else ' '))
+                months.append('{6}<a href="calendar:{0}-{1}-{2}-{3}-{4}">{5}</a> '.format(y, i, d, H, M, datetime(y, i, 1, H, M, 0).strftime('%b'), '•' if i == m else ' '))
                 if i in (4, 8, 12):
                     months.append('<br><br>')
             self.view.update_popup(''.join(months))
@@ -497,6 +545,10 @@ class PlainTasksChooseDate(sublime_plugin.ViewEventListener):
 
         def calendar(stamp):
             y, m, d, H, M = (int(i) for i in stamp.split('-'))
+            if m == 2 and d > 28:
+                d = 28
+            elif d == 31 and m in (4, 6, 9, 11):
+                d = 30
             self.view.update_popup(self.generate_calendar(date=datetime(y, m, d, H, M, 0)))
 
         case = {
@@ -508,3 +560,22 @@ class PlainTasksChooseDate(sublime_plugin.ViewEventListener):
         }
         self.view.update_popup('Loading...')
         case[msg](stamp)
+
+
+class PlainTasksRemain(PlainTasksViewEventListener):
+    def __init__(self, view):
+        self.view = view
+        self.phantoms = sublime.PhantomSet(view, 'plain_tasks_remain_time')
+        self.view.settings().add_on_change('plain_tasks_remain_time_phantoms', self.update)
+
+    def update(self):
+        phantoms = self.view.settings().get('plain_tasks_remain_time_phantoms', [])
+        if not phantoms:
+            self.phantoms.update([])
+            return
+        self.phantoms.update([
+            sublime.Phantom(
+                sublime.Region(point),
+                '%s %s' % ('Overdue' if '-' in content else 'Remain', content.lstrip('-') or 'a little bit'),
+                sublime.LAYOUT_BELOW)
+            for point, content in phantoms])
