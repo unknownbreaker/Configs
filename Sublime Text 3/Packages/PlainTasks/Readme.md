@@ -176,6 +176,7 @@ Here is a list of PlainTasks’ specific settings:
 | **cancelled_tasks_bullet**     | `✘`              | `x` `[-]`                                                               |
 | **date_format**                | `(%y-%m-%d %H:%M)` | See [strfti.me](http://www.strfti.me/) for quick reference; detailed documentation: [ST2](https://docs.python.org/2.6/library/datetime.html#strftime-and-strptime-behavior), [ST3](https://docs.python.org/3.3/library/datetime.html#strftime-and-strptime-behavior) |
 | **done_tag**                   | true             | Determines whether done tasks should gain a `@done` tag or not          |
+| **done_date**                  | true             | Determines whether done tasks should gain a date or not                 |
 | **before_tasks_bullet_margin** | 1                | Determines the number of spaces (default indent) before the task bullet |
 | **project_tag**                | true             | Postfix archived task with project tag, otherwise prefix                |
 | **archive_name**               | `Archive:`       | Make sure it is the unique project name within your todo files          |
@@ -191,6 +192,10 @@ Here is a list of PlainTasks’ specific settings:
 | **icon_past_due**              | `"circle"`       | Gutter icon¹                                                            |
 | **icon_due_soon**              | `"dot"`          | Gutter icon¹                                                            |
 | **icon_misformatted**          | `""`             | Gutter icon¹                                                            |
+| **icon_critical**              | `""`             | Gutter icon¹                                                            |
+| **icon_high**                  | `""`             | Gutter icon¹                                                            |
+| **icon_low**                   | `""`             | Gutter icon¹                                                            |
+| **icon_today**                 | `""`             | Gutter icon¹                                                            |
 | **show_remain_due**            | true             | In Sublime 3, show remain or overdue time under due tags                |
 | **show_calendar_on_tags**      | false            | In Sublime 3, if true, automatically show date picker when cursor is on tag (you can get date picker any time via context menu) |
 

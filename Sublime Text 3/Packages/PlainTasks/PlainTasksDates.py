@@ -7,6 +7,7 @@ import calendar
 from datetime import datetime
 from datetime import timedelta
 
+NT = sublime.platform() == 'windows'
 ST3 = int(sublime.version()) >= 3000
 if ST3:
     from .APlainTasksCommon import PlainTasksBase, PlainTasksEnabled, PlainTasksFold
@@ -27,6 +28,10 @@ except:
 
 if ST3:
     locale.setlocale(locale.LC_ALL, '')
+
+
+def is_yearfirst(date_format):
+    return date_format.strip('( )').startswith(('%y', '%Y'))
 
 
 def _convert_date(matchstr, now):
@@ -99,7 +104,10 @@ def increase_date(view, region, text, now, date_format):
         line_content = view.substr(line)
         created = re.search(r'(?mxu)@created\(([\d\w,\.:\-\/ @]*)\)', line_content)
         if created:
-            created_date, error = parse_date(created.group(1), date_format=date_format, yearfirst=date_format.startswith(('%y', '%Y')), default=now)
+            created_date, error = parse_date(created.group(1),
+                                             date_format=date_format,
+                                             yearfirst=is_yearfirst(date_format),
+                                             default=now)
             if error:
                 ln = (view.rowcol(line.a)[0] + 1)
                 print(u'\nPlainTasks:\nError at line %d\n\t%s\ncaused by text:\n\t"%s"\n' % (ln, error, created.group(0)))
@@ -141,8 +149,6 @@ def increase_date(view, region, text, now, date_format):
 
 
 def expand_short_date(view, start, end, now, date_format):
-    date_format = date_format.strip('()')
-
     while view.substr(start) != '(':
         start -= 1
     while view.substr(end) != ')':
@@ -154,7 +160,7 @@ def expand_short_date(view, start, end, now, date_format):
     if '+' in text:
         date, error = increase_date(view, region, text, now, date_format)
     else:
-        date, error = parse_date(text, date_format, yearfirst=date_format.startswith(('%y', '%Y')), default=now)
+        date, error = parse_date(text, date_format, yearfirst=is_yearfirst(date_format), default=now)
 
     return date, error, sublime.Region(start, end + 1)
 
@@ -190,6 +196,8 @@ def parse_date(date_string, date_format='(%y-%m-%d %H:%M)', yearfirst=True, defa
         date = dateutil_parser.parse(bare_date_string,
                                      yearfirst=yearfirst,
                                      default=default)
+        if NT and all((date.year < 1900, '%y' in date_format)):
+            return None, ('format %y requires year >= 1900 on Windows', date.year, date.month, date.day, date.hour, date.minute)
     except Exception as e:
         # print(e)
         date, error = convert_date(bare_date_string, default)
@@ -251,7 +259,7 @@ class PlainTasksToggleHighlightPastDue(PlainTasksEnabled):
     def group_due_tags(self, dates_strings, dates_regions):
         past_due, due_soon, misformatted, phantoms = [], [], [], []
         date_format = self.view.settings().get('date_format', '(%y-%m-%d %H:%M)')
-        yearfirst = date_format.startswith(('(%y', '(%Y'))
+        yearfirst = is_yearfirst(date_format)
         now = datetime.now()
         default = now - timedelta(seconds=now.second, microseconds=now.microsecond)  # for short dates w/o time
         due_soon_threshold = self.view.settings().get('highlight_due_soon', 24) * 60 * 60
@@ -262,6 +270,7 @@ class PlainTasksToggleHighlightPastDue(PlainTasksEnabled):
             text = dates_strings[i]
             if '+' in text:
                 date, error = increase_date(self.view, region, text, default, date_format)
+                # print(date, date_format)
             else:
                 date, error = parse_date(text, date_format=date_format, yearfirst=yearfirst, default=default)
                 # print(date, date_format, yearfirst)
@@ -337,13 +346,13 @@ class PlainTasksCalculateTotalTimeForProject(PlainTasksEnabled):
 
 
 class PlainTasksCalculateTimeForTask(PlainTasksEnabled):
-    def run(self, edit, started_matches, toggle_matches, done_line_end, eol, tag='lasted'):
+    def run(self, edit, started_matches, toggle_matches, now, eol, tag='lasted'):
         if not started_matches:
             return
 
         date_format = self.view.settings().get('date_format', '(%y-%m-%d %H:%M)')
         start = datetime.strptime(started_matches[0], date_format)
-        end = datetime.strptime(done_line_end.replace('@done', '').replace('@cancelled', '').strip(), date_format)
+        end = datetime.strptime(now, date_format)
 
         toggle_times = [datetime.strptime(toggle, date_format) for toggle in toggle_matches]
         all_times = [start] + toggle_times + [end]
