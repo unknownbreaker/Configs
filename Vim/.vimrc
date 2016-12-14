@@ -3,7 +3,11 @@
 "======NOTES======
 
 execute pathogen#infect()
-syntax enable
+set nocompatible    "Run in Vim, not Vi
+syntax on
+filetype on	    "Enable filetype detection
+filetype indent on  "Enable filetype-specific indenting
+filetype plugin on  "Enable filetype-specific plugins
 
 "Solarized color scheme settings
 if !has("gui_running")
@@ -18,6 +22,9 @@ autocmd Filetype gitcommit setlocal spell textwidth=65
 
 "Git gutter settings
 let g:gitgutter_max_signs = 500  " default value
+
+"Tab completion
+let g:SuperTabDefaultCompletionType = "<c-p>"
 
 "Syntastic settings
 set statusline+=%#warningmsg#
@@ -37,24 +44,14 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "Code folding settings
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10      "deepest fold is 10 levels
-set nofoldenable        "dont fold by default
-"set foldlevel=1
-
-"JavaScript filetype settings
-autocmd FileType javascript set textwidth=79
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS "Auto enable JS Autocomplete
-
-
-"FORMATTING OPTIONS
-"Indenting rules
+":set foldmethod=indent   "fold based on indent
 :set softtabstop=2 "Convert tabs to spaces
 :set shiftwidth=2
-":set expandtab
+:set tabstop=2
+:set expandtab
 :set autoindent
 ":set smartindent
-:set nu                 "Enable line numbers
+":set nu                 "Enable line numbers
 :set relativenumber
 
 :set clipboard=unnamedplus "Set clipboard to + key.
@@ -62,8 +59,5 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS "Auto ena
 "Set *.md to be markdown files instead of Modula-2.
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-"Fire markdown preview
-filetype plugin indent on
-
-"Paste toggle shortcut"
+"Paste toggle shortcut
 set pastetoggle=<F2>

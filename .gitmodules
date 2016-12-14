@@ -28,3 +28,21 @@
 [submodule "Vim/.vim/bundle/vim-fugitive"]
 	path = Vim/.vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
+[submodule "Vim/.vim/bundle/supertab"]
+	path = Vim/.vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "Vim/.vim/bundle/vim-endwise"]
+	path = Vim/.vim/bundle/vim-endwise
+	url = https://github.com/tpope/vim-endwise.git
+[submodule "Vim/.vim/bundle/vim-cucumber"]
+	path = Vim/.vim/bundle/vim-cucumber
+	url = https://github.com/tpope/vim-cucumber.git
+[submodule "Vim/.vim/bundle/vim-ruby"]
+	path = Vim/.vim/bundle/vim-ruby
+	url = https://github.com/vim-ruby/vim-ruby.git
+[submodule "Vim/.vim/bundle/vim-markdown"]
+	path = Vim/.vim/bundle/vim-markdown
+	url = https://github.com/tpope/vim-markdown
+[submodule "Vim/.vim/bundle/vim-mustache-handlebars"]
+	path = Vim/.vim/bundle/vim-mustache-handlebars
+	url = git://github.com/mustache/vim-mustache-handlebars.git
