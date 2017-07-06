@@ -3,6 +3,8 @@
 export PATH="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/mysql/bin:$PYTHON_SHARE:$PATH"
 export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247/bin:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247@global/bin:/Users/robertyang/.rvm/rubies/ruby-2.0.0-p247/bin:/Users/robertyang/.rvm/bin:/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/mysql/bin::/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
 export PATH="$HOME/.rbenv/bin:$PATH"
+export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -193,9 +195,65 @@ export NVM_DIR="/Users/robertyang/.nvm"
 # ========= MARVELKIDS =========
 # this command shuts off zsh's bracket recognition
 unsetopt nomatch
-alias mkqa='be rake s cms_uri=http://cms.qa.diznee.net'
-alias mkprod='be rake s mtt_cms_api_uri=http://cms.diznee.net/'
+alias mklocal='be rake s cms_uri=http://cms.local.diznee.net:3003/ &'
+alias mklocalnetwork='cms_uri=http://cms.local.diznee.net:3003/ be rackup -o 172.21.58.235 &'
+alias mkqa='be rake s cms_uri=https://cms-qa.mh.disney.io/ &'
+alias mkqanetwork='cms_uri=https://cms-qa.mh.disney.io/ be rackup -o 172.21.58.235 &'
+alias mkprod='be rake s cms_uri=https://cms.matterhorn.disney.io/ &'
+alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o 172.21.58.235 &'
 alias mktag='be rake matterhorn:release'
+
+function startcms {
+  cd ~/Documents/Repos/Marvel/cms &&
+  mongod &
+  rails s -p 3003 -b 127.0.0.1 &
+  cd -
+}
+
+# ========= ANDROID EMULATOR FOR LOCAL SERVER DEBUG =========
+# remounts emulator to allow for briefly pushing a custom hosts file
+# must run this every time if want to view local server
+alias mkandroid='adb root && adb -s emulator-5554 remount && adb -s emulator-5554 push ~/Desktop/hosts /system/etc/hosts'
+
+function startandroid {
+  # (@) start-android
+  # If the emulator command exists on this device, displays a list of emulators
+  # and prompts the user to start one
+
+  # Check if the emulator command exists first
+  if ! type emulator > /dev/null; then
+    echo "emulator command not found"
+    exit 1
+  fi
+
+  # Gather emulators that exist on this computer
+  DEVICES=( $(emulator -list-avds 2>&1 ) )
+
+  # Display list of emulators
+  echo "Available Emulators
+  ----------------------------------------"
+  N=1
+  for DEVICE in ${DEVICES[@]}
+  do
+    echo "$N) $DEVICE"
+    let N=$N+1
+  done
+
+  # Request an emulator to start
+  read "?
+  Choose an emulator: " num
+
+  # If the input is valid, launch our emulator on a separate PID and exit
+  if [ $num -lt $N ] && [ $num -gt 0 ];
+  then
+    DEVICE=${DEVICES[$num]}
+    cd ~/Library/Android/sdk/tools && emulator "@$DEVICE" &
+    cd -
+  else
+    echo "Invalid Entry : $num"
+    exit 1
+  fi
+}
 
 # ========= QUBIT =========
 
