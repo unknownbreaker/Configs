@@ -5,6 +5,7 @@ export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247/bin:/Users/roberty
 export PATH="$HOME/.rbenv/bin:$PATH"
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export VAULT_ADDR="https://devkeys.disney.network"
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -195,12 +196,14 @@ export NVM_DIR="/Users/robertyang/.nvm"
 # ========= MARVELKIDS =========
 # this command shuts off zsh's bracket recognition
 unsetopt nomatch
-alias mklocal='be rake s cms_uri=http://cms.local.diznee.net:3003/ &'
-alias mklocalnetwork='cms_uri=http://cms.local.diznee.net:3003/ be rackup -o 172.21.58.235 &'
-alias mkqa='be rake s cms_uri=https://cms-qa.mh.disney.io/ &'
-alias mkqanetwork='cms_uri=https://cms-qa.mh.disney.io/ be rackup -o 172.21.58.235 &'
-alias mkprod='be rake s cms_uri=https://cms.matterhorn.disney.io/ &'
-alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o 172.21.58.235 &'
+alias mklocal='be rake s mtt_cms_api_uri=http://cms.local.diznee.net:3003/'
+alias mklocalnetwork='mtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o 172.21.58.235 &'
+alias mkqa='be rake s mtt_cms_api_uri=https://cms-qa.mh.disney.io/'
+alias mkqanetwork='mtt_cms_api_uri=https://cms-qa.mh.disney.io/ be rackup -o 172.21.58.235'
+alias mkdev1='be rake s mtt_cms_api_uri=https://cms-dev1.mh.disney.io/'
+alias mkdev1network='mtt_cms_api_uri=https://cms-dev1.mh.disney.io/ be rackup -o 172.21.58.235'
+alias mkprod='be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/'
+alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o 172.21.58.235'
 alias mktag='be rake matterhorn:release'
 
 function startcms {
