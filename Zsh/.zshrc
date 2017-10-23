@@ -76,6 +76,9 @@ plugins=(osx)
 
 source $ZSH/oh-my-zsh.sh
 
+# ============== TMUX ==============
+DISABLE_AUTO_TITLE=true
+
 # ============== SUBLIME ==============
 
 # alias nano="subl"
