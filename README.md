@@ -16,3 +16,11 @@ Syncing up all my settings.
 1. `git pull origin master` to update the local machine's settings.
 2. `git submodule init` to index the new submodules found in .gitmodules.
 3. `git submodule update` to download the plugin to the machine.
+
+#### Installing matcher
+```shell
+$ make
+# move `matcher` somewhere useful
+$ make install
+# make install will install it to /usr/local/bin.
+```
