@@ -181,7 +181,7 @@ eval "$(rbenv init -)"
 
 # Initialize rbenv
 
-rbenv global 2.3.1
+rbenv global 2.3.4
 # export RBENV_VERSION=1.9.3-p484
 
 # For my Ruby programs
