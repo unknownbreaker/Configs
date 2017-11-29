@@ -209,11 +209,41 @@ alias mkprod='be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/'
 alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o 172.21.58.235'
 alias mktag='be rake matterhorn:release'
 
-function startcms {
+function runmongo {
+  if pgrep -x "mongod" > /dev/null
+  then
+    echo "Mongo is running"
+  else
+    mongod &
+  fi
+}
+
+function mkcms {
+  CURR_DIR=$(pwd)
   cd ~/Documents/Repos/Marvel/cms &&
-  mongod &
+  
+  runmongo
+
   rails s -p 3003 -b 127.0.0.1 &
-  cd -
+  open http://cms.local.diznee.net:3003
+
+  if [ "$PWD" != CURR_DIR ]; then
+    cd -
+  fi
+}
+
+function mkcore {
+  CURR_DIR=$(pwd)
+  cd ~/Documents/Repos/Marvel/core &&
+
+  runmongo
+
+  rails s -p 3000 -b 127.0.0.1 &
+  open http://core.local.diznee.net:3000
+
+  if [ "$PWD" != CURR_DIR ]; then
+    cd -
+  fi
 }
 
 # ========= ANDROID EMULATOR FOR LOCAL SERVER DEBUG =========
