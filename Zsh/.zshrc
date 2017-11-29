@@ -5,6 +5,7 @@ export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247/bin:/Users/roberty
 export PATH="$HOME/.rbenv/bin:$PATH"
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export PATH=$PATH:/usr/local/share/npm/bin/
 export VAULT_ADDR="https://devkeys.disney.network"
 
 # Added by the Heroku Toolbelt
@@ -193,8 +194,7 @@ alias seeds='be rake db:drop; be rake db:create && be rake db:migrate && be rake
 
 # ========= NODE =========
 
-export NVM_DIR="/Users/robertyang/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+eval "$(nodenv init -)"
 
 # ========= MARVELKIDS =========
 # this command shuts off zsh's bracket recognition
