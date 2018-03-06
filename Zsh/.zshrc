@@ -200,13 +200,13 @@ eval "$(nodenv init -)"
 # this command shuts off zsh's bracket recognition
 unsetopt nomatch
 alias mklocal='be rake s mtt_cms_api_uri=http://cms.local.diznee.net:3003/'
-alias mklocalnetwork='mtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o 172.21.58.235 &'
+alias mklocalnetwork='mtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o 172.21.58.137 &'
 alias mkqa='be rake s mtt_cms_api_uri=https://cms-qa.mh.disney.io/'
-alias mkqanetwork='mtt_cms_api_uri=https://cms-qa.mh.disney.io/ be rackup -o 172.21.58.235'
+alias mkqanetwork='mtt_cms_api_uri=https://cms-qa.mh.disney.io/ be rackup -o 172.21.58.137'
 alias mkdev1='be rake s mtt_cms_api_uri=https://cms-dev1.mh.disney.io/'
-alias mkdev1network='mtt_cms_api_uri=https://cms-dev1.mh.disney.io/ be rackup -o 172.21.58.235'
+alias mkdev1network='mtt_cms_api_uri=https://cms-dev1.mh.disney.io/ be rackup -o 172.21.58.137'
 alias mkprod='be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/'
-alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o 172.21.58.235'
+alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o 172.21.58.137'
 alias mktag='be rake matterhorn:release'
 
 function runmongo {
@@ -249,7 +249,7 @@ function mkcore {
 # ========= ANDROID EMULATOR FOR LOCAL SERVER DEBUG =========
 # remounts emulator to allow for briefly pushing a custom hosts file
 # must run this every time if want to view local server
-alias mkandroid='adb root && adb -s emulator-5554 remount && adb -s emulator-5554 push ~/Desktop/hosts /system/etc/hosts'
+alias mkandroid='adb root && adb -s emulator-5554 remount && adb -s emulator-5554 push ~/Documents/Configs/Android/hosts /system/etc/hosts'
 
 function startandroid {
   # (@) start-android
@@ -283,8 +283,9 @@ function startandroid {
   if [ $num -lt $N ] && [ $num -gt 0 ];
   then
     DEVICE=${DEVICES[$num]}
-    cd ~/Library/Android/sdk/tools && emulator "@$DEVICE" &
+    cd ~/Library/Android/sdk/tools && emulator -writable-system "@$DEVICE" -http-proxy 172.21.58.137:8888 &
     cd -
+    mkandroid &
   else
     echo "Invalid Entry : $num"
     exit 1

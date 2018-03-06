@@ -1,0 +1,24 @@
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1    localhost rocketlocal.marvel.com groot-local.marvel.com
+255.255.255.255    broadcasthost
+        ::1             localhost rocketlocal.marvel.com groot-local.marvel.com
+192.168.33.10    devdev.marvel.com devdevelopers.marvel.com redeem.marvel.com redwing-local.marvel.com
+192.168.33.16     groot-api-local.marvel.com
+192.168.33.20    rocket-api-local.marvel.com
+192.168.33.75   lunella-local.marvel.com
+192.168.33.74   lunella-api-local.marvel.com
+192.168.100.149 loyalty-api-dev.marvel.com
+#192.168.100.106 redeem-dev.marvel.com #Mystique
+#192.168.100.106 redeem-qa.marvel.com #Mystique
+#192.168.100.126 redeem-qa.marvel.com #Gargoyle
+
+10.0.2.2  www.marvelhq.com.local.diznee.net
+10.0.2.2  avengers.marvelhq.com.local.diznee.net
+10.0.2.2  spiderman.marvelhq.com.local.diznee.net
+10.0.2.2  guardiansofthegalaxy.marvelhq.com.local.diznee.net
+10.0.2.2  a.dilcdn.com.local.diznee.net
