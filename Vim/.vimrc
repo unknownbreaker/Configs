@@ -66,3 +66,7 @@ set pastetoggle=<F2>
 "Helps jump to first line of wrapped line.
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
+
+"Inserts blank line above/below without exiting Normal Mode
+map <Enter> o<ESC>
+map <S-Enter> O<ESC>
