@@ -49,3 +49,6 @@
 [submodule "Vim/.vim/bundle/nerdcommenter"]
 	path = Vim/.vim/bundle/nerdcommenter
 	url = git@github.com:scrooloose/nerdcommenter.git
+[submodule "Vim/.vim/bundle/cosco.vim"]
+	path = Vim/.vim/bundle/cosco.vim
+	url = git@github.com:lfilho/cosco.vim.git
