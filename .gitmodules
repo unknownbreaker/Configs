@@ -46,3 +46,6 @@
 [submodule "Vim/.vim/bundle/vim-mustache-handlebars"]
 	path = Vim/.vim/bundle/vim-mustache-handlebars
 	url = git://github.com/mustache/vim-mustache-handlebars.git
+[submodule "Vim/.vim/bundle/nerdcommenter"]
+	path = Vim/.vim/bundle/nerdcommenter
+	url = git@github.com:scrooloose/nerdcommenter.git
