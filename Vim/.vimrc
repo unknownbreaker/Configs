@@ -9,6 +9,8 @@ filetype on	    "Enable filetype detection
 filetype indent on  "Enable filetype-specific indenting
 filetype plugin on  "Enable filetype-specific plugins
 
+set rtp+=/usr/local/opt/fzf
+
 "Solarized color scheme settings
 if !has("gui_running")
   let g:solarized_termtrans=1
@@ -19,6 +21,15 @@ set background=dark
 
 "Git commit message format
 autocmd Filetype gitcommit setlocal spell textwidth=65
+
+"yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
 
 "Git gutter settings
 let g:gitgutter_max_signs = 500  " default value
@@ -40,8 +51,8 @@ let g:syntastic_javascript_checkers = ['jshint', 'eslint']
 
 "NERDtree settings
 "Opens a NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "Code folding settings
 ":set foldmethod=indent   "fold based on indent
@@ -52,9 +63,11 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 :set autoindent
 ":set smartindent
 ":set nu                 "Enable line numbers
-:set relativenumber
+:set number relativenumber
 
 :set clipboard=unnamedplus "Set clipboard to + key.
+:set hlsearch "Highlights search matches.
+:set incsearch "Displays match while typing it.
 
 "Set *.md to be markdown files instead of Modula-2.
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -67,6 +80,25 @@ set pastetoggle=<F2>
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
-"Inserts blank line above/below without exiting Normal Mode
-map <Enter> o<ESC>
-map <S-Enter> O<ESC>
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+let g:ackprg = 'ag --vimgrep'
