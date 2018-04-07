@@ -102,3 +102,14 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 let g:ackprg = 'ag --vimgrep'
+
+" Range jsbeautify
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
+autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+
+" Search strings and ignore regex forward slashes. 
+command! -nargs=1 S let @/ = escape('<args>', '\')
+nmap <Leader>S :execute(":S " . input('Regex-off: /'))<CR>

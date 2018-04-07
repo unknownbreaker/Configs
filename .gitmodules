@@ -52,3 +52,6 @@
 [submodule "Vim/.vim/bundle/cosco.vim"]
 	path = Vim/.vim/bundle/cosco.vim
 	url = git@github.com:lfilho/cosco.vim.git
+[submodule "Vim/.vim/bundle/vim-jsbeautify"]
+	path = Vim/.vim/bundle/vim-jsbeautify
+	url = git@github.com:maksimr/vim-jsbeautify.git
