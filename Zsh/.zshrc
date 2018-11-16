@@ -243,6 +243,13 @@ function mkcore {
   fi
 }
 
+# ========= COMPANION APP =========
+# QA JSON
+alias jqa='curl -H "Authorization: GAE 29958746-a0f7-46c6-92c7-be6676a75d57" https://cms-qa.api.mh.disney.io/frontend/app.marvelhq.com/page.json\?path\=%2Fcompanion-app-games'
+alias jprod='curl -H "Authorization: GAE 267d6fd8-2b52-4c73-a571-a7271edc6d77" https://cms.api.matterhorn.disney.io/frontend/app.marvelhq.com/page.json\?path\=%2Fcompanion-app-games'
+
+
+
 # ========= ANDROID EMULATOR FOR LOCAL SERVER DEBUG =========
 # remounts emulator to allow for briefly pushing a custom hosts file
 # must run this every time if want to view local server
@@ -350,3 +357,39 @@ function vi_mode_prompt_info() {
 # define right prompt, regardless of whether the theme defined it
 RPS1='$(vi_mode_prompt_info)'
 RPS2=$RPS1
+
+# Use ripgrep
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fzf-history-widget-accept() {
+fzf-history-widget
+  zle accept-line
+}
+zle     -N     fzf-history-widget-accept
+bindkey '^X^R' fzf-history-widget-accept
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# ======= SCRUM NOTES =======
+
+function scrum() {
+  today=$(date +%Y%m%d)
+
+  a="$today.md\n"
+  b="# YESTERDAY / THIS MORNING ============================================\n\n"
+  c="# AFTER TALKS ============================================\n\n"
+  d="# BLOCKERS ============================================\n\n"
+  e="# ANSWERS / UPDATES ============================================\n\n"
+  f="# TODAY ============================================\n\n"
+  g="# WFH / OOO / Offline ============================================\n\n"
+  h="# CONVERSATIONS / MEETINGS ============================================"
+
+  total="$a$b$c$d$e$f$g$h"
+
+  if [ -f scrum$today.md ]; then
+    echo "File already exists"
+  else
+    echo $total > scrum$today.md && echo "scrum$today.md has been created"
+  fi
+}
