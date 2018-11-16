@@ -374,22 +374,32 @@ bindkey '^X^R' fzf-history-widget-accept
 # ======= SCRUM NOTES =======
 
 function scrum() {
-  today=$(date +%Y%m%d)
-
-  a="$today.md\n"
-  b="# YESTERDAY / THIS MORNING ============================================\n\n"
-  c="# AFTER TALKS ============================================\n\n"
-  d="# BLOCKERS ============================================\n\n"
-  e="# ANSWERS / UPDATES ============================================\n\n"
-  f="# TODAY ============================================\n\n"
-  g="# WFH / OOO / Offline ============================================\n\n"
-  h="# CONVERSATIONS / MEETINGS ============================================"
-
-  total="$a$b$c$d$e$f$g$h"
-
-  if [ -f scrum$today.md ]; then
-    echo "File already exists"
+  stringDate=0
+  if [ $1 ]; then
+    stringDate=$1
   else
-    echo $total > scrum$today.md && echo "scrum$today.md has been created"
+    stringDate=$(date +%Y%m%d)
+  fi
+  filename=scrum$stringDate.md
+
+  scrum_line_a="$stringDate.md\n"
+  scrum_line_b="# YESTERDAY / THIS MORNING ============================================\n\n"
+  scrum_line_c="# AFTER TALKS ============================================\n\n"
+  scrum_line_d="# BLOCKERS ============================================\n\n"
+  scrum_line_e="# ANSWERS / UPDATES ============================================\n\n"
+  scrum_line_f="# TODAY ============================================\n\n"
+  scrum_line_g="# WFH / OOO / Offline ============================================\n\n"
+  scrum_line_h="# CONVERSATIONS / MEETINGS ============================================"
+
+  total="$scrum_line_a$scrum_line_b$scrum_line_c$scrum_line_d$scrum_line_e$scrum_line_f$scrum_line_g$scrum_line_h"
+
+  if [ -f $filename ]; then
+    scrum $(date -j -f %Y%m%d -v+1d "$stringDate" +%Y%m%d)
+  elif [ $(date -j -f %Y%m%d $stringDate +%A) == Sunday ]; then
+    scrum $(date -j -f %Y%m%d -v+1d "$stringDate" +%Y%m%d)
+  elif [ $(date -j -f %Y%m%d $stringDate +%A) == Saturday ]; then
+    scrum $(date -j -f %Y%m%d -v+2d "$stringDate" +%Y%m%d)
+  else
+    echo $total > scrum$stringDate.md && echo "scrum$stringDate.md has been created"
   fi
 }
