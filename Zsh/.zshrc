@@ -393,7 +393,7 @@ function scrum() {
   scrum_line_e="# ANSWERS / UPDATES ============================================\n\n"
   scrum_line_f="# TODAY ============================================\n\n"
   scrum_line_g="# WFH / OOO / Offline ============================================\n\n"
-  scrum_line_h="# CONVERSATIONS / MEETINGS ============================================"
+  scrum_line_h="# CONVERSATIONS / MEETINGS ============================================\n"
 
   total="$scrum_line_a$scrum_line_b$scrum_line_c$scrum_line_d$scrum_line_e$scrum_line_f$scrum_line_g$scrum_line_h"
 
