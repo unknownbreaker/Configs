@@ -6,6 +6,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=$PATH:/usr/local/share/npm/bin/
+export PATH=$PATH:/usr/local/bin/vim
 export VAULT_ADDR="https://devkeys.disney.network"
 
 # Added by the Heroku Toolbelt
@@ -181,6 +182,9 @@ eval "$(rbenv init -)"
 rbenv global 2.3.4
 # export RBENV_VERSION=1.9.3-p484
 
+# Fix Ruby server for High Sierra and Mojave
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 # For my Ruby programs
 alias be="bundle exec"
 alias console="be rake console"
@@ -197,13 +201,13 @@ eval "$(nodenv init -)"
 # this command shuts off zsh's bracket recognition
 unsetopt nomatch
 alias mklocal='be rake s mtt_cms_api_uri=http://cms.local.diznee.net:3003/'
-alias mklocalnetwork='mtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o 172.21.58.137 &'
+alias mklocalnetwork='mtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o "$(ipconfig getifaddr en0)" &'
 alias mkqa='be rake s mtt_cms_api_uri=https://cms-qa.mh.disney.io/'
-alias mkqanetwork='mtt_cms_api_uri=https://cms-qa.mh.disney.io/ be rackup -o 172.21.58.137'
+alias mkqanetwork='mtt_cms_api_uri=https://cms-qa.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
 alias mkdev1='be rake s mtt_cms_api_uri=https://cms-dev1.mh.disney.io/'
-alias mkdev1network='mtt_cms_api_uri=https://cms-dev1.mh.disney.io/ be rackup -o 172.21.58.137'
+alias mkdev1network='mtt_cms_api_uri=https://cms-dev1.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
 alias mkprod='be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/'
-alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o 172.21.58.137'
+alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
 alias mktag='be rake matterhorn:release'
 
 function runmongo {
@@ -287,7 +291,7 @@ function startandroid {
   if [ $num -lt $N ] && [ $num -gt 0 ];
   then
     DEVICE=${DEVICES[$num]}
-    cd ~/Library/Android/sdk/tools && emulator -writable-system "@$DEVICE" -http-proxy 172.21.58.137:8888 &
+    cd ~/Library/Android/sdk/tools && emulator -writable-system "@$DEVICE" -http-proxy "$(ipconfig getifaddr en0)":8888 &
     cd -
     mkandroid &
   else
