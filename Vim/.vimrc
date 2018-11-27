@@ -5,7 +5,7 @@
 execute pathogen#infect()
 set nocompatible    "Run in Vim, not Vi
 syntax on
-filetype on	    "Enable filetype detection
+filetype on     "Enable filetype detection
 filetype indent on  "Enable filetype-specific indenting
 filetype plugin on  "Enable filetype-specific plugins
 
@@ -48,6 +48,9 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "let g:syntastic_javascript_checkers = ['standard']
 let g:syntastic_javascript_checkers = ['jshint', 'eslint']
+let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_ruby_checkers = ['rubylint']
+let g:syntastic_html_checkers = ['jshint', 'eslint', 'jshint', 'stylelint']
 
 "NERDtree settings
 "Opens a NERDTree automatically when vim starts up if no files were specified
@@ -64,13 +67,14 @@ let g:syntastic_javascript_checkers = ['jshint', 'eslint']
 ":set smartindent
 ":set nu                 "Enable line numbers
 :set number relativenumber
+:set backspace=2 " make backspace work like most other programs
 
-:set clipboard=unnamedplus "Set clipboard to + key.
+":set clipboard=unnamedplus "Set clipboard to + key.
 :set hlsearch "Highlights search matches.
 :set incsearch "Displays match while typing it.
 
 "Set *.md to be markdown files instead of Modula-2.
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+"autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 "Paste toggle shortcut
 set pastetoggle=<F2>
@@ -113,3 +117,6 @@ autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 " Search strings and ignore regex forward slashes. 
 command! -nargs=1 S let @/ = escape('<args>', '\')
 nmap <Leader>S :execute(":S " . input('Regex-off: /'))<CR>
+
+" Vimwiki settings
+let g:vimwiki_hl_cb_checked = 2
