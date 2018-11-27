@@ -55,3 +55,6 @@
 [submodule "Vim/.vim/bundle/vim-jsbeautify"]
 	path = Vim/.vim/bundle/vim-jsbeautify
 	url = git@github.com:maksimr/vim-jsbeautify.git
+[submodule "Vim/.vim/bundle/vimwiki"]
+	path = Vim/.vim/bundle/vimwiki
+	url = git@github.com:vimwiki/vimwiki.git
