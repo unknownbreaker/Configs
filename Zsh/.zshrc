@@ -407,3 +407,6 @@ function scrum() {
     echo $total > scrum$stringDate.md && echo "scrum$stringDate.md has been created"
   fi
 }
+
+# Remove zcompdump file which interferes with autocomplete
+rm ~/.zcompdump*
