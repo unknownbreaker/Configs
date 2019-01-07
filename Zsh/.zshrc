@@ -72,8 +72,13 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 plugins=(osx)
+plugins=(zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
+
+# ============== ZSH AUTOSUGGESTIONS ==============
+# Ctrl + Space
+bindkey '^@' autosuggest-accept
 
 # ============== TMUX ==============
 DISABLE_AUTO_TITLE=true
