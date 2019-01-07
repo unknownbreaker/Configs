@@ -58,3 +58,6 @@
 [submodule "Vim/.vim/bundle/vimwiki"]
 	path = Vim/.vim/bundle/vimwiki
 	url = git@github.com:vimwiki/vimwiki.git
+[submodule "Zsh/.oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+	path = Zsh/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
