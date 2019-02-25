@@ -76,10 +76,6 @@ plugins=(zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
-# ============== ZSH AUTOSUGGESTIONS ==============
-# Ctrl + Space
-bindkey '^@' autosuggest-accept
-
 # ============== TMUX ==============
 DISABLE_AUTO_TITLE=true
 
@@ -379,6 +375,10 @@ zle     -N     fzf-history-widget-accept
 bindkey '^X^R' fzf-history-widget-accept
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# ============== ZSH AUTOSUGGESTIONS ==============
+# Ctrl + Space
+bindkey "^ " autosuggest-accept
 
 # ======= SCRUM NOTES =======
 
