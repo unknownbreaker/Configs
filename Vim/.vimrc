@@ -37,6 +37,9 @@ let g:gitgutter_max_signs = 500  " default value
 "Tab completion
 let g:SuperTabDefaultCompletionType = "<c-p>"
 
+"enhance YCM JS completion with Tern
+autocmd FileType javascript setlocal omnifunc=tern#Complete
+
 "Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -51,6 +54,33 @@ let g:syntastic_javascript_checkers = ['jshint', 'eslint']
 let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_ruby_checkers = ['rubylint']
 let g:syntastic_html_checkers = ['jshint', 'eslint', 'jshint', 'stylelint']
+
+"TernJS
+"enable keyboard shortcuts
+let g:tern_map_keys=1
+"show argument hints
+let g:tern_show_argument_hints='on_hold'
+
+"JSX
+let g:jsx_ext_required = 1
+
+"ack
+let g:ackprg = 'ag --nogroup --nocolor --no-column'
+"
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+"Mustache handle bars
+let g:mustache_abbreviations = 1
 
 "NERDtree settings
 "Opens a NERDTree automatically when vim starts up if no files were specified
@@ -105,6 +135,10 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
+" Set width of NERTree to 31 chars
+let NERDTreeWinSize = 1
+
+" Use ag instead of ack
 let g:ackprg = 'ag --vimgrep'
 
 " Range jsbeautify
@@ -120,3 +154,4 @@ nmap <Leader>S :execute(":S " . input('Regex-off: /'))<CR>
 
 " Vimwiki settings
 let g:vimwiki_hl_cb_checked = 2
+autocmd BufNewFile,BufReadPost *.wiki set filetype=vimwiki
