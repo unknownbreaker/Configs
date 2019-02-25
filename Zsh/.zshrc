@@ -292,7 +292,8 @@ function startandroid {
   if [ $num -lt $N ] && [ $num -gt 0 ];
   then
     DEVICE=${DEVICES[$num]}
-    cd ~/Library/Android/sdk/tools && emulator -writable-system "@$DEVICE" -http-proxy "$(ipconfig getifaddr en0)":8888 &
+    # cd ~/Library/Android/sdk/tools && emulator -writable-system "@$DEVICE" -http-proxy "$(ipconfig getifaddr en0)":8888 &
+    cd ~/Library/Android/sdk/tools && emulator -writable-system "@$DEVICE" & 
     cd -
     mkandroid &
   else
