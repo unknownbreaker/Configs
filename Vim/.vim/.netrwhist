@@ -1,4 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/Users/robertyang/Documents/Repos/Marvel/_quiz_game_video_data_marvel'
 let g:netrw_dirhist_2='/Users/ryang/Documents/Repos/Marvel/marvelkids'
+let g:netrw_dirhist_3='/Users/robertyang/Documents/Repos/Marvel/mint-package'
+let g:netrw_dirhist_4='/Users/robertyang/Documents/Repos/Marvel/mint-package/js'
+let g:netrw_dirhist_5='/Users/robertyang/Documents/Repos/Marvel/mint-package'
+let g:netrw_dirhist_6='/Users/robertyang/Documents/Repos/Work/Marvel/marvelkids/lib/marvel/views'
