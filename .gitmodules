@@ -78,7 +78,7 @@
 	url = git@github.com:tpope/vim-markdown
 [submodule "Vim/.vim/bundle/mustache"]
 	path = Vim/.vim/bundle/mustache
-	url = git://github.com/mustache
+	url = git@github.com:mustache/vim-mustache-handlebars
 [submodule "Vim/.vim/bundle/nerdcommenter"]
 	path = Vim/.vim/bundle/nerdcommenter
 	url = git@github.com:scrooloose/nerdcommenter.git
