@@ -76,7 +76,7 @@
 [submodule "Vim/.vim/bundle/vim-markdown"]
 	path = Vim/.vim/bundle/vim-markdown
 	url = git@github.com:tpope/vim-markdown
-[submodule "Vim/.vim/bundle/vim-mustache-handlebars"]
+[submodule "Vim/.vim/bundle/mustache"]
 	path = Vim/.vim/bundle/mustache
 	url = git://github.com/mustache/vim-mustache-handlebars.git
 [submodule "Vim/.vim/bundle/nerdcommenter"]
