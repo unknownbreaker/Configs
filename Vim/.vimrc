@@ -32,7 +32,8 @@ if has("clipboard")
 endif
 
 "Git gutter settings
-let g:gitgutter_max_signs = 500  " default value
+let g:gitgutter_max_signs = 1000  " default value
+let g:gitgutter_async = 0
 
 "Tab completion
 let g:SuperTabDefaultCompletionType = "<c-p>"
