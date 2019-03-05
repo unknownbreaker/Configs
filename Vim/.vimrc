@@ -137,7 +137,7 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 " Set width of NERTree to 31 chars
-let NERDTreeWinSize = 1
+let NERDTreeWinSize = 35
 
 " Use ag instead of ack
 let g:ackprg = 'ag --vimgrep'
