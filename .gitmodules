@@ -102,3 +102,6 @@
 [submodule "tmux/.tmux/plugins/tmux-resurrect"]
 	path = tmux/.tmux/plugins/tmux-resurrect
 	url = git@github.com:tmux-plugins/tmux-resurrect
+[submodule "Vim/.vim/bundle/vim-gutentags"]
+	path = Vim/.vim/bundle/vim-gutentags
+	url = git@github.com:ludovicchabant/vim-gutentags
