@@ -10,7 +10,31 @@ Syncing up all my settings.
 ## Vim
 ### Instructions
 ####Adding new plugins
-`git submodule add [path]` (This clones the repo but also adds to .gitmodules file and indexes it as a submodule.)
+`git submodule add [ssh path without .git] [path to submodule in repo]` (This clones the repo but also adds to .gitmodules file and indexes it as a submodule.)
+
+#### Setup system for plugins
+
+In case, the system is not setup yet, do the following:
+
+##### Install universal-ctags to support `vim-gutentags`.
+
+```
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+```
+
+##### Install YouCompleteMe
+
+After cloning all submodules within YouCompleteMe, go to the root and run:
+```
+install.sh
+```
+
+##### Install Silver Searcher
+
+Using ack.vim plugin to power searching in files. vimrc is hijacking it to use Ag instead. Install Silver Searcher:
+```
+brew install the_silver_searcher
+```
 
 #### Syncing plugins on different machine
 1. `git pull origin master` to update the local machine's settings.
