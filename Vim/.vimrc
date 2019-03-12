@@ -156,3 +156,6 @@ nmap <Leader>S :execute(":S " . input('Regex-off: /'))<CR>
 " Vimwiki settings
 let g:vimwiki_hl_cb_checked = 2
 autocmd BufNewFile,BufReadPost *.wiki set filetype=vimwiki
+
+" Ctags with CtrlP
+nnoremap <leader>. :CtrlPTag<cr>
