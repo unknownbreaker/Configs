@@ -72,7 +72,7 @@
 	url = git@github.com:tpope/vim-cucumber.git
 [submodule "Vim/.vim/bundle/vim-ruby"]
 	path = Vim/.vim/bundle/vim-ruby
-	url = git@github.com:vim-ruby/vim-ruby.git
+	url = git@github.com:vim-ruby
 [submodule "Vim/.vim/bundle/vim-markdown"]
 	path = Vim/.vim/bundle/vim-markdown
 	url = git@github.com:tpope/vim-markdown
