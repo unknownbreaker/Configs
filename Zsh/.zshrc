@@ -141,6 +141,12 @@ alias gp='git push'
 alias gpo='git push origin'
 alias glpfa='git log --pretty=format:"%s (%h)"'
 
+# Delete a commit
+function gd {
+  local commit=$1;
+  git rebase -p --onto $1^ $1
+}
+
 # Opens git config file
 alias gconf='e ~/.gitconfig'
 
@@ -165,7 +171,6 @@ function clone {
 
   git clone $url $repo && cd $repo && subl . && bundle install;
 }
-
 
 # ========= Postgres =========
 
