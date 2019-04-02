@@ -11,6 +11,11 @@ filetype plugin on  "Enable filetype-specific plugins
 
 set rtp+=/usr/local/opt/fzf
 
+"Enable persistent undo
+if has('persistent_undo')
+  set undofile
+  set undodir=$HOME/.vim/undo
+endif
 "Solarized color scheme settings
 if !has("gui_running")
   let g:solarized_termtrans=1
