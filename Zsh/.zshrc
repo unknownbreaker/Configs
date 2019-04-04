@@ -403,14 +403,15 @@ function scrum() {
 
   scrum_line_a="$stringDate.md\n"
   scrum_line_b="# YESTERDAY / THIS MORNING ============================================\n\n"
-  scrum_line_c="# AFTER TALKS ============================================\n\n"
-  scrum_line_d="# BLOCKERS ============================================\n\n"
-  scrum_line_e="# ANSWERS / UPDATES ============================================\n\n"
-  scrum_line_f="# TODAY ============================================\n\n"
-  scrum_line_g="# WFH / OOO / Offline ============================================\n\n"
-  scrum_line_h="# CONVERSATIONS / MEETINGS ============================================\n"
+  scrum_line_c="# FOR MY OWN RECORDS ============================================\n\n"
+  scrum_line_d="# AFTER TALKS ============================================\n\n"
+  scrum_line_e="# BLOCKERS ============================================\n\n"
+  scrum_line_f="# ANSWERS / UPDATES ============================================\n\n"
+  scrum_line_g="# TODAY ============================================\n\n"
+  scrum_line_h="# WFH / OOO / Offline ============================================\n\n"
+  scrum_line_i="# CONVERSATIONS / MEETINGS ============================================\n"
 
-  total="$scrum_line_a$scrum_line_b$scrum_line_c$scrum_line_d$scrum_line_e$scrum_line_f$scrum_line_g$scrum_line_h"
+  total="$scrum_line_a$scrum_line_b$scrum_line_c$scrum_line_d$scrum_line_e$scrum_line_f$scrum_line_g$scrum_line_h$scrum_line_i"
 
   if [ -f $filename ]; then
     scrum $(date -j -f %Y%m%d -v+1d "$stringDate" +%Y%m%d)
