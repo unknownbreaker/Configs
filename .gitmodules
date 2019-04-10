@@ -105,3 +105,9 @@
 [submodule "Vim/.vim/bundle/vim-gutentags"]
 	path = Vim/.vim/bundle/vim-gutentags
 	url = git@github.com:ludovicchabant/vim-gutentags
+[submodule "Vim/.vim/bundle/start"]
+	path = Vim/.vim/bundle/start
+	url = git@github.com:tpope/vim-sleuth.git
+[submodule "Vim/.vim/bundle/commentary"]
+	path = Vim/.vim/bundle/commentary
+	url = git@github.com:tpope/vim-commentary.git
