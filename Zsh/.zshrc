@@ -232,6 +232,14 @@ function mk {
     else
       be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/ &
     fi
+  elif [[ ${env} == 'local' ]]
+  then
+    if [[ ${net} == 'network' ]]
+    then
+      mmtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o "$(ipconfig getifaddr en0)" &
+    else
+      be rake s mtt_cms_api_uri=http://cms.local.diznee.net:3003/ &
+    fi
   else
     if [[ ${net} == 'network' ]]
     then
