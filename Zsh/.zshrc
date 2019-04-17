@@ -220,6 +220,28 @@ alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup
 alias mktag='be rake matterhorn:release'
 alias cdmk='cd ~/Documents/Repos/*/marvelkids'
 
+function mk {
+  local env=$1
+  local net=$2
+
+  if [[ ${env} == 'prod' ]]
+  then
+    if [[ ${net} == 'network' ]]
+    then
+      mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o "$(ipconfig getifaddr en0)" &
+    else
+      be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/ &
+    fi
+  else
+    if [[ ${net} == 'network' ]]
+    then
+      mtt_cms_api_uri=https://cms-$env.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)" &
+    else
+      be rake s mtt_cms_api_uri=https://cms-$env.mh.disney.io/ &
+    fi
+  fi
+}
+
 function runmongo {
   if pgrep -x "mongod" > /dev/null
   then
