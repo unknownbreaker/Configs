@@ -207,18 +207,38 @@ eval "$(nodenv init -)"
 # ========= MARVELKIDS =========
 # this command shuts off zsh's bracket recognition
 unsetopt nomatch
-alias mklocal='be rake s mtt_cms_api_uri=http://cms.local.diznee.net:3003/'
-alias mklocalnetwork='mtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o "$(ipconfig getifaddr en0)" &'
-alias mkqa='be rake s mtt_cms_api_uri=https://cms-qa.mh.disney.io/'
-alias mkqanetwork='mtt_cms_api_uri=https://cms-qa.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
-alias mkdev1='be rake s mtt_cms_api_uri=https://cms-dev1.mh.disney.io/'
-alias mkdev1network='mtt_cms_api_uri=https://cms-dev1.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
-alias mkdev2='be rake s mtt_cms_api_uri=https://cms-dev2.mh.disney.io/'
-alias mkdev2network='mtt_cms_api_uri=https://cms-dev2.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
-alias mkprod='be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/'
-alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
 alias mktag='be rake matterhorn:release'
 alias cdmk='cd ~/Documents/Repos/*/marvelkids'
+
+function mk {
+  local env=$1
+  local net=$2
+
+  if [[ ${env} == 'prod' ]]
+  then
+    if [[ ${net} == 'network' ]]
+    then
+      mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o "$(ipconfig getifaddr en0)" &
+    else
+      be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/ &
+    fi
+  elif [[ ${env} == 'local' ]]
+  then
+    if [[ ${net} == 'network' ]]
+    then
+      mmtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o "$(ipconfig getifaddr en0)" &
+    else
+      be rake s mtt_cms_api_uri=http://cms.local.diznee.net:3003/ &
+    fi
+  else
+    if [[ ${net} == 'network' ]]
+    then
+      mtt_cms_api_uri=https://cms-$env.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)" &
+    else
+      be rake s mtt_cms_api_uri=https://cms-$env.mh.disney.io/ &
+    fi
+  fi
+}
 
 function runmongo {
   if pgrep -x "mongod" > /dev/null
