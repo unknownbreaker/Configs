@@ -207,16 +207,6 @@ eval "$(nodenv init -)"
 # ========= MARVELKIDS =========
 # this command shuts off zsh's bracket recognition
 unsetopt nomatch
-alias mklocal='be rake s mtt_cms_api_uri=http://cms.local.diznee.net:3003/'
-alias mklocalnetwork='mtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o "$(ipconfig getifaddr en0)" &'
-alias mkqa='be rake s mtt_cms_api_uri=https://cms-qa.mh.disney.io/'
-alias mkqanetwork='mtt_cms_api_uri=https://cms-qa.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
-alias mkdev1='be rake s mtt_cms_api_uri=https://cms-dev1.mh.disney.io/'
-alias mkdev1network='mtt_cms_api_uri=https://cms-dev1.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
-alias mkdev2='be rake s mtt_cms_api_uri=https://cms-dev2.mh.disney.io/'
-alias mkdev2network='mtt_cms_api_uri=https://cms-dev2.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
-alias mkprod='be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/'
-alias mkprodnetwork='mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o "$(ipconfig getifaddr en0)"'
 alias mktag='be rake matterhorn:release'
 alias cdmk='cd ~/Documents/Repos/*/marvelkids'
 
