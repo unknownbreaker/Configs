@@ -153,6 +153,7 @@ autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
 autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
 autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
 autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+autocmd FileType scss vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 
 " Search strings and ignore regex forward slashes. 
 command! -nargs=1 S let @/ = escape('<args>', '\')
