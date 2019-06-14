@@ -5,3 +5,4 @@ Vim/.vim/undo
 Vim/.vim/bundle/YouCompleteMe/third_party/
 Vim/.vim/.netrwhist
 iTerm/com.googlecode.iterm2.plist
+tmux/.tmux/resurrect/
