@@ -10,6 +10,10 @@ filetype indent on  "Enable filetype-specific indenting
 filetype plugin on  "Enable filetype-specific plugins
 
 set rtp+=/usr/local/opt/fzf
+"
+" enable indentation
+set breakindent
+set linebreak
 
 "Enable persistent undo
 if has('persistent_undo')
