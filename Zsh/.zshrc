@@ -23,6 +23,9 @@ alias atom="'/Applications/Atom.app/Contents/MacOS/Atom'"
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# load zsh moving function
+autoload -U zmv
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -446,3 +449,6 @@ function scrum() {
 
 # Remove zcompdump file which interferes with autocomplete
 rm ~/.zcompdump*
+
+# ======== CHROME UNHINGED =====
+alias chrome="open /Applications/Google\ Chrome.app/ --args --allow-file-access --allow-cross-origin-auth-prompt"
