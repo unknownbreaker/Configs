@@ -20,6 +20,9 @@ alias atom="'/Applications/Atom.app/Contents/MacOS/Atom'"
 
 # ============== OH MY ZSH ==============
 
+# load z plugin
+. ~/z.sh
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
