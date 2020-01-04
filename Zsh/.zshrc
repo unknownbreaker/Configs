@@ -399,19 +399,6 @@ function vi_mode_prompt_info() {
 RPS1='$(vi_mode_prompt_info)'
 RPS2=$RPS1
 
-# Use ripgrep
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-fzf-history-widget-accept() {
-fzf-history-widget
-  zle accept-line
-}
-zle     -N     fzf-history-widget-accept
-bindkey '^X^R' fzf-history-widget-accept
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # ============== ZSH AUTOSUGGESTIONS ==============
 # Ctrl + Space
 bindkey "^ " autosuggest-accept
@@ -455,3 +442,6 @@ rm ~/.zcompdump*
 
 # ======== CHROME UNHINGED =====
 alias chrome="open /Applications/Google\ Chrome.app/ --args --allow-file-access --allow-cross-origin-auth-prompt"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='if [ -f cscope.files ]; then cat cscope.files; else find ./ -type f ; fi'
