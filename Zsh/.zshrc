@@ -20,8 +20,14 @@ alias atom="'/Applications/Atom.app/Contents/MacOS/Atom'"
 
 # ============== OH MY ZSH ==============
 
+# load z plugin
+. ~/z.sh
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+
+# load zsh moving function
+autoload -U zmv
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -70,10 +76,12 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
-plugins=(osx)
-plugins=(zsh-autosuggestions)
-
+plugins=(
+  git
+  osx
+  zsh-autosuggestions
+  fzf
+)
 source $ZSH/oh-my-zsh.sh
 
 # ============== TMUX ==============
@@ -393,19 +401,6 @@ function vi_mode_prompt_info() {
 RPS1='$(vi_mode_prompt_info)'
 RPS2=$RPS1
 
-# Use ripgrep
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-fzf-history-widget-accept() {
-fzf-history-widget
-  zle accept-line
-}
-zle     -N     fzf-history-widget-accept
-bindkey '^X^R' fzf-history-widget-accept
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # ============== ZSH AUTOSUGGESTIONS ==============
 # Ctrl + Space
 bindkey "^ " autosuggest-accept
@@ -446,3 +441,9 @@ function scrum() {
 
 # Remove zcompdump file which interferes with autocomplete
 rm ~/.zcompdump*
+
+# ======== CHROME UNHINGED =====
+alias chrome="open /Applications/Google\ Chrome.app/ --args --allow-file-access --allow-cross-origin-auth-prompt"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='if [ -f cscope.files ]; then cat cscope.files; else find ./ -type f ; fi'
