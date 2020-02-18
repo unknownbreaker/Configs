@@ -7,6 +7,7 @@ export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=$PATH:/usr/local/share/npm/bin/
 export PATH=$PATH:/usr/local/bin/vim
+export PATH=$PATH:/usr/local/bin/rg
 export VAULT_ADDR="https://devkeys.disney.network"
 
 # Added by the Heroku Toolbelt
@@ -40,7 +41,7 @@ alias zshconfig="subl ~/.zshrc"
 alias ohmyzsh="subl ~/.oh-my-zsh"
 
 # To quickly edit my zshrc profile
-alias bp='e ~/.zshrc'
+alias bp='nvim ~/.zshrc'
 
 # Disable autoupdate prompt
 DISABLE_UPDATE_PROMPT=true
@@ -145,6 +146,7 @@ alias gc='git commit'
 alias gcm='git commit -m'
 alias gco='git checkout'
 alias gcom='git checkout master'
+alias gcof='git checkout $(git branch | fzf)'
 alias gp='git push'
 alias gpo='git push origin'
 alias glpfa='git log --pretty=format:"%s (%h)"'
@@ -414,17 +416,17 @@ function scrum() {
   else
     stringDate=$(date +%Y%m%d)
   fi
-  filename=scrum$stringDate.md
+  filename=scrum$stringDate.org
 
-  scrum_line_a="$stringDate.md\n"
-  scrum_line_b="# YESTERDAY / THIS MORNING ============================================\n\n"
-  scrum_line_c="# FOR MY OWN RECORDS ============================================\n\n"
-  scrum_line_d="# AFTER TALKS ============================================\n\n"
-  scrum_line_e="# BLOCKERS ============================================\n\n"
-  scrum_line_f="# ANSWERS / UPDATES ============================================\n\n"
-  scrum_line_g="# TODAY ============================================\n\n"
-  scrum_line_h="# WFH / OOO / Offline ============================================\n\n"
-  scrum_line_i="# CONVERSATIONS / MEETINGS ============================================\n"
+  scrum_line_a="<$(date +%Y)-$(date +%m)-$(date +%d) $(date +%a)>\n"
+  scrum_line_b="# YESTERDAY / THIS MORNING\n"
+  scrum_line_c="# TODAY\n"
+  scrum_line_d="# AFTER TALKS\n"
+  scrum_line_e="# BLOCKERS\n"
+  scrum_line_f="# ANSWERS / UPDATES\n"
+  scrum_line_g="# WFH / OOO / Offline\n"
+  scrum_line_h="# FOR MY OWN RECORDS\n"
+  scrum_line_i="# CONVERSATIONS / MEETINGS"
 
   total="$scrum_line_a$scrum_line_b$scrum_line_c$scrum_line_d$scrum_line_e$scrum_line_f$scrum_line_g$scrum_line_h$scrum_line_i"
 
@@ -435,7 +437,7 @@ function scrum() {
   elif [ $(date -j -f %Y%m%d $stringDate +%A) == Saturday ]; then
     scrum $(date -j -f %Y%m%d -v+2d "$stringDate" +%Y%m%d)
   else
-    echo $total > scrum$stringDate.md && echo "scrum$stringDate.md has been created"
+    echo $total > scrum$stringDate.org && echo "scrum$stringDate.org has been created"
   fi
 }
 
@@ -448,7 +450,7 @@ alias chrome="open /Applications/Google\ Chrome.app/ --args --allow-file-access 
 # ======== FZF ========
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-FD_OPTIONS="--follow --exclude .git --exclude node_modules"
+FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
 
 # Setting fd as the default source for fzf
 # follow symbolic links, and include hidden files
@@ -458,5 +460,11 @@ export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
 
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Make ALT-C find directory
+# export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+
+# Bind C-u to pageup and C-d to pagedown
+export FZF_DEFAULT_OPTS='--bind ctrl-d:page-down,ctrl-u:page-up'
 
 export EMACS="*term*"
