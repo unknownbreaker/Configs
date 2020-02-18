@@ -9,7 +9,8 @@ Vim/.vim/undo
 Vim/.vim/bundle/YouCompleteMe/third_party/
 Vim/.vim/.netrwhist
 iTerm/com.googlecode.iterm2.plist
-Tmux/.tmux/resurrect/
+Tmux/.tmux/resurrect
+Tmux/.tmux/resurrect/last
 Neovim/.config/nvim/Session.vim
 Neovim/.config/nvim/.session.vim
 Neovim/.config/nvim/.netrwhist
