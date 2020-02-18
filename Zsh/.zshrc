@@ -416,7 +416,7 @@ function scrum() {
   else
     stringDate=$(date +%Y%m%d)
   fi
-  filename=scrum$stringDate.org
+  filename=scrum$stringDate.md
 
   scrum_line_a="<$(date +%Y)-$(date +%m)-$(date +%d) $(date +%a)>\n"
   scrum_line_b="# YESTERDAY / THIS MORNING\n"
@@ -437,7 +437,7 @@ function scrum() {
   elif [ $(date -j -f %Y%m%d $stringDate +%A) == Saturday ]; then
     scrum $(date -j -f %Y%m%d -v+2d "$stringDate" +%Y%m%d)
   else
-    echo $total > scrum$stringDate.org && echo "scrum$stringDate.org has been created"
+    echo $total > scrum$stringDate.md && echo "scrum$stringDate.md has been created"
   fi
 }
 
