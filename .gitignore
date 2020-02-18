@@ -1,8 +1,17 @@
 .DS_Store
+Session.vim
+**/Session.vim
+.session.vim
+**/.session.vim
 Sublime Text 3/
 Vim/.vimrc.swp
 Vim/.vim/undo
 Vim/.vim/bundle/YouCompleteMe/third_party/
 Vim/.vim/.netrwhist
 iTerm/com.googlecode.iterm2.plist
-tmux/.tmux/resurrect/
+Tmux/.tmux/resurrect
+Tmux/.tmux/resurrect/last
+Neovim/.config/nvim/Session.vim
+Neovim/.config/nvim/.session.vim
+Neovim/.config/nvim/.netrwhist
+Neovim/.config/nvim/plugged

@@ -1,0 +1,30 @@
+{
+  "snippets": {
+    "extends": {
+      "javascriptreact": ["javascript"]
+    }
+  },
+  "suggest": {
+    "noselect": false
+  },
+  "explorer": {
+    "sources": [
+      {
+        "name": "buffer",
+        "expand": false
+      },
+      {
+        "name": "file",
+        "expand": true
+      }
+    ],
+    "keyMappings": {
+      "<space>": "toggleSelection",
+      "L": "actionMenu"
+    },
+    "icon": {
+      "enableNerdfont": true
+    }
+  }
+}
+

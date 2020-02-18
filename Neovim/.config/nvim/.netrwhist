@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/robertyang/Documents/Repos/Work/CM/marvelhq-companion-app/src/es6/lib'
+let g:netrw_dirhist_3='/Users/robertyang/Documents/Repos/Work/CM/marvelhq-companion-app/src/es6'
+let g:netrw_dirhist_2='/Users/robertyang/Documents/Repos/Work/CM/marvelhq-companion-app/src'
+let g:netrw_dirhist_1='/Users/robertyang/Documents/Repos/Work/CM/marvelhq-companion-app'
+let g:netrw_dirhist_0='/Users/robertyang/Documents/Repos/Work/CM/marvelhq-companion-app/src/js/video_ad'
+let g:netrw_dirhist_9='/Users/robertyang/Documents/Repos/Work/CM/marvelhq-companion-app/src/js'
+let g:netrw_dirhist_8='/Users/robertyang/Documents/Repos/Work/CM/marvelhq-companion-app/src'
+let g:netrw_dirhist_7='/Users/robertyang/Documents/Repos/Work/CM/marvelhq-companion-app'
+let g:netrw_dirhist_6='/Users/robertyang/.nodenv/shims'
+let g:netrw_dirhist_5='/Users/robertyang/Documents/Repos/Work/CM/marvelhq-companion-app'
