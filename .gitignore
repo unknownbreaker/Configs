@@ -10,7 +10,7 @@ Vim/.vim/bundle/YouCompleteMe/third_party/
 Vim/.vim/.netrwhist
 iTerm/com.googlecode.iterm2.plist
 Tmux/.tmux/resurrect/
-Nvim/nvim/Session.vim
-Nvim/nvim/.session.vim
-Nvim/nvim/.netrwhist
-Nvim/nvim/plugged
+Neovim/.config/nvim/Session.vim
+Neovim/.config/nvim/.session.vim
+Neovim/.config/nvim/.netrwhist
+Neovim/.config/nvim/plugged
