@@ -24,8 +24,6 @@ Plug 'mattn/calendar-vim'
 
 " Note taking
 Plug 'vimwiki/vimwiki'
-
-" Orgmode clone
 Plug 'dhruvasagar/vim-dotoo'
 
 Plug 'jpalardy/vim-slime'
