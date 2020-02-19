@@ -23,18 +23,21 @@ Plug 'neoclide/coc-tsserver'
 Plug 'neoclide/vim-jsx-improve'
 
 " Orgmode support
-Plug 'jceb/vim-orgmode'
+" Plug 'jceb/vim-orgmode'
 Plug 'mattn/calendar-vim'
-Plug 'vim-scripts/utl.vim'
+" Plug 'vim-scripts/utl.vim'
 Plug 'tpope/vim-repeat'
-Plug 'vim-scripts/taglist.vim'
-Plug 'majutsushi/tagbar'
+" Plug 'vim-scripts/taglist.vim'
+" Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-speeddating'
-Plug 'chrisbra/NrrwRgn'
-Plug 'vim-scripts/SyntaxRange'
+" Plug 'chrisbra/NrrwRgn'
+" Plug 'vim-scripts/SyntaxRange'
 
 " vimwiki
 Plug 'vimwiki/vimwiki'
+
+" Orgmode clone
+Plug 'dhruvasagar/vim-dotoo'
 
 Plug 'jpalardy/vim-slime'
 
