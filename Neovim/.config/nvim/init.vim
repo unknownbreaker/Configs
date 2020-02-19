@@ -10,6 +10,7 @@ source ~/.config/nvim/settings.vim
 source ~/.config/nvim/plugin-vim-unimpaired.vim
 source ~/.config/nvim/plugin-ale.vim
 source ~/.config/nvim/plugin-fzf.vim.vim
+source ~/.config/nvim/plugin-coc-extensions.vim
 source ~/.config/nvim/plugin-coc.nvim.vim
 source ~/.config/nvim/plugin-vim-agriculture.vim
 source ~/.config/nvim/plugin-nerdtree.vim
