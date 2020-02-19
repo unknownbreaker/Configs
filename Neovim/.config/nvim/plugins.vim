@@ -13,6 +13,16 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Coc Extensions
+Plug 'neoclide/coc-emmet'
+Plug 'neoclide/coc-json'
+Plug 'neoclide/coc-tabnine'
+Plug 'neoclide/coc-css'
+Plug 'neoclide/coc-html'
+Plug 'voldikss/coc-bookmark'
+Plug 'neoclide/coc-snippets'
+Plug 'neoclide/coc-tsserver'
+
 " Orgmode support
 " Plug 'jceb/vim-orgmode'
 Plug 'mattn/calendar-vim'
