@@ -40,6 +40,9 @@ set foldlevel=2
 set lazyredraw
 set regexpengine=1
 
+" Share system clipboard
+set clipboard=unnamedplus
+
 " Remapping keys
 
 " Terminal mode
