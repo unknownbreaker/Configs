@@ -1,8 +1,6 @@
 .DS_Store
 Session.vim
-**/Session.vim
 .session.vim
-**/.session.vim
 Sublime Text 3/
 Vim/.vimrc.swp
 Vim/.vim/undo
