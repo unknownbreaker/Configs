@@ -419,14 +419,14 @@ function scrum() {
   filename=scrum$stringDate.md
 
   scrum_line_a="<$(date +%Y)-$(date +%m)-$(date +%d) $(date +%a)>\n"
-  scrum_line_b="# YESTERDAY / THIS MORNING\n"
-  scrum_line_c="# TODAY\n"
-  scrum_line_d="# AFTER TALKS\n"
-  scrum_line_e="# BLOCKERS\n"
-  scrum_line_f="# ANSWERS / UPDATES\n"
-  scrum_line_g="# WFH / OOO / Offline\n"
-  scrum_line_h="# FOR MY OWN RECORDS\n"
-  scrum_line_i="# CONVERSATIONS / MEETINGS"
+  scrum_line_b="# YESTERDAY / THIS MORNING\n\n"
+  scrum_line_c="# TODAY\n\n"
+  scrum_line_d="# AFTER TALKS\n\n"
+  scrum_line_e="# BLOCKERS\n\n"
+  scrum_line_f="# ANSWERS / UPDATES\n\n"
+  scrum_line_g="# WFH / OOO / Offline\n\n"
+  scrum_line_h="# FOR MY OWN RECORDS\n\n"
+  scrum_line_i="# CONVERSATIONS / MEETINGS\n"
 
   total="$scrum_line_a$scrum_line_b$scrum_line_c$scrum_line_d$scrum_line_e$scrum_line_f$scrum_line_g$scrum_line_h$scrum_line_i"
 
