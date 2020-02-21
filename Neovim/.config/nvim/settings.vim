@@ -75,10 +75,6 @@ if has('nvim')
   " nnoremap <A-l> <c-w>l
 endif
 
-" Insert date/timestamp
-nmap <C-x> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
-imap <C-x> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
-
 " Window movement
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
