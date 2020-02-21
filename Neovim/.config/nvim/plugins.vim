@@ -49,6 +49,7 @@ Plug 'vimtaku/vim-textobj-keyvalue'
 Plug 'jceb/vim-textobj-uri'
 Plug 'neoclide/vim-jsx-improve'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'tpope/vim-jdaddy'
 
 " Snippets
 Plug 'andys8/vscode-jest-snippets'
