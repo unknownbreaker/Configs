@@ -75,12 +75,6 @@ if has('nvim')
   " nnoremap <A-l> <c-w>l
 endif
 
-" Window movement
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
 " Split windows and move into new split
 nnoremap sh :vsplit<CR>
 nnoremap sl :vsplit<CR><C-W><c-l>
