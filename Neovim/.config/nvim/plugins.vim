@@ -58,7 +58,7 @@ Plug 'xabikos/vscode-javascript'
 Plug 'xabikos/vscode-react'
 
 Plug 'dense-analysis/ale'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'scss', 'css', 'json', 'html', 'markdown'] }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'scss', 'css', 'json', 'html', 'markdown', 'ruby'] }
 Plug 'vim-airline/vim-airline'
 Plug 'iCyMind/NeoSolarized'
 Plug 'airblade/vim-gitgutter'
