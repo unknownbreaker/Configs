@@ -80,3 +80,7 @@ nnoremap sh :vsplit<CR>
 nnoremap sl :vsplit<CR><C-W><c-l>
 nnoremap sj :split<CR><C-W><c-j>
 nnoremap sk :split<CR>
+
+" Deal with soft wrapped lines and moving around
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
