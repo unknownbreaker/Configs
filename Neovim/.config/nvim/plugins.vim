@@ -51,6 +51,7 @@ Plug 'jceb/vim-textobj-uri'
 Plug 'neoclide/vim-jsx-improve'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-jdaddy'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Snippets
 Plug 'andys8/vscode-jest-snippets'
@@ -58,7 +59,7 @@ Plug 'xabikos/vscode-javascript'
 Plug 'xabikos/vscode-react'
 
 Plug 'dense-analysis/ale'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'scss', 'css', 'json', 'html', 'markdown', 'ruby'] }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x', 'for': ['javascript', 'scss', 'css', 'json', 'html', 'markdown', 'ruby'] }
 Plug 'vim-airline/vim-airline'
 Plug 'iCyMind/NeoSolarized'
 Plug 'airblade/vim-gitgutter'
@@ -70,6 +71,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'ciaranm/detectindent'
 Plug 'sickill/vim-pasta'
+Plug 'vim-ruby/vim-ruby'
 
 Plug 'junegunn/limelight.vim'
 
