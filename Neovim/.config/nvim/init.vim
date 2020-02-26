@@ -20,3 +20,5 @@ source ~/.config/nvim/plugin-vim-pasta.vim
 source ~/.config/nvim/plugin-limelight.vim.vim
 source ~/.config/nvim/plugin-vim-fugitive.vim
 source ~/.config/nvim/plugin-vimwiki.vim
+" source ~/.config/nvim/plugin-vim-gutentags.vim
+
