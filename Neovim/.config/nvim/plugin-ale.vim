@@ -6,7 +6,7 @@ autocmd FileType javascript let g:ale_linters = findfile('.eslintrc', '.;') != '
 
 " Disable linting for following languages
 let g:ale_linters = {
-  \ 'ruby': []
+  \ 'ruby': ['']
   \ }
 
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
