@@ -2,8 +2,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'jesseleite/vim-agriculture'
-Plug 'tpope/vim-obsession'
 
 " vim and tmux integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -43,6 +41,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'dhruvasagar/vim-dotoo'
 Plug 'mattn/webapi-vim'
 Plug 'christoomey/vim-quicklink'
+Plug 'junegunn/limelight.vim'
 
 Plug 'jpalardy/vim-slime'
 
@@ -59,6 +58,7 @@ Plug 'neoclide/vim-jsx-improve'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-jdaddy'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'wellle/targets.vim'
 
 " Snippets
 Plug 'andys8/vscode-jest-snippets'
@@ -80,7 +80,11 @@ Plug 'ciaranm/detectindent'
 Plug 'sickill/vim-pasta'
 Plug 'vim-ruby/vim-ruby'
 Plug 'ngmy/vim-rubocop'
-
-Plug 'junegunn/limelight.vim'
+Plug 'tpope/vim-eunuch'
+Plug 'jesseleite/vim-agriculture'
+Plug 'tpope/vim-obsession'
+Plug 'sjl/vitality.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'matze/vim-move'
 
 call plug#end()
