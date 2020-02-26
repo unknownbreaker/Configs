@@ -72,6 +72,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'ciaranm/detectindent'
 Plug 'sickill/vim-pasta'
 Plug 'vim-ruby/vim-ruby'
+Plug 'ngmy/vim-rubocop'
 
 Plug 'junegunn/limelight.vim'
 

@@ -4,5 +4,10 @@ let g:airline#extensions#ale#enabled = 1
 " Disable if eslint file does not exist
 autocmd FileType javascript let g:ale_linters = findfile('.eslintrc', '.;') != '' ? {'javascript': ['eslint']} : {'javascript': ['']}
 
+" Disable linting for following languages
+let g:ale_linters = {
+  \ 'ruby': []
+  \ }
+
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
