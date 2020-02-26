@@ -10,6 +10,8 @@ Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
 
 " completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
