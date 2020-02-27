@@ -103,5 +103,6 @@ nnoremap L g_
 nnoremap Q @q
 
 " Quick save/exit
-nnoremap <Leader>w :w<cr>
-nnoremap <Leader>q :q<cr>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>x :x<CR>
