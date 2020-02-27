@@ -84,3 +84,20 @@ nnoremap sk :split<CR>
 " Deal with soft wrapped lines and moving around
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+
+" Replaces the word under cursor for whatever you want; after that, you can keep pressing . and it will keep substituting all the instances of the original word (ala multiple cursors). You can skip them with n (as you would in a normal search). The second mapping goes the other way around: substitutes upwards.
+nnoremap c* /\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn
+nnoremap c# ?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN
+nnoremap d* /\<<C-r>=expand('<cword>')<CR>\>\C<CR>``dgn
+nnoremap d# ?\<<C-r>=expand('<cword>')<CR>\>\C<CR>``dgN
+
+" Jump to first and last non whitespace character of current line
+nnoremap H _
+nnoremap L g_
+
+" Fast macro call
+nnoremap Q @q
+
+" Quick save/exit
+nnoremap <Leader>w :w<cr>
+nnoremap <Leader>q :q<cr>
