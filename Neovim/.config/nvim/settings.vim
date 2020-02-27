@@ -85,6 +85,9 @@ nnoremap sk :split<CR>
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
+" Keep * on same word, as opposed to jumping to the next
+nnoremap * *``
+
 " Replaces the word under cursor for whatever you want; after that, you can keep pressing . and it will keep substituting all the instances of the original word (ala multiple cursors). You can skip them with n (as you would in a normal search). The second mapping goes the other way around: substitutes upwards.
 nnoremap c* /\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn
 nnoremap c# ?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN
