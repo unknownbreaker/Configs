@@ -2,6 +2,10 @@
 Session.vim
 .session.vim
 Sublime Text 3/
+tags.lock
+tags.temp
+**/tags.lock
+**/tags.temp
 Vim/.vimrc.swp
 Vim/.vim/undo
 Vim/.vim/bundle/
