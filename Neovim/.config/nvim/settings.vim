@@ -96,8 +96,8 @@ nnoremap d* /\<<C-r>=expand('<cword>')<CR>\>\C<CR>``dgn
 nnoremap d# ?\<<C-r>=expand('<cword>')<CR>\>\C<CR>``dgN
 
 " Jump to first and last non whitespace character of current line
-nnoremap H _
-nnoremap L g_
+nnoremap gh _
+nnoremap gl g_
 
 " Fast macro call
 nnoremap Q @q
