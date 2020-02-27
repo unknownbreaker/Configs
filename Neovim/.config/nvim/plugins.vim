@@ -38,9 +38,6 @@ Plug 'mattn/calendar-vim'
 
 " Note taking
 Plug 'vimwiki/vimwiki'
-Plug 'dhruvasagar/vim-dotoo'
-Plug 'mattn/webapi-vim'
-Plug 'christoomey/vim-quicklink'
 Plug 'junegunn/limelight.vim'
 
 Plug 'jpalardy/vim-slime'
