@@ -24,6 +24,21 @@ command! -bang -nargs=* Rg
 "   \   'rg -B 3 -A 2 --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
 "   \   fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
+" Delete buffer from list of buffers
+function! Bufs()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': Bufs(),
+  \ 'sink*': { lines -> execute('bwipeout '.join(map(lines, {_, line -> split(line)[0]}))) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
+
+
 " Mappings
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
