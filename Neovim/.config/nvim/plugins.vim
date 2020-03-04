@@ -84,5 +84,6 @@ Plug 'tpope/vim-obsession'
 Plug 'sjl/vitality.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'matze/vim-move'
+Plug 'psliwka/vim-smoothie'
 
 call plug#end()
