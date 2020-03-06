@@ -94,6 +94,7 @@ nnoremap c* /\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn
 nnoremap c# ?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN
 nnoremap d* /\<<C-r>=expand('<cword>')<CR>\>\C<CR>``dgn
 nnoremap d# ?\<<C-r>=expand('<cword>')<CR>\>\C<CR>``dgN
+vnoremap * "hy:%s/<C-r>=escape(@",'/\:')h//gc<left><left><left>
 
 " Jump to first and last non whitespace character of current line
 nnoremap gh _
