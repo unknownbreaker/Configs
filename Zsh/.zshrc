@@ -18,6 +18,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
 alias atom="'/Applications/Atom.app/Contents/MacOS/Atom'"
+alias vim="nvim"
+alias vi="nvim"
 
 # ============== OH MY ZSH ==============
 
@@ -37,11 +39,11 @@ autoload -U zmv
 ZSH_THEME="rob"
 
 # Example aliases
-alias zshconfig="subl ~/.zshrc"
-alias ohmyzsh="subl ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
 
 # To quickly edit my zshrc profile
-alias bp='nvim ~/.zshrc'
+alias bp='vim ~/.zshrc'
 
 # Disable autoupdate prompt
 DISABLE_UPDATE_PROMPT=true
