@@ -17,16 +17,6 @@ Plug 'camspiers/lens.vim'
 " completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Coc Extensions
-Plug 'neoclide/coc-emmet'
-Plug 'neoclide/coc-json'
-Plug 'neoclide/coc-tabnine'
-Plug 'neoclide/coc-css'
-Plug 'neoclide/coc-html'
-Plug 'voldikss/coc-bookmark'
-Plug 'neoclide/coc-snippets'
-Plug 'neoclide/coc-tsserver'
-
 " Orgmode support
 " Plug 'jceb/vim-orgmode'
 Plug 'mattn/calendar-vim'
@@ -56,11 +46,6 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-jdaddy'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'wellle/targets.vim'
-
-" Snippets
-Plug 'andys8/vscode-jest-snippets'
-Plug 'xabikos/vscode-javascript'
-Plug 'xabikos/vscode-react'
 
 Plug 'dense-analysis/ale'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x', 'for': ['javascript', 'scss', 'css', 'json', 'html', 'markdown', 'ruby'] }
