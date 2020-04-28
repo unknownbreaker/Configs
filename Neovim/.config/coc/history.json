@@ -1,0 +1,119 @@
+{
+  "snippets": {
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FCM%2Fmarvelhq-companion-app": [
+      "for",
+      "callback",
+      "settimeout"
+    ],
+    "%2FUsers%2Frobertyang%2F": {
+      "config%2Fnvim": [
+        "arrow"
+      ]
+    },
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FMINTs%2Fmint-converter": [
+      "classes6",
+      "class"
+    ]
+  },
+  "lists": {
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FCM%2Fmarvelhq-companion-app": [
+      "ex"
+    ],
+    "%2FUsers%2Frobertyang%2F": {
+      "config%2Fnvim": [
+        "snippets",
+        "snip",
+        "snipp",
+        "ex",
+        "ext"
+      ],
+      "config%2Fcoc": [
+        "ext"
+      ]
+    },
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FMINTs%2Fmint-converter": [
+      "snip"
+    ],
+    "%2Fprivate%2Fetc%2Fmatterhorn": [
+      "ex"
+    ],
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FPersonal%2FAdvanced-React%2Fsick-fits%2Ffrontend": [
+      "ex"
+    ]
+  },
+  "extensions": {
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FCM%2Fmarvelhq-companion-app": [
+      "em",
+      "js"
+    ],
+    "%2FUsers%2Frobertyang%2F": {
+      "config%2Fnvim": [
+        "es7",
+        "coc-",
+        "tss",
+        "bookm",
+        "exl",
+        "snip",
+        "exp",
+        "ex"
+      ]
+    },
+    "%2Fprivate%2Fetc%2Fmatterhorn": [
+      "react"
+    ],
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FPersonal%2FAdvanced-React%2Fsick-fits%2Ffrontend": [
+      "coc-snip",
+      "css"
+    ]
+  },
+  "explorerFiles": {
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FMINTs%2Fmint-converter": [
+      "api",
+      "output",
+      "js",
+      "test",
+      "jsonssssssssssssdd",
+      "index",
+      "inde",
+      "ind",
+      "eslintrc"
+    ],
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FNotes%2Fscrum-notes": [
+      "0115"
+    ],
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FCM%2Fmarvelhq-companion-app": [
+      "me",
+      "anal",
+      "contentscss",
+      "playerjs",
+      "uijs",
+      "uij",
+      "menu",
+      "es6js",
+      "utils",
+      "ui",
+      "apijs",
+      "util"
+    ],
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FMarvel%2Fmarvelkids": [
+      "htmladplayer",
+      "marvel_hero_gams"
+    ],
+    "%2FUsers%2Frobertyang%2F": {
+      "config%2Fnvim": [
+        "plugins",
+        "sett"
+      ]
+    }
+  },
+  "commands": {
+    "%2FUsers%2Frobertyang%2F": {
+      "config%2Fcoc": [
+        "explor"
+      ],
+      "config%2Fnvim": [
+        "ex"
+      ]
+    }
+  }
+}
