@@ -422,7 +422,7 @@ function scrum() {
   filename=scrum$stringDate.md
 
   scrum_line="$(date +%A), $(date +%b) $(date +%d), $(date +%Y)\n"
-  scrum_line+="= YESTERDAY / THIS MORNING =\n\n"
+  scrum_line+="= PREVIOUSLY =\n\n"
   scrum_line+="= TODAY =\n\n"
   scrum_line+="= AFTER TALKS =\n\n"
   scrum_line+="= BLOCKERS =\n\n"
