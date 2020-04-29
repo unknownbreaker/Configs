@@ -16,6 +16,7 @@ Plug 'camspiers/lens.vim'
 
 " completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'mattn/emmet-vim'
 
 " Orgmode support
 " Plug 'jceb/vim-orgmode'
@@ -41,7 +42,8 @@ Plug 'glts/vim-textobj-comment'
 Plug 'sgur/vim-textobj-parameter'
 Plug 'vimtaku/vim-textobj-keyvalue'
 Plug 'jceb/vim-textobj-uri'
-Plug 'neoclide/vim-jsx-improve'
+Plug 'yuezk/vim-js'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-jdaddy'
 Plug 'nelstrom/vim-textobj-rubyblock'
