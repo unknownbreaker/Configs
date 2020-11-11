@@ -8,6 +8,7 @@ export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/pla
 export PATH=$PATH:/usr/local/share/npm/bin/
 export PATH=$PATH:/usr/local/bin/vim
 export PATH=$PATH:/usr/local/bin/rg
+export PATH=$PATH:~/.emacs.d/bin
 export VAULT_ADDR="https://devkeys.disney.network"
 
 # Added by the Heroku Toolbelt
@@ -18,8 +19,9 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
 alias atom="'/Applications/Atom.app/Contents/MacOS/Atom'"
-alias vim="nvim"
-alias vi="nvim"
+alias vsc="'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'"
+# alias vim="nvim"
+# alias vi="nvim"
 
 # ============== OH MY ZSH ==============
 
@@ -99,7 +101,7 @@ export EDITOR="vi"
 # ============== ATOM ==============
 
 alias nano="subl"
-alias e="subl"
+alias e="vsc"
 
 # ============== NAVIGATION ==============
 
@@ -451,23 +453,27 @@ rm ~/.zcompdump*
 alias chrome="open /Applications/Google\ Chrome.app/ --args --allow-file-access --allow-cross-origin-auth-prompt"
 
 # ======== FZF ========
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
 
 # Setting fd as the default source for fzf
 # follow symbolic links, and include hidden files
-export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l $FD_OPTIONS"
+# export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l $FD_OPTIONS"
 
-export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
+# export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
 
 # To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Make ALT-C find directory
 # export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 
 # Bind C-u to pageup and C-d to pagedown
-export FZF_DEFAULT_OPTS='--bind ctrl-d:page-down,ctrl-u:page-up'
+# export FZF_DEFAULT_OPTS='--bind ctrl-d:page-down,ctrl-u:page-up'
 
 export EMACS="*term*"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

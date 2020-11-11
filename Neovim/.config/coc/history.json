@@ -39,7 +39,13 @@
     ],
     "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FPersonal%2FAdvanced-React%2Fsick-fits%2Ffrontend": [
       "ex"
-    ]
+    ],
+    "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FConfigs%2FNeovim%2F": {
+      "config%2Fnvim": [
+        "ex",
+        "ext"
+      ]
+    }
   },
   "extensions": {
     "%2FUsers%2Frobertyang%2FDocuments%2FRepos%2FWork%2FCM%2Fmarvelhq-companion-app": [

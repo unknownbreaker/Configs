@@ -1,5 +1,10 @@
+" Python plugins
+" let g:python_host_prog  = '/usr/bin/python'
+" let g:python3_host_prog = '/usr/bin/python3'
+
 " Change leader key
-let mapleader = ","
+nnoremap <SPACE> <Nop>
+let mapleader = " "
 
 " Other UI changes
 set showmatch				" Show matching braces
@@ -21,12 +26,20 @@ set expandtab				" Use spaces instead of tabs
 set omnifunc=syntaxcomplete#Complete	
 set wildmenu
 set wildmode=longest:full,full
+set backupdir=~/.config/nvim/backup//
+set directory=~/.config/nvim/swap//
+set undodir=~/.config/nvim/undo//
+syntax off
+
 au BufReadPost *.mustache set filetype=html syntax=mustache
 syntax on
 set nocompatible
 filetype plugin on
 
-colorscheme NeoSolarized
+" colorscheme NeoSolarized
+colorscheme one
+set background=dark
+let g:one_allow_italics=1
 set termguicolors
 set background=dark
 
@@ -89,6 +102,9 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap * *``
 nnoremap # #``
 
+" Search but keep very magic enabled
+nnoremap / /\v
+
 " Replaces the word under cursor for whatever you want; after that, you can keep pressing . and it will keep substituting all the instances of the original word (ala multiple cursors). You can skip them with n (as you would in a normal search). The second mapping goes the other way around: substitutes upwards.
 nnoremap c* /\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn
 nnoremap c# ?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN
@@ -102,10 +118,23 @@ nnoremap gl g_
 vnoremap gh _
 vnoremap gl g_
 
-" Fast macro call
+" Fast macro call for last macro
+" nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
 nnoremap Q @q
 
 " Quick save/exit
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :x<CR>
+
+" Go to previous buffer and delete buffer just moved away from
+nnoremap <C-c> :bp\|bd #<CR>
+
+" Store relative line number jumps in the jumplist if they exceed a threshold
+" nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
+" nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
+
+" Highlight and move selection up or down
+" Preserves formatting
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv

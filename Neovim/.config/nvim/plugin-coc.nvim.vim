@@ -1,3 +1,33 @@
+let g:coc_global_extensions = [
+      \  'coc-actions',
+      \  'coc-browser',
+      \  'coc-css',
+      \  'coc-discord',
+      \  'coc-docker',
+      \  'coc-eslint',
+      \  'coc-flow',
+      \  'coc-format-json',
+      \  'coc-fzf-preview',
+      \  'coc-gitignore',
+      \  'coc-html',
+      \  'coc-jest',
+      \  'coc-json', 
+      \  'coc-marketplace',
+      \  'coc-pairs',
+      \  'coc-prettier',
+      \  'coc-react-refactor',
+      \  'coc-snippets',
+      \  'coc-sql',
+      \  'coc-styled-components',
+      \  'coc-svg',
+      \  'coc-tabnine',
+      \  'coc-texlab',
+      \  'coc-tsserver',
+      \  'coc-yank',
+      \  'jest-snippets'
+      \]
+      " \  'coc-emmet',
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 
@@ -46,10 +76,10 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <Leader>gd <Plug>(coc-definition)
+nmap <silent> <Leader>gy <Plug>(coc-type-definition)
+nmap <silent> <Leader>gi <Plug>(coc-implementation)
+nmap <silent> <Leader>gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -66,11 +96,13 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
+" Useful for renaming variables
+" Only renames in buffers, not all files
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-xmap <leader><S-f>  <Plug>(coc-format-selected)
-nmap <leader><S-f>  <Plug>(coc-format-selected)
+xmap <leader>gf  <Plug>(coc-format-selected)
+nmap <leader>gf  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -109,27 +141,26 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <Leader><space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <Leader><space>e  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <Leader><space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <Leader><space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <Leader><space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <Leader><space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <Leader><space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <Leader><space>p  :<C-u>CocListResume<CR>
 
 " ======= MORE SETTINGS =======
 
@@ -151,3 +182,7 @@ endfunction
 
 " let g:coc_snippet_next = '<tab>'
 let g:coc_snippet_next = '<C-n>'
+
+" Search for word under cursor across entire project
+nnoremap <Leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+

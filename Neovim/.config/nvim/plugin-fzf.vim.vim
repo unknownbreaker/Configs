@@ -41,9 +41,9 @@ command! BD call fzf#run(fzf#wrap({
 
 " Mappings
 " Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
+nmap <leader>f<tab> <plug>(fzf-maps-n)
+xmap <leader>f<tab> <plug>(fzf-maps-x)
+omap <leader>f<tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -55,10 +55,10 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 " Search word under cursor
-nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+" nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 " Search files
-nnoremap <silent> <Leader>f :Files<CR>
+" nnoremap <silent> <Leader>f :Files<CR>
 
 " Search buffers
-nnoremap <silent> <Leader>b :Buffers<CR>
+" nnoremap <silent> <Leader>b :Buffers<CR>

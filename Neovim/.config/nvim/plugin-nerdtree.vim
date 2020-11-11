@@ -7,6 +7,6 @@ function! ToggleNerdTree()
     endif
 endfunction
 " toggle nerd tree
-nmap <silent> <Leader>m :call ToggleNerdTree()<cr>
+nmap <silent> <Leader>tt :call ToggleNerdTree()<cr>
 " find the current file in nerdtree without needing to reload the drawer
-nmap <silent> <Leader>n :NERDTreeFind<cr>
+nmap <silent> <Leader>tf :NERDTreeFind<cr>

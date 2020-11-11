@@ -1,0 +1,15 @@
+{
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvbmZpZ3MvTmVvdmltLy5jb25maWcvbnZpbQ==": [
+    "\" Custom startup list, only show MRU from current directory/projectlet g:startify_lists = [\\  { 'type': 'dir',       'header': [ 'Files '. getcwd() ] },\\  { 'type': function('helpers#startify#listcommits'), 'header': [ 'Recent Commits' ] },\\  { 'type': 'sessions',  'header': [ 'Sessions' ]       },\\  { 'type': 'bookmarks', 'header': [ 'Bookmarks' ]      },\\  { 'type': 'commands',  'header': [ 'Commands' ]       },\\ ]",
+    "ma"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL2Rpc25leS1wbHVzLWNsb25l": [
+    ":CocInstall coc-tsserver"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvUmVwb3MvQ29uZmlncy9OZW92aW0vLmNvbmZpZy9udmlt": [
+    "java",
+    "tss",
+    "mark",
+    "rea"
+  ]
+}

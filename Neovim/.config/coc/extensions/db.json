@@ -1,10 +1,19 @@
 {
-  "lastUpdate": 1588097219198,
+  "lastUpdate": 1604858705147,
   "extension": {
     "jest-snippets": {
       "disabled": false
     },
     "coc-explorer": {
+      "disabled": false
+    },
+    "coc-emmet": {
+      "disabled": false
+    },
+    "coc-tabnine": {
+      "disabled": true
+    },
+    "coc-marketplace": {
       "disabled": false
     }
   }

@@ -1,0 +1,35 @@
+{
+  "adapters": {
+    "chrome": {
+      "command": [
+        "node",
+        "${gadgetDir}/debugger-for-chrome/out/src/chromeDebug.js"
+      ],
+      "name": "debugger-for-chrome",
+      "type": "chrome"
+    },
+    "debugpy": {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.8/bin/python3",
+        "${gadgetDir}/debugpy/build/lib/debugpy/adapter"
+      ],
+      "configuration": {
+        "python": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.8/bin/python3",
+        "subProcess": false
+      },
+      "name": "debugpy"
+    },
+    "multi-session": {
+      "host": "${host}",
+      "port": "${port}"
+    },
+    "vscode-node": {
+      "command": [
+        "node",
+        "${gadgetDir}/vscode-node-debug2/out/src/nodeDebug.js"
+      ],
+      "name": "node2",
+      "type": "node2"
+    }
+  }
+}

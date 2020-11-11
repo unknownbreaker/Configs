@@ -6,6 +6,23 @@
   },
   "suggest": {
     "noselect": false
-  }
+  },
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "scss",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "graphql",
+    "Markdown"
+  ],
+  "prettier.jsxBracketSameLine": false,
+  "prettier.jsxSingleQuote": false,
+  "prettier.bracketSpacing": true,
+  "prettier.arrowParens": "avoid",
+  "prettier.singleQuote": true,
+  "emmet.showExpandedAbbreviation": true,
+  "emmet.showAbbreviationSuggestions": true,
+  "emmet.includeLanguages.javascript": "javascriptreact"
 }
-
