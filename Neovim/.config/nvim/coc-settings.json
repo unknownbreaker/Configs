@@ -22,7 +22,7 @@
   "prettier.bracketSpacing": true,
   "prettier.arrowParens": "avoid",
   "prettier.singleQuote": true,
-  "emmet.showExpandedAbbreviation": true,
-  "emmet.showAbbreviationSuggestions": true,
-  "emmet.includeLanguages.javascript": "javascriptreact"
+  "tabnine.ignore_all_lsp": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.file.showHiddenFiles": true
 }

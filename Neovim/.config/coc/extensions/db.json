@@ -11,9 +11,27 @@
       "disabled": false
     },
     "coc-tabnine": {
-      "disabled": true
+      "disabled": false
     },
     "coc-marketplace": {
+      "disabled": false
+    },
+    "coc-tsserver": {
+      "disabled": false
+    },
+    "coc-prettier": {
+      "disabled": false
+    },
+    "coc-browser": {
+      "disabled": true
+    },
+    "coc-discord": {
+      "disabled": true
+    },
+    "coc-docker": {
+      "disabled": true
+    },
+    "es7-react-js-snippets": {
       "disabled": false
     }
   }

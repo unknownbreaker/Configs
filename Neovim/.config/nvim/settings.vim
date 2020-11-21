@@ -17,6 +17,7 @@ set number				" Show line numbers
 set tabstop=2				" Use 2 space tabs
 set shiftwidth=2			" Use 2 space tabs
 set incsearch				" Incremental search: jump tot he first occurrence of search while user still searching
+set inccommand=split " Live highlighting and replace
 set mouse=a				" Enable mouse
 set autoindent				" Use auto indentation
 set scrolloff=3				" Start scrolling when 3 lines away from bottom
@@ -54,7 +55,8 @@ set lazyredraw
 set regexpengine=1
 
 " Share system clipboard
-set clipboard=unnamedplus
+" In Neovim 0.5, extremely slow process
+set clipboard+=unnamedplus
 
 " Remapping keys
 
@@ -89,10 +91,10 @@ if has('nvim')
 endif
 
 " Split windows and move into new split
-nnoremap sh :vsplit<CR>
-nnoremap sl :vsplit<CR><C-W><c-l>
-nnoremap sj :split<CR><C-W><c-j>
-nnoremap sk :split<CR>
+nnoremap <Leader>sh :vsplit<CR>
+nnoremap <Leader>sl :vsplit<CR><C-W><c-l>
+nnoremap <Leader>sj :split<CR><C-W><c-j>
+nnoremap <Leader>sk :split<CR>
 
 " Deal with soft wrapped lines and moving around
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')

@@ -1,2 +1,2 @@
-nnoremap <leader>dm :MaximizerToggle!<CR>
+nnoremap <C-m> :MaximizerToggle!<CR>
 

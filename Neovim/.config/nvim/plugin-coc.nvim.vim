@@ -1,17 +1,15 @@
 let g:coc_global_extensions = [
       \  'coc-actions',
-      \  'coc-browser',
       \  'coc-css',
-      \  'coc-discord',
       \  'coc-docker',
       \  'coc-eslint',
       \  'coc-flow',
-      \  'coc-format-json',
-      \  'coc-fzf-preview',
+      \  'coc-git',
       \  'coc-gitignore',
       \  'coc-html',
       \  'coc-jest',
       \  'coc-json', 
+      \  'coc-lists',
       \  'coc-marketplace',
       \  'coc-pairs',
       \  'coc-prettier',
@@ -27,6 +25,8 @@ let g:coc_global_extensions = [
       \  'jest-snippets'
       \]
       " \  'coc-emmet',
+      " \  'coc-fzf-preview',
+      " \  'coc-format-json',
 
 " if hidden is not set, TextEdit might fail.
 set hidden
