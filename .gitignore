@@ -18,7 +18,7 @@ Neovim/.config/nvim/Session.vim
 Neovim/.config/nvim/.session.vim
 Neovim/.config/nvim/.netrwhist
 Neovim/.config/nvim/plugged/
-Neovim/.config/coc/extensions/node_modules/
+Neovim/.config/coc/extensions/
 Neovim/.config/nvim/undo/*
 Neovim/.config/nvim/backup/*
 Neovim/.config/nvim/swap/*
