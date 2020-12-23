@@ -6,9 +6,9 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'nvim-lua/completion-nvim'
 
 " Telescope
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-lua/telescope.nvim'
+"Plug 'nvim-lua/popup.nvim'
+"Plug 'nvim-lua/plenary.nvim'
+"Plug 'nvim-lua/telescope.nvim'
 " === NEOVIM 0.5.0 ===
 
 " Start screen
@@ -25,17 +25,17 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 
 " File navigation
-Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-vinegar'
 
 " completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
-Plug 'jparise/vim-graphql'
-Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
+" Plug 'jparise/vim-graphql'
+" Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
 
 " Orgmode support
 " Plug 'jceb/vim-orgmode'
@@ -58,11 +58,11 @@ Plug 'sheerun/vim-polyglot'
 
 " Text objects
 Plug 'kana/vim-textobj-user'
-" Plug 'kana/vim-textobj-function'
-" Plug 'haya14busa/vim-textobj-function-syntax'
+Plug 'kana/vim-textobj-function'
+Plug 'haya14busa/vim-textobj-function-syntax'
 " Plug 'pangloss/vim-javascript'
 Plug 'glts/vim-textobj-comment'
-" Plug 'sgur/vim-textobj-parameter'
+Plug 'sgur/vim-textobj-parameter'
 " Plug 'vimtaku/vim-textobj-keyvalue'
 " Plug 'jceb/vim-textobj-uri'
 " Plug 'mustache/vim-mustache-handlebars'
@@ -74,6 +74,7 @@ if !exists('g:vscode')
 Plug 'yuezk/vim-js'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-jdaddy'
+Plug 'honza/vim-snippets'
 endif
 
 if !exists('g:vscode')
@@ -83,11 +84,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
 " Plug 'iCyMind/NeoSolarized'
 Plug 'rakr/vim-one'
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'sjl/vitality.vim'
-Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'MattesGroeger/vim-bookmarks'
 Plug 'puremourning/vimspector', { 'do': './install_gadget.py' }
 Plug 'szw/vim-maximizer'
 
@@ -96,6 +97,7 @@ Plug 'szw/vim-maximizer'
 " Plug 'ludovicchabant/vim-gutentags'
 endif
 
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 " Plug 'tpope/vim-commentary'
@@ -111,10 +113,11 @@ Plug 'tpope/vim-eunuch'
 Plug 'matze/vim-move'
 Plug 'justinmk/vim-sneak'
 Plug 'mg979/vim-visual-multi'
-Plug 'machakann/vim-highlightedyank'
+" Plug 'machakann/vim-highlightedyank'
 Plug 'ap/vim-css-color'
 
 " Turn off
 " Plug 'psliwka/vim-smoothie'
 " Plug 'kchmck/vim-coffee-script'
+
 call plug#end()

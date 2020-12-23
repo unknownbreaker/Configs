@@ -1,32 +1,38 @@
 let g:coc_global_extensions = [
-      \  'coc-actions',
+      \  'coc-bookmark',
       \  'coc-css',
-      \  'coc-docker',
+      \  'coc-diagnostic',
       \  'coc-eslint',
+      \  'coc-explorer',
       \  'coc-flow',
       \  'coc-git',
-      \  'coc-gitignore',
       \  'coc-html',
       \  'coc-jest',
       \  'coc-json', 
-      \  'coc-lists',
-      \  'coc-marketplace',
-      \  'coc-pairs',
       \  'coc-prettier',
+      \  'coc-fzf-preview',
       \  'coc-react-refactor',
-      \  'coc-snippets',
       \  'coc-sql',
       \  'coc-styled-components',
       \  'coc-svg',
-      \  'coc-tabnine',
+      \  'coc-snippets',
       \  'coc-texlab',
       \  'coc-tsserver',
-      \  'coc-yank',
-      \  'jest-snippets'
       \]
+
+
+      " \  'coc-actions',
+      " \  'coc-docker',
       " \  'coc-emmet',
-      " \  'coc-fzf-preview',
       " \  'coc-format-json',
+      " \  'coc-gitignore',
+      " \  'coc-lists',
+      " \  'coc-marketplace',
+      " \  'coc-ultisnips',
+      " \  'coc-pairs',
+      " \  'coc-python',
+      " \  'coc-tabnine',
+      " \  'coc-yank',
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -93,7 +99,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 " Useful for renaming variables

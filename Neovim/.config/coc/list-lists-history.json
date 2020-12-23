@@ -3,10 +3,17 @@
     "ex",
     "fol",
     "mar",
+    "fds",
+    "fdsa",
+    "ser",
+    "sou",
     "ext"
   ],
   "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL2Rpc25leS1wbHVzLWNsb25l": [
-    "diag"
+    "diag",
+    "serv",
+    "ext",
+    "ex"
   ],
   "L1VzZXJzL3JvYmVydHlhbmcvUmVwb3MvQ29uZmlncy9OZW92aW0vLmNvbmZpZy9udmlt": [
     "ext",
@@ -23,6 +30,17 @@
     "ext"
   ],
   "L1VzZXJzL3JvYmVydHlhbmcvUmVwb3MvQ29uZmlncw==": [
+    "ext"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvbmZpZ3M=": [
+    "ext",
+    "jkjkjkjkjkjkjkjkjkjkjkjkjjk",
+    "sy"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL0FkdmVudE9mQ29kZQ==": [
+    "bo"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL2RlZXAtanMtZm91bmRhdGlvbnMtdjItZXhlcmNpc2Vz": [
     "ext"
   ]
 }

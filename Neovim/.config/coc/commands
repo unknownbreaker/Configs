@@ -1,9 +1,10 @@
-fzf-preview.Buffers
-explorer
-fzf-preview.AllBuffers
-fzf-preview.DirectoryFiles
 fzf-preview.ProjectFiles
+fzf-preview.DirectoryFiles
+explorer
+prettier.formatFile
+fzf-preview.Buffers
 fzf-preview.GitFiles
+fzf-preview.AllBuffers
 fzf-preview.GitStatus
 fzf-preview.GitActions
 fzf-preview.GitLogs
@@ -12,5 +13,4 @@ fzf-preview.BufferTags
 fzf-preview.Changes
 fzf-preview.LocationList
 fzf-preview.Jumps
-prettier.formatFile
 tsserver.executeAutofix

@@ -1,7 +1,10 @@
 extensions
 services
+commands
+diagnostics
+bookmark
+sources
+symbols
 snippets
 marketplace
 folders
-diagnostics
-sources

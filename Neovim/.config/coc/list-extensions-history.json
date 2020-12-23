@@ -1,10 +1,28 @@
 {
   "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvbmZpZ3MvTmVvdmltLy5jb25maWcvbnZpbQ==": [
     "\" Custom startup list, only show MRU from current directory/projectlet g:startify_lists = [\\  { 'type': 'dir',       'header': [ 'Files '. getcwd() ] },\\  { 'type': function('helpers#startify#listcommits'), 'header': [ 'Recent Commits' ] },\\  { 'type': 'sessions',  'header': [ 'Sessions' ]       },\\  { 'type': 'bookmarks', 'header': [ 'Bookmarks' ]      },\\  { 'type': 'commands',  'header': [ 'Commands' ]       },\\ ]",
-    "ma"
+    "ma",
+    "klkji",
+    "\" Custom startup list, only show MRU from current directory/projectlet g:startify_lists = [\\  { 'type': 'dir',       'header': [ 'Files '. getcwd() ] },\\  { 'type': function('helpers#startify#listcommits'), 'header': [ 'Recent Commits' ] },\\  { 'type': 'sessions',  'header': [ 'Sessions' ]       },\\  { 'type': 'bookmarks', 'header': [ 'Bookmarks' ]      },\\  { 'type': 'commands',  'header': [ 'Comm",
+    "ulti",
+    "act",
+    "list",
+    "pre",
+    "snip",
+    "git",
+    "kkk",
+    "exp",
+    "ex",
+    "book"
   ],
   "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL2Rpc25leS1wbHVzLWNsb25l": [
-    ":CocInstall coc-tsserver"
+    ":CocInstall coc-tsserver",
+    "ts",
+    "ex",
+    "llll",
+    "pret",
+    "pre",
+    "json"
   ],
   "L1VzZXJzL3JvYmVydHlhbmcvUmVwb3MvQ29uZmlncy9OZW92aW0vLmNvbmZpZy9udmlt": [
     "java",
@@ -21,5 +39,16 @@
   "L1VzZXJzL3JvYmVydHlhbmcvUmVwb3MvQ29uZmlncw==": [
     "snip",
     "pre"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvbmZpZ3M=": [
+    "book"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL0FkdmVudE9mQ29kZQ==": [
+    "tss"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL2RlZXAtanMtZm91bmRhdGlvbnMtdjItZXhlcmNpc2Vz": [
+    "book",
+    "ts",
+    "pair"
   ]
 }

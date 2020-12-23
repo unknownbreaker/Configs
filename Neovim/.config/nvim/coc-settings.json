@@ -7,6 +7,7 @@
   "suggest": {
     "noselect": false
   },
+  "coc.preferences.messageLevel": "error",
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "scss",
@@ -17,12 +18,18 @@
     "graphql",
     "Markdown"
   ],
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true,
   "prettier.jsxBracketSameLine": false,
   "prettier.jsxSingleQuote": false,
   "prettier.bracketSpacing": true,
   "prettier.arrowParens": "avoid",
   "prettier.singleQuote": true,
+  "javascript.implementationsCodeLens.enable": false,
+  "javascript.referencesCodeLens.enable": false,
   "tabnine.ignore_all_lsp": true,
   "explorer.icon.enableNerdfont": true,
-  "explorer.file.showHiddenFiles": true
+  "explorer.file.showHiddenFiles": true,
+  "python.jediEnabled": false,
+  "html.format.endWithNewline": true
 }

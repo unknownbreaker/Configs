@@ -1,6 +1,6 @@
 " Python plugins
-" let g:python_host_prog  = '/usr/bin/python'
-" let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog  = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
 
 " Change leader key
 nnoremap <SPACE> <Nop>
@@ -24,16 +24,27 @@ set scrolloff=3				" Start scrolling when 3 lines away from bottom
 set laststatus=2			" Always display status line
 set cursorline				" Highlight current line
 set expandtab				" Use spaces instead of tabs
+set smarttab
+set smartindent
+set cindent
 set omnifunc=syntaxcomplete#Complete	
 set wildmenu
 set wildmode=longest:full,full
 set backupdir=~/.config/nvim/backup//
 set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/undo//
-syntax off
+syntax on
+set modifiable
+
+" Use relative line nums in NORMAL, but all absolute in INSERT
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 au BufReadPost *.mustache set filetype=html syntax=mustache
-syntax on
 set nocompatible
 filetype plugin on
 
@@ -125,9 +136,10 @@ vnoremap gl g_
 nnoremap Q @q
 
 " Quick save/exit
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>x :x<CR>
+nnoremap <silent> <Leader>w :w<CR>
+nnoremap <silent> <Leader>q :q<CR>
+nnoremap <silent> <Leader>Q :qa<CR>
+nnoremap <silent> <Leader>x :x<CR>
 
 " Go to previous buffer and delete buffer just moved away from
 nnoremap <C-c> :bp\|bd #<CR>
@@ -140,3 +152,11 @@ nnoremap <C-c> :bp\|bd #<CR>
 " Preserves formatting
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" Insert cursor between new curly braces
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
+" inoremap [<CR> [<CR>]<ESC>O
+
+" Get to normal mode in terminal emulator
+tnoremap <Esc> <C-\><C-n>

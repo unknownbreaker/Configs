@@ -1,5 +1,5 @@
 {
-  "lastUpdate": 1604858705147,
+  "lastUpdate": 1608008261104,
   "extension": {
     "jest-snippets": {
       "disabled": false
@@ -11,7 +11,7 @@
       "disabled": false
     },
     "coc-tabnine": {
-      "disabled": false
+      "disabled": true
     },
     "coc-marketplace": {
       "disabled": false

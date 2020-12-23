@@ -2,5 +2,12 @@
   "L1VzZXJzL3JvYmVydHlhbmcvUmVwb3MvZGlzbmV5LXBsdXMtY2xvbmU=": [
     "action",
     "actioncreat"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL2Rpc25leS1wbHVzLWNsb25l": [
+    "api",
+    "apijs"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvLmVtYWNzLmQ=": [
+    "imagemagick"
   ]
 }
