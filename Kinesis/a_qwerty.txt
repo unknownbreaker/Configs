@@ -2,5 +2,6 @@
 [intl-\]>[hyphen]
 {left}>{speed5}{-lshift}{=}{+lshift}
 {right}>{speed5}{=}
+[end]>[lalt]
 {up}>{speed5}{-lshift}{obrack}{+lshift}
 {down}>{speed5}{-lshift}{cbrack}{+lshift}
