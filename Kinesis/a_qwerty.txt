@@ -1,7 +1,11 @@
 [caps]>[home]
+[bspace]>[lwin]
+[delete]>[enter]
+[enter]>[bspace]
 [intl-\]>[hyphen]
 {left}>{speed5}{-lshift}{=}{+lshift}
 {right}>{speed5}{=}
 [end]>[lalt]
+[pdown]>[lwin]
 {up}>{speed5}{-lshift}{obrack}{+lshift}
 {down}>{speed5}{-lshift}{cbrack}{+lshift}
