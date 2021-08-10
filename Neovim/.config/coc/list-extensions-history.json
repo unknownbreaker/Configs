@@ -41,7 +41,8 @@
     "pre"
   ],
   "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvbmZpZ3M=": [
-    "book"
+    "book",
+    "ts"
   ],
   "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL0FkdmVudE9mQ29kZQ==": [
     "tss"
@@ -50,5 +51,26 @@
     "book",
     "ts",
     "pair"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvZGVzbWl0aC9wcmVwLWdyYWQtYXNzZXNzbWVudA==": [
+    "ts"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvZGVzbWl0aC9wcm9kdWN0aW9uLXByb2plY3Qvdm5v": [
+    "tss",
+    "deno"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvZGVzbWl0aC9wcm9kdWN0aW9uLXByb2plY3QvZGVuby10ZXN0": [
+    "cocde"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvZGVzbWl0aC9yZWluZm9yY2VtZW50L3BvYy1lZGl0b3I=": [
+    "deno"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL1BlcnNvbmFsL3RvZG8=": [
+    "de"
+  ],
+  "L1VzZXJzL3JvYmVydHlhbmcvRG9jdW1lbnRzL1JlcG9zL0NvZGluZy9UaGlydHlNYWRpc29uL2ludmVudG9yeS1hcHA=": [
+    "tss",
+    "ts",
+    "lint"
   ]
 }

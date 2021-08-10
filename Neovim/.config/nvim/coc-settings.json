@@ -16,7 +16,8 @@
     "javascriptreact",
     "json",
     "graphql",
-    "Markdown"
+    "Markdown",
+    "typescript"
   ],
   "eslint.run": "onSave",
   "eslint.autoFixOnSave": true,
@@ -31,5 +32,7 @@
   "explorer.icon.enableNerdfont": true,
   "explorer.file.showHiddenFiles": true,
   "python.jediEnabled": false,
-  "html.format.endWithNewline": true
+  "html.format.endWithNewline": true,
+  "deno.enable": false,
+  "tsserver.enable": true
 }

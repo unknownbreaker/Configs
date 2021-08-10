@@ -1,9 +1,10 @@
-fzf-preview.ProjectFiles
-fzf-preview.DirectoryFiles
 explorer
-prettier.formatFile
+fzf-preview.DirectoryFiles
 fzf-preview.Buffers
+eslint.showOutputChannel
 fzf-preview.GitFiles
+fzf-preview.ProjectFiles
+prettier.formatFile
 fzf-preview.AllBuffers
 fzf-preview.GitStatus
 fzf-preview.GitActions

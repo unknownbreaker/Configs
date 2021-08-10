@@ -1,6 +1,6 @@
 let g:coc_global_extensions = [
-      \  'coc-bookmark',
       \  'coc-css',
+      \  'coc-denoland',
       \  'coc-diagnostic',
       \  'coc-eslint',
       \  'coc-explorer',
@@ -9,6 +9,7 @@ let g:coc_global_extensions = [
       \  'coc-html',
       \  'coc-jest',
       \  'coc-json', 
+      \  'coc-marketplace',
       \  'coc-prettier',
       \  'coc-fzf-preview',
       \  'coc-react-refactor',
@@ -18,16 +19,17 @@ let g:coc_global_extensions = [
       \  'coc-snippets',
       \  'coc-texlab',
       \  'coc-tsserver',
+      \  'coc-vetur',
       \]
 
 
       " \  'coc-actions',
+      " \  'coc-deno',
       " \  'coc-docker',
       " \  'coc-emmet',
       " \  'coc-format-json',
       " \  'coc-gitignore',
       " \  'coc-lists',
-      " \  'coc-marketplace',
       " \  'coc-ultisnips',
       " \  'coc-pairs',
       " \  'coc-python',

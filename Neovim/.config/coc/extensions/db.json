@@ -1,5 +1,5 @@
 {
-  "lastUpdate": 1608008261104,
+  "lastUpdate": 1623645885733,
   "extension": {
     "jest-snippets": {
       "disabled": false
@@ -33,6 +33,12 @@
     },
     "es7-react-js-snippets": {
       "disabled": false
+    },
+    "coc-deno": {
+      "disabled": true
+    },
+    "coc-denoland": {
+      "disabled": true
     }
   }
 }

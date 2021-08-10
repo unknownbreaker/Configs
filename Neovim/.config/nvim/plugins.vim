@@ -76,11 +76,13 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-jdaddy'
 Plug 'honza/vim-snippets'
 endif
+Plug 'leafgarland/typescript-vim'
 
 if !exists('g:vscode')
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'scss', 'css', 'json', 'html', 'markdown', 'ruby'] }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
 " Plug 'iCyMind/NeoSolarized'
 Plug 'rakr/vim-one'
@@ -116,6 +118,7 @@ Plug 'mg979/vim-visual-multi'
 " Plug 'machakann/vim-highlightedyank'
 Plug 'ap/vim-css-color'
 
+Plug 'puremourning/vimspector'
 " Turn off
 " Plug 'psliwka/vim-smoothie'
 " Plug 'kchmck/vim-coffee-script'

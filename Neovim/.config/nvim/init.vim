@@ -9,7 +9,8 @@ source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/settings.vim
 " Use this when Neovim 0.5.0 is fully released
 " source ~/.config/nvim/lua.vim
-source ~/.config/nvim/plugin-vim-airline.vim
+" source ~/.config/nvim/plugin-vim-airline.vim
+source ~/.config/nvim/plugin-vim-lightline.vim
 source ~/.config/nvim/plugin-vim-startify.vim
 source ~/.config/nvim/plugin-vim-unimpaired.vim
 source ~/.config/nvim/plugin-fzf.vim.vim

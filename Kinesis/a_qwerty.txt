@@ -6,6 +6,7 @@
 {left}>{speed5}{-lshift}{=}{+lshift}
 {right}>{speed5}{=}
 [end]>[lalt]
-[pdown]>[lwin]
+[pdown]>[rwin]
+[pup]>[ralt]
 {up}>{speed5}{-lshift}{obrack}{+lshift}
 {down}>{speed5}{-lshift}{cbrack}{+lshift}

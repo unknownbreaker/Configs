@@ -35,6 +35,7 @@ set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/undo//
 syntax on
 set modifiable
+set noshowmode
 
 " Use relative line nums in NORMAL, but all absolute in INSERT
 set number relativenumber
@@ -160,3 +161,5 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " Get to normal mode in terminal emulator
 tnoremap <Esc> <C-\><C-n>
+
+" Auto template literals if inside quotes
