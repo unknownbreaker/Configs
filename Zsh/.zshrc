@@ -9,7 +9,6 @@ export PATH=$PATH:/usr/local/share/npm/bin/
 export PATH=$PATH:/usr/local/bin/vim
 export PATH=$PATH:/usr/local/bin/rg
 export PATH=$PATH:~/.emacs.d/bin
-export VAULT_ADDR="https://devkeys.disney.network"
 export PATH=$PATH:~/.deno/bin
 export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
 
@@ -17,18 +16,17 @@ export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 export PATH="/usr/local/heroku/bin:$PATH"
 
+# nvm
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 # ============== APPLICATION ASSIGNMENTS ==============
 
-alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
-alias atom="'/Applications/Atom.app/Contents/MacOS/Atom'"
 alias vsc="'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'"
 # alias vim="nvim"
 # alias vi="nvim"
 
 # ============== OH MY ZSH ==============
-
-# load z plugin
-. ~/z.sh
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -84,12 +82,34 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-  git
-  osx
-  zsh-autosuggestions
+  alias-finder
+  aws
+  colored-man-pages
+  docker
+  docker-compose
+  fancy-ctrl-z
   fzf
+  git
+  history
+  minicube
+  osx
+  ripgrep
+  safe-paste
+  tmux
+  vi-mode
+  z
+  zsh-autosuggestions
+  zsh-navigation-tools
 )
 source $ZSH/oh-my-zsh.sh
+
+# Remove zcompdump file which interferes with autocomplete
+rm ~/.zcompdump*
+
+# ============== PLUGINS CONFIGS
+ZSH_ALIAS_FINDER_AUTOMATIC=true
+
+bindkey "^ " autosuggest-accept
 
 # ============== TMUX ==============
 DISABLE_AUTO_TITLE=true
@@ -98,12 +118,7 @@ DISABLE_AUTO_TITLE=true
 
 # alias nano="subl"
 # alias e="subl"
-export EDITOR="vi"
-
-# ============== ATOM ==============
-
-alias nano="subl"
-alias e="vsc"
+export EDITOR="nvim"
 
 # ============== NAVIGATION ==============
 
@@ -139,7 +154,7 @@ echo "cd to \"$currFolderPath\""
 cd "$currFolderPath"
 }
 
-# ============== GIT SHORTCUTS ==============
+# ============== GIT ALIASES ==============
 
 alias gl="git log"
 alias gs="git status"
@@ -221,86 +236,6 @@ alias seeds='be rake db:drop; be rake db:create && be rake db:migrate && be rake
 
 eval "$(nodenv init -)"
 
-# ========= MARVELKIDS =========
-# this command shuts off zsh's bracket recognition
-unsetopt nomatch
-alias mktag='be rake matterhorn:release'
-alias cdmk='cd ~/Documents/Repos/*/marvelkids'
-
-function mk {
-  local env=$1
-  local net=$2
-
-  if [[ ${env} == 'prod' ]]
-  then
-    if [[ ${net} == 'network' ]]
-    then
-      mtt_cms_api_uri=https://cms.matterhorn.disney.io/ be rackup -o "$(ipconfig getifaddr en0)" &
-    else
-      be rake s mtt_cms_api_uri=https://cms.matterhorn.disney.io/ &
-    fi
-  elif [[ ${env} == 'local' ]]
-  then
-    if [[ ${net} == 'network' ]]
-    then
-      mmtt_cms_api_uri=http://cms.local.diznee.net:3003/ be rackup -o "$(ipconfig getifaddr en0)" &
-    else
-      be rake s mtt_cms_api_uri=http://cms.local.diznee.net:3003/ &
-    fi
-  else
-    if [[ ${net} == 'network' ]]
-    then
-      mtt_cms_api_uri=https://cms-$env.mh.disney.io/ be rackup -o "$(ipconfig getifaddr en0)" &
-    else
-      be rake s mtt_cms_api_uri=https://cms-$env.mh.disney.io/ &
-    fi
-  fi
-}
-
-function runmongo {
-  if pgrep -x "mongod" > /dev/null
-  then
-    echo "Mongo is running"
-  else
-    mongod &
-  fi
-}
-
-function mkcms {
-  CURR_DIR=$(pwd)
-  cd ~/Documents/Repos/Marvel/cms &&
-  
-  runmongo
-
-  rails s -p 3003 -b 127.0.0.1 &
-  open http://cms.local.diznee.net:3003
-
-  if [ "$PWD" != CURR_DIR ]; then
-    cd -
-  fi
-}
-
-function mkcore {
-  CURR_DIR=$(pwd)
-  cd ~/Documents/Repos/Marvel/core &&
-
-  runmongo
-
-  rails s -p 3000 -b 127.0.0.1 &
-  open http://core.local.diznee.net:3000
-
-  if [ "$PWD" != CURR_DIR ]; then
-    cd -
-  fi
-}
-
-# ========= COMPANION APP =========
-# QA JSON
-alias jqa='curl -H "Authorization: GAE 29958746-a0f7-46c6-92c7-be6676a75d57" https://cms-qa.api.mh.disney.io/frontend/app.marvelhq.com/page.json\?path\=%2Fcompanion-app-games'
-alias jprod='curl -H "Authorization: GAE 267d6fd8-2b52-4c73-a571-a7271edc6d77" https://cms.api.matterhorn.disney.io/frontend/app.marvelhq.com/page.json\?path\=%2Fcompanion-app-games'
-
-
-
 # ========= ANDROID EMULATOR FOR LOCAL SERVER DEBUG =========
 # remounts emulator to allow for briefly pushing a custom hosts file
 # must run this every time if want to view local server
@@ -348,72 +283,6 @@ function startandroid {
   fi
 }
 
-# ========= QUBIT =========
-
-# For setting up local experiments
-alias xpgo='touch activation.js; touch execution.js; touch global.js; touch variation.css; e .; xp'
-
-# ========= Browser functions =========
-
-function gcal() {
-  open https://calendar.google.com/
-}
-
-function gmail() {
-  open https://mail.google.com/mail/u/0/#inbox
-}
-
-function exercise() {
-  open https://docs.google.com/spreadsheets/d/1-DaDlRZLMR_HACPwl9rkfRj1T-SQ5tCWkOV0wQ4zThs/edit#gid=1996917032
-}
-
-
-# ========= PEBBLE SHORTCUTS =========
-alias pebblego="pebble clean; pebble build; pebble install --emulator aplite; pebble logs"
-
-
-# ========= VIM MODE =========
-# Enable Vim keyboard shortcuts instead.
-# set -o vi
-bindkey -v
-
-# Better searching in command mode
-bindkey -M vicmd '?' history-incremental-search-backward
-bindkey -M vicmd '/' history-incremental-search-forward
-
-# Beginning search with arrow keys
-bindkey "^[OA" up-line-or-beginning-search
-bindkey "^[OB" down-line-or-beginning-search
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
-
-# `v` is already mapped to visual mode, so we need to use a different key to
-# open Vim
-bindkey -M vicmd "^V" edit-command-line
-
-# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-export KEYTIMEOUT=1
-
-# Updates editor information when the keymap changes.
-function zle-keymap-select() {
-  zle reset-prompt
-  zle -R
-}
-
-zle -N zle-keymap-select
-
-function vi_mode_prompt_info() {
-  echo "${${KEYMAP/vicmd/[% NORMAL]%}/(main|viins)/[% INSERT]%}"
-}
-
-# define right prompt, regardless of whether the theme defined it
-RPS1='$(vi_mode_prompt_info)'
-RPS2=$RPS1
-
-# ============== ZSH AUTOSUGGESTIONS ==============
-# Ctrl + Space
-bindkey "^ " autosuggest-accept
-
 # ======= SCRUM NOTES =======
 
 function scrum() {
@@ -448,8 +317,7 @@ function scrum() {
   fi
 }
 
-# Remove zcompdump file which interferes with autocomplete
-rm ~/.zcompdump*
+
 
 # ======== CHROME UNHINGED =====
 alias chrome="open /Applications/Google\ Chrome.app/ --args --allow-file-access --allow-cross-origin-auth-prompt"
@@ -494,4 +362,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# KARGO base-infrastructure setup
+if [ -f /Users/robertyang/Documents/Repos/Work/Kargo/base-infrastructure/env.sh ]; then
+  source /Users/robertyang/Documents/Repos/Work/Kargo/base-infrastructure/env.sh
+fi
 
