@@ -100,6 +100,7 @@ plugins=(
   z
   zsh-autosuggestions
   zsh-navigation-tools
+  zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -185,23 +186,14 @@ alias gconf='e ~/.gitconfig'
 # Clones a repo, CDs into it, opens it in Sublime, and runs bundle. From: https://github.com/stephenplusplus/dots/blob/master/.bash_profile
 function clone {
   local url=$1;
-  local repo=$2;
 
   if [[ ${url:0:4} == 'http' || ${url:0:3} == 'git' ]]
   then
     # just clone this thing.
     repo=$(echo $url | awk -F/ '{print $NF}' | sed -e 's/.git$//');
-  elif [[ -z $repo ]]
-  then
-    # my own stuff.
-    repo=$url;
-    url="git@github.com:flamdoodle/$repo";
-  else
-    # not my own, but I know whose it is.
-    url="git@github.com:$url/$repo.git";
   fi
 
-  git clone $url $repo && cd $repo && subl . && bundle install;
+  git clone $url && cd $repo
 }
 
 # ========= Postgres =========
@@ -218,7 +210,7 @@ eval "$(rbenv init -)"
 
 # Initialize rbenv
 
-rbenv global 2.3.4
+# rbenv global 2.3.4
 # export RBENV_VERSION=1.9.3-p484
 
 # Fix Ruby server for High Sierra and Mojave
@@ -234,7 +226,7 @@ alias seeds='be rake db:drop; be rake db:create && be rake db:migrate && be rake
 
 # ========= NODE =========
 
-eval "$(nodenv init -)"
+# eval "$(nodenv init -)"
 
 # ========= ANDROID EMULATOR FOR LOCAL SERVER DEBUG =========
 # remounts emulator to allow for briefly pushing a custom hosts file
@@ -320,7 +312,7 @@ function scrum() {
 
 
 # ======== CHROME UNHINGED =====
-alias chrome="open /Applications/Google\ Chrome.app/ --args --allow-file-access --allow-cross-origin-auth-prompt"
+alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-security --allow-file-access --allow-cross-origin-auth-prompt"
 
 # ======== FZF ========
 
@@ -364,7 +356,7 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # KARGO base-infrastructure setup
-if [ -f /Users/robertyang/Documents/Repos/Work/Kargo/base-infrastructure/env.sh ]; then
-  source /Users/robertyang/Documents/Repos/Work/Kargo/base-infrastructure/env.sh
+if [ -f /Users/robertyang/Documents/Repos/Kargo/base-infrastructure/env.sh ]; then
+  source /Users/robertyang/Documents/Repos/Kargo/base-infrastructure/env.sh
 fi
 
