@@ -81,7 +81,61 @@
                 },
                 "to": [
                   {
+                    "key_code": "backslash",
+                    "modifiers": [
+                      "shift"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "backslash"
+                },
+                "to_if_alone": [
+                  {
                     "key_code": "backslash"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "backslash",
+                  "modifiers": {
+                    "mandatory": [
+                      "command"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "backslash",
+                    "modifiers": [
+                      "command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "backslash",
+                  "modifiers": {
+                    "mandatory": [
+                      "command",
+                      "option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "backslash",
+                    "modifiers": [
+                      "command",
+                      "option"
+                    ]
                   }
                 ],
                 "type": "basic"
@@ -194,6 +248,17 @@
             "description": "Kinesis customization",
             "manipulators": [
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "left_arrow",
                   "modifiers": {
@@ -210,6 +275,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "right_arrow",
                   "modifiers": {
@@ -226,6 +302,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "up_arrow",
                   "modifiers": {
@@ -245,6 +332,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "down_arrow",
                   "modifiers": {
@@ -264,6 +362,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "delete_or_backspace",
                   "modifiers": {
@@ -280,6 +389,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "delete_forward",
                   "modifiers": {
@@ -296,6 +416,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "page_up",
                   "modifiers": {
@@ -312,6 +443,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "return_or_enter",
                   "modifiers": {
@@ -328,6 +470,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "end",
                   "modifiers": {
@@ -344,6 +497,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "page_down",
                   "modifiers": {
@@ -360,6 +524,17 @@
                 "type": "basic"
               },
               {
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 10730,
+                        "product_id": 258
+                      }
+                    ]
+                  }
+                ],
                 "from": {
                   "key_code": "home",
                   "modifiers": {
