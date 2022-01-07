@@ -106,7 +106,18 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # Remove zcompdump file which interferes with autocomplete
-rm ~/.zcompdump*
+# rm ~/.zcompdump*
+
+# Increase history size
+HISTFILE=~/.zsh_history
+HISTFILESIZE=10000000
+HISTSIZE=100000
+SAVEHIST=100000
+setopt appendhistory
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt SHARE_HISTORY
 
 # ============== PLUGINS CONFIGS
 ZSH_ALIAS_FINDER_AUTOMATIC=true
@@ -319,22 +330,24 @@ alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-securi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
 
 # Setting fd as the default source for fzf
 # follow symbolic links, and include hidden files
-# export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l $FD_OPTIONS"
+# export FZF_DEFAULT_COMMAND="fd . $HOME"
 
-# export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
+# export FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
+# export FZF_DEFAULT_OPTS1="--layout=reverse --inline-info"
+
+# Bind C-u to pageup and C-d to pagedown
+# export FZF_DEFAULT_OPTS2='--bind ctrl-d:page-down,ctrl-u:page-up'
 
 # To apply the command to CTRL-T as well
 # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Make ALT-C find directory
-# export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+# export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS $FZF_DEFAULT_OPTS1 $FZF_DEFAULT_OPTS2 $FZF_DEFAULT_COMMAND"
 
-# Bind C-u to pageup and C-d to pagedown
-# export FZF_DEFAULT_OPTS='--bind ctrl-d:page-down,ctrl-u:page-up'
+bindkey -s ^f "tmux-sessionizer\n"
 
 export EMACS="*term*"
 
@@ -361,3 +374,15 @@ if [ -f /Users/robertyang/Documents/Repos/Kargo/base-infrastructure/env.sh ]; th
   source /Users/robertyang/Documents/Repos/Kargo/base-infrastructure/env.sh
 fi
 
+# - - - - - - News
+alias getnews='open "https://news.ycombinator.com"; \
+  open "https://adexchanger.com"; \
+  open "https://hn.algolia.com/?dateRange=last24h&page=0&prefix=false&query=typescript&sort=byPopularity&type=story"; \
+  open "https://hn.algolia.com/?dateRange=last24h&page=0&prefix=false&query=javascript&sort=byPopularity&type=story"; \
+  open "https://hn.algolia.com/?dateRange=pastWeek&page=0&prefix=true&query=%22ad%22&sort=byPopularity&type=story"; \ 
+  open "https://hn.algolia.com/?dateRange=pastWeek&page=0&prefix=true&query=security&sort=byPopularity&type=story"'
+# - - - - - - News
+
+# Upgrade all 
+alias brewall='brew update; brew upgrade; brew doctor'
+export PATH=$HOME/bin:$PATH
