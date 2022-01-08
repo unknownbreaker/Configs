@@ -24,6 +24,7 @@ source $(brew --prefix nvm)/nvm.sh
 # ============== APPLICATION ASSIGNMENTS ==============
 
 alias vsc="'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'"
+alias vscode='vsc'
 # alias vim="nvim"
 # alias vi="nvim"
 
