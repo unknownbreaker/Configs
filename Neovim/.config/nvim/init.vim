@@ -98,13 +98,7 @@ Plug 'chentau/marks.nvim' " marks
 
 call plug#end()
 
-if empty(glob(data_dir . '/plugged'))
-  finish
-endif
-"
-" if g:colors_name == 'one'
-  colorscheme one
-" endif
+colorscheme one
 highlight Normal guibg=none
 
 autocmd BufWritePre *.js Neoformat
