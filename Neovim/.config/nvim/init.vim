@@ -55,11 +55,6 @@ if empty(glob(data_dir . '/site/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
 endif
 
-" Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source ~/.config/nvim/init.vim
-\| endif
-
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'neovim/nvim-lspconfig'
