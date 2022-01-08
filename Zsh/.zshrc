@@ -92,6 +92,7 @@ plugins=(
   fancy-ctrl-z
   fzf
   git
+  gitfast
   history
   minicube
   osx
