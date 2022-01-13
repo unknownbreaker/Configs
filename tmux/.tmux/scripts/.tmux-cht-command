@@ -1,5 +1,6 @@
 ansible
 awk
+aws
 bat
 brew
 cargo
@@ -36,6 +37,7 @@ stow
 tail
 tar
 tldr
+tmux
 tr
 webpack
 xargs
