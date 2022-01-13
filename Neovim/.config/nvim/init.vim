@@ -58,6 +58,7 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'digitaltoad/vim-pug' " syntax highlighting for pug/jade
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects' "text objects
