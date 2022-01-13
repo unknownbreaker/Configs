@@ -12,6 +12,7 @@ export PATH=$PATH:~/.emacs.d/bin
 export PATH=$PATH:~/.deno/bin
 export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
 export PATH=$PATH:/usr/local/bin/limelight
+export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
