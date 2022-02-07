@@ -191,6 +191,7 @@ alias gcof='git checkout $(git branch | fzf)'
 alias gp='git push'
 alias gpo='git push origin'
 alias glpfa='git log --pretty=format:"%s (%h)"'
+alias gfa='git fetch origin "+refs/heads/*:refs/heads/*"'
 
 # Delete a commit
 function gd {
