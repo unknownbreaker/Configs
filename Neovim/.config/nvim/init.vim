@@ -96,6 +96,7 @@ Plug 'kevinhwang91/nvim-bqf' " quickfix list editing
 Plug 'ThePrimeagen/git-worktree.nvim' " git worktree telescopic
 Plug 'lukas-reineke/indent-blankline.nvim' " show me what the blanks are
 Plug 'chentau/marks.nvim' " marks
+Plug 'ThePrimeagen/harpoon' " manage marks/file navigation memory
 
 call plug#end()
 
