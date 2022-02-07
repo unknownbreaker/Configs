@@ -22,6 +22,9 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
+# kcli
+export PATH=$PATH:~/Documents/Repos/Kargo/kcli-codebase
+
 # ============== APPLICATION ASSIGNMENTS ==============
 
 alias vsc="'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'"
