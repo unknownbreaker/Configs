@@ -1,0 +1,17 @@
+#!/usr/local/bin/bash
+
+developmentJson=$(find $(pwd) -name  "development.json")
+dockerCompose=$(find $(pwd) -name "docker-compose.yml")
+
+echo -n "Enter host subdomain to change (without protocols): "
+read original_host
+
+echo -n "Enter new host (without protocols): "
+read new_host
+
+# echo -n "Enter new container name: "
+# read containerName
+
+sed -i '' "s/$original_host\./$new_host\./g" $developmentJson
+sed -i '' "s/ $original_host$/ $new_host/g" $dockerCompose
+

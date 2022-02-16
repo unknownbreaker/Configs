@@ -100,6 +100,11 @@ Plug 'ThePrimeagen/harpoon' " manage marks/file navigation memory
 
 call plug#end()
 
+" Start Obsession upon entering
+if !exists("g:this_obsession")
+  autocmd VimEnter * Obsession
+endif
+
 colorscheme one
 highlight Normal guibg=none
 
@@ -436,7 +441,7 @@ lualine.setup {
       'filetype'
     },
     lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_z = {'ObsessionStatus()', 'location'}
   },
   inactive_sections = {
     lualine_a = {},
