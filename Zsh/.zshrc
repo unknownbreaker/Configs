@@ -13,6 +13,7 @@ export PATH=$PATH:~/.deno/bin
 export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
 export PATH=$PATH:/usr/local/bin/limelight
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
+export PATH=$PATH:~/.config/nvim/scripts/change-host-value
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -133,6 +134,9 @@ bindkey "^ " autosuggest-accept
 # ============== TMUX ==============
 DISABLE_AUTO_TITLE=true
 
+# ============== NEOVIM ============== 
+alias chv='bash ~/.config/nvim/scripts/change-host-value'
+
 # ============== SUBLIME ==============
 
 # alias nano="subl"
@@ -219,6 +223,46 @@ function clone {
 
 alias psql='psql -h localhost'
 
+# ============== DOCKER ==============
+
+# Images #
+
+alias di='docker images'
+alias drmi='docker rmi'
+alias dbu='docker build'
+alias drmi_all='docker rmi $* $(docker images -a -q)'
+alias drmi_dang='docker rmi $* $(docker images -q -f "dangling=true")'
+alias dhi='docker history $*'
+dhi_neat() {
+  ### dhi_neat <image name> [extra `docker history` options]
+  docker history "${1}" \
+    --format "{{ .Size }}\t{{ .CreatedBy }}" \
+    ${2:-} |
+    sort \
+      --key=1 \
+      --human-numeric-sort \
+      --reverse
+}
+
+# Containers #
+
+alias dps='docker ps'
+alias drit='docker run -it'
+alias deit='docker exec -it'
+alias dlog='docker logs'
+alias dip='docker inspect --format "{{ .NetworkSettings.IPAddress }}" $*'
+alias dstop='docker stop'
+alias dstop_all='docker stop $* $(docker ps -q -f "status=running")'
+alias drm='docker rm'
+alias drm_stopped='docker rm $* $(docker ps -q -f "status=exited")'
+alias drmv_stopped='docker rm -v $* $(docker ps -q -f "status=exited")'
+alias drm_all='docker rm $* $(docker ps -a -q)'
+alias drmv_all='docker rm -v $* $(docker ps -a -q)'
+
+# Volumes #
+alias dvls='docker volume ls $*'
+alias dvrm_all='docker volume rm $(docker volume ls -q)'
+alias dvrm_dang='docker volume rm $(docker volume ls -q -f "dangling=true")'
 
 # ========= RUBY =========
 
@@ -393,3 +437,4 @@ alias getnews='open "https://news.ycombinator.com"; \
 # Upgrade all 
 alias brewall='brew update; brew upgrade; brew doctor'
 export PATH=$HOME/bin:$PATH
+
