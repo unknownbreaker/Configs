@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-yabai -m config external_bar all:26:0
+# yabai -m config external_bar all:26:0
 
 # global settings
 yabai -m config mouse_follows_focus             off
@@ -46,18 +46,21 @@ yabai -m space 7 --label "Secondary"
 yabai -m config --space 2 layout float
 
 # Unmanaged
-yabai -m rule --add app="^System Preferences$"  manage=off border=off
-yabai -m rule --add app="ScreenFlow 9"          manage=off border=off
-yabai -m rule --add app="^Karabiner"            manage=off border=off
-yabai -m rule --add app="Snagit"                manage=off border=off
-yabai -m rule --add app="^1Password"            manage=off border=off
+yabai -m rule --add app="Activity Monitor"      manage=off border=off
+yabai -m rule --add app="Charles"               manage=off border=off
 yabai -m rule --add app="DaisyDesk"             manage=off border=off
 yabai -m rule --add app="Finder"                manage=off border=off
-yabai -m rule --add app="Preview"               manage=off border=off
-yabai -m rule --add app="Things"                manage=off border=off
-yabai -m rule --add app="Charles"               manage=off border=off
-yabai -m rule --add app="QuickTime Player"      manage=off border=off
 yabai -m rule --add app="Keyboard Maestro"      manage=off border=off
+yabai -m rule --add app="Music"                 manage=off border=off
+yabai -m rule --add app="Preview"               manage=off border=off
+yabai -m rule --add app="QuickTime Player"      manage=off border=off
+yabai -m rule --add app="ScreenFlow 9"          manage=off border=off
+yabai -m rule --add app="Snagit"                manage=off border=off
+yabai -m rule --add app="Things"                manage=off border=off
+yabai -m rule --add app="VLC"                   manage=off border=off 
+yabai -m rule --add app="^1Password"            manage=off border=off
+yabai -m rule --add app="^Karabiner"            manage=off border=off
+yabai -m rule --add app="^System Preferences$"  manage=off border=off
 
 # Primary
 yabai -m rule --add app="Brave"                 space=1
@@ -84,7 +87,5 @@ yabai -m rule --add app="Messages"              space=6
 yabai -m rule --add app="Slack"                 space=6
 
 # Media
-yabai -m rule --add app="Music"                 space=7
-yabai -m rule --add app="VLC"                   space=7
 yabai -m rule --add app="Spotify"               space=7
 
