@@ -50,10 +50,10 @@ ctrl + alt - p : yabai -m display --focus prev || yabai -m display --focus last
 
 # "Swaps" with another Window, obtaining its size and position
 # Swap: Ctrl + Alt + [DIR]
-# ctrl + alt - h : yabai -m window --swap west
-# ctrl + alt - j : yabai -m window --swap south
-# ctrl + alt - k : yabai -m window --swap north
-# ctrl + alt - l : yabai -m window --swap east
+ctrl + alt - h : yabai -m window --swap west
+ctrl + alt - j : yabai -m window --swap south
+ctrl + alt - k : yabai -m window --swap north
+ctrl + alt - l : yabai -m window --swap east
 
 # Sends Window to Space and shifts focus
 # Send: Shift + Cmd + [NUM]
@@ -128,4 +128,4 @@ shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
 # Restart yabai-ish things
 shift + alt - r : brew services restart yabai; \
                   brew services restart skhd; \
-                  brew services restart spacebar
+                  # brew services restart spacebar
