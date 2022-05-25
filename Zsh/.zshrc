@@ -132,6 +132,7 @@ ZSH_ALIAS_FINDER_AUTOMATIC=true
 bindkey "^ " autosuggest-accept
 
 # ============== TMUX ==============
+export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/
 DISABLE_AUTO_TITLE=true
 
 # ============== NEOVIM ============== 
@@ -148,12 +149,16 @@ export EDITOR="nvim"
 alias cd..="cd .."
 alias cd/='cd /'
 alias desktop='cd ~/Desktop'
-alias ll='ls -halF'
-alias lsa='ls -a'
-alias ls='ls -FGh'
+# alias ll='ls -halF'
+# alias lsa='ls -a'
+# alias ls='ls -FGh'
 alias b='bundle install'
 alias f='open -a Finder ./'
 alias clear="clear && printf '\e[3J'"
+
+function g() {
+
+}
 
 # Make a directory and "cd" into it.
 function mcd() {
@@ -196,11 +201,15 @@ alias gp='git push'
 alias gpo='git push origin'
 alias glpfa='git log --pretty=format:"%s (%h)"'
 alias gfa='git fetch origin "+refs/heads/*:refs/heads/*"'
+alias gw='git worktree'
+alias gwa='git worktree add'
+alias gwr='git worktree remove'
+alias gwrf='git worktree remove --force'
 
 # Delete a commit
-function gd {
+function grbro {
   local commit=$1;
-  git rebase -p --onto $1^ $1
+  git rebase --rebase-merges --onto $1^ $1
 }
 
 # Opens git config file
@@ -224,6 +233,21 @@ function clone {
 alias psql='psql -h localhost'
 
 # ============== DOCKER ==============
+# Docker Compose #
+alias dco='docker-compose'
+
+alias dcb='docker-compose build'
+alias dce='docker-compose exec'
+alias dcps='docker-compose ps'
+alias dcrestart='docker-compose restart'
+alias dcrm='docker-compose rm'
+alias dcr='docker-compose run'
+alias dcstop='docker-compose stop'
+alias dcup='docker-compose up'
+alias dcdown='docker-compose down'
+alias dcl='docker-compose logs'
+alias dclf='docker-compose logs -f'
+
 
 # Images #
 
@@ -246,12 +270,15 @@ dhi_neat() {
 
 # Containers #
 
-alias dps='docker ps'
+alias dps='docker container ls --all --format "table {{.Names}}\t{{.Status}}" | sort'
 alias drit='docker run -it'
 alias deit='docker exec -it'
 alias dlog='docker logs'
 alias dip='docker inspect --format "{{ .NetworkSettings.IPAddress }}" $*'
+alias dhelp='docker help'
+alias dstart='docker container start'
 alias dstop='docker stop'
+alias dkill='docker kill'
 alias dstop_all='docker stop $* $(docker ps -q -f "status=running")'
 alias drm='docker rm'
 alias drm_stopped='docker rm $* $(docker ps -q -f "status=exited")'
@@ -263,6 +290,14 @@ alias drmv_all='docker rm -v $* $(docker ps -a -q)'
 alias dvls='docker volume ls $*'
 alias dvrm_all='docker volume rm $(docker volume ls -q)'
 alias dvrm_dang='docker volume rm $(docker volume ls -q -f "dangling=true")'
+
+# ========= k8s =========
+
+function kbverify() {
+  namespaces=(ad-demo-platform ad-demo-platform-v2)
+  kubectl -n $(printf '%s\n' "${namespaces[@]}" | fzf) get pods 
+}
+
 
 # ========= RUBY =========
 
@@ -399,6 +434,14 @@ alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-securi
 # export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS $FZF_DEFAULT_OPTS1 $FZF_DEFAULT_OPTS2 $FZF_DEFAULT_COMMAND"
 
 bindkey -s ^f "tmux-sessionizer\n"
+
+function go-to-kat-project() {
+  # cd $(find ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf) > /dev/null
+  kat_projects # zsh custom script
+  ls -la
+}
+bindkey -s ^p "go-to-kat-project\n"
+# bindkey -s ^p "z $(find ~ ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf)\n"
 
 export EMACS="*term*"
 
