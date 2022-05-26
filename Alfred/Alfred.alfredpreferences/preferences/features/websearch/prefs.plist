@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>customSites</key>
+	<dict>
+		<key>493D31BB-47EA-48C3-93D0-871398249371</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>reddit</string>
+			<key>text</key>
+			<string>Search Reddit for '{query}'</string>
+			<key>url</key>
+			<string>https://www.reddit.com/search/?q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>4B688854-48E9-4C35-8FB6-5430C5911E4C</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>medscape</string>
+			<key>text</key>
+			<string>Search Medscape for '{query}'</string>
+			<key>url</key>
+			<string>https://search.medscape.com/search/?q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>E9F315AC-D186-407A-931E-36C02FAB37AC</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>vwh</string>
+			<key>text</key>
+			<string>Search Verywell Health for '{query}'
+instagram
+twitter
+facebook
+pinterest
+flipboard
+Verywell Fit
+Verywell Mind
+Verywell Family
+Search Verywell Health for '{query}'</string>
+			<key>url</key>
+			<string>https://www.verywellhealth.com/search?q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
