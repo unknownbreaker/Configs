@@ -119,6 +119,9 @@ if filereadable(findfile('.prettierrc.json', '.'))
 " autocmd BufWritePre *.yml Neoformat
 endif
 
+" Close vim if NvimTree is the last buffer
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
@@ -362,7 +365,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
+parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
 
 -- auto completion
 vim.o.completeopt = "menuone,noselect"
@@ -545,78 +548,127 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- nvim tree
--- following options are the default
-require'nvim-tree'.setup {
-  -- disables netrw completely
-  disable_netrw       = true,
-  -- hijack netrw window on startup
-  hijack_netrw        = true,
-  -- open the tree when running this setup function
-  open_on_setup       = false,
-  -- will not open on setup if the filetype is in this list
-  ignore_ft_on_setup  = {},
-  -- closes neovim automatically when the tree is the last **WINDOW** in the view
-  auto_close          = false,
-  -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
-  open_on_tab         = false,
-  -- hijacks new directory buffers when they are opened.
-  update_to_buf_dir   = {
-    -- enable the feature
+-- setup with all defaults
+-- each of these are documented in `:help nvim-tree.OPTION_NAME`
+-- nested options are documented by accessing them with `.` (eg: `:help nvim-tree.view.mappings.list`).
+require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
+  auto_reload_on_write = true,
+  disable_netrw = false,
+  hijack_cursor = false,
+  hijack_netrw = true,
+  hijack_unnamed_buffer_when_opening = false,
+  ignore_buffer_on_setup = false,
+  open_on_setup = false,
+  open_on_setup_file = false,
+  open_on_tab = false,
+  sort_by = "name",
+  update_cwd = false,
+  reload_on_bufenter = false,
+  view = {
+    width = 30,
+    height = 30,
+    hide_root_folder = false,
+    side = "left",
+    preserve_window_proportions = false,
+    number = false,
+    relativenumber = false,
+    signcolumn = "yes",
+    mappings = {
+      custom_only = false,
+      list = {
+        -- user mappings go here
+      },
+    },
+  },
+  renderer = {
+    indent_markers = {
+      enable = false,
+      icons = {
+        corner = "└ ",
+        edge = "│ ",
+        none = "  ",
+      },
+    },
+    icons = {
+      webdev_colors = true,
+      git_placement = "before",
+    },
+  },
+  hijack_directories = {
     enable = true,
-    -- allow to open the tree if it was previously closed
     auto_open = true,
   },
-  -- hijack the cursor in the tree to put it at the start of the filename
-  hijack_cursor       = false,
-  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
-  update_cwd          = false,
-  -- show lsp diagnostics in the signcolumn
+  update_focused_file = {
+    enable = false,
+    update_cwd = false,
+    ignore_list = {},
+  },
+  ignore_ft_on_setup = {},
+  system_open = {
+    cmd = "",
+    args = {},
+  },
   diagnostics = {
     enable = false,
+    show_on_dirs = false,
     icons = {
       hint = "",
       info = "",
       warning = "",
       error = "",
-    }
+    },
   },
-  -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
-  update_focused_file = {
-    -- enables the feature
-    enable      = true,
-    -- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
-    -- only relevant when `update_focused_file.enable` is true
-    update_cwd  = false,
-    -- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
-    -- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
-    ignore_list = {}
+  filters = {
+    dotfiles = false,
+    custom = {},
+    exclude = {},
   },
-  -- configuration options for the system open command (`s` in the tree by default)
-  system_open = {
-    -- the command to run this, leaving nil should work in most cases
-    cmd  = nil,
-    -- the command arguments as a list
-    args = {}
+  git = {
+    enable = true,
+    ignore = true,
+    timeout = 400,
   },
-
-  view = {
-    -- width of the window, can be either a number (columns) or a string in `%`, for left or right side placement
-    width = 30,
-    -- height of the window, can be either a number (columns) or a string in `%`, for top or bottom side placement
-    height = 30,
-    -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
-    side = 'left',
-    -- if true the tree will resize itself after opening a file
-    auto_resize = false,
-    mappings = {
-      -- custom only false will merge the list with the default mappings
-      -- if true, it will only use your list to set the mappings
-      custom_only = false,
-      -- list of mappings to set on the tree manually
-      list = {}
-    }
-  }
-}
+  actions = {
+    use_system_clipboard = true,
+    change_dir = {
+      enable = true,
+      global = false,
+      restrict_above_cwd = false,
+    },
+    open_file = {
+      quit_on_open = false,
+      resize_window = true,
+      window_picker = {
+        enable = true,
+        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+        exclude = {
+          filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+          buftype = { "nofile", "terminal", "help" },
+        },
+      },
+    },
+  },
+  trash = {
+    cmd = "trash",
+    require_confirm = true,
+  },
+  live_filter = {
+    prefix = "[FILTER]: ",
+    always_show_folders = true,
+  },
+  log = {
+    enable = false,
+    truncate = false,
+    types = {
+      all = false,
+      config = false,
+      copy_paste = false,
+      diagnostics = false,
+      git = false,
+      profile = false,
+    },
+  },
+} -- END_DEFAULT_OPTS
 
 -- sniprun
 require'sniprun'.setup({
