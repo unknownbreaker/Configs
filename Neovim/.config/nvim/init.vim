@@ -57,7 +57,10 @@ endif
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'williamboman/nvim-lsp-installer' " automatically install language servers
 Plug 'neovim/nvim-lspconfig'
+Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'} " php lsp
+Plug 'glepnir/lspsaga.nvim' " little GUIs
 Plug 'digitaltoad/vim-pug' " syntax highlighting for pug/jade
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
@@ -217,6 +220,40 @@ nnoremap <leader>vsd <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <leader>vp <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>zz
 nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>zz
 
+" lsp saga
+" lsp provider to find the cursor word definition and reference
+nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+" code action
+nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+" show hover doc
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+
+" scroll down hover doc or scroll in definition preview
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+" scroll up hover doc
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+" show signature help
+nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+" and you also can use smart_scroll_with_saga to scroll in signature help win
+" rename
+nnoremap <silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>
+" close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
+" preview definition
+nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+" can use smart_scroll_with_saga to scroll
+" show
+nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+" only show diagnostic if cursor is over the area
+nnoremap <silent><leader>cc <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
+
+" jump diagnostic
+nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+" float terminal also you can pass the cli command in open_float_terminal function
+nnoremap <silent> <A-d> <cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR> " or open_float_terminal('lazygit')<CR>
+tnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>
+
 " Navigate quickfix
 nnoremap <C-n> :cnext<CR>
 nnoremap <C-p> :cprev<CR>
@@ -234,7 +271,7 @@ inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 
 " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
 " for normal mode - the word under the cursor
@@ -306,12 +343,23 @@ nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>
 lua << EOF
 require("git-worktree").setup{}
 require("telescope").load_extension("git_worktree")
-
+require("nvim-lsp-installer").setup ({
+  automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+  ui = {
+    icons = {
+      server_installed = "✓",
+      server_pending = "➜",
+      server_uninstalled = "✗"
+    }
+  }
+})
 require'lspconfig'.bashls.setup{}
 require'lspconfig'.cssls.setup{}
+require'lspconfig'.golangci_lint_ls.setup{}
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.graphql.setup{}
 require'lspconfig'.perlpls.setup{}
+require'lspconfig'.phpactor.setup{}
 require'lspconfig'.pylsp.setup{}
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.rust_analyzer.setup{}
@@ -725,5 +773,10 @@ require'sniprun'.setup({
                                    -- # possible values are 'none', 'single', 'double', or 'shadow'
   live_mode_toggle='off'       -- # live mode toggle, see Usage - Running for more info   
 })
+
+
+local saga = require 'lspsaga'
+saga.init_lsp_saga()
+
 EOF
 
