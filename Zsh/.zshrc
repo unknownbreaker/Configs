@@ -19,6 +19,14 @@ export PATH=$PATH:~/.config/nvim/scripts/change-host-value
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 export PATH="/usr/local/heroku/bin:$PATH"
 
+export PATH="/opt/homebrew/Cellar/python@3.10/3.10.4/bin:$PATH"
+
+# Other ENVs
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
+
+# brew
+alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
+
 # nvm
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
@@ -89,7 +97,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-  alias-finder
+  aliases
   aws
   colored-man-pages
   docker
@@ -106,7 +114,7 @@ plugins=(
   tmux
   vi-mode
   z
-  zsh-autosuggestions
+  zsh-autocomplete
   zsh-navigation-tools
   zsh-syntax-highlighting
 )
@@ -129,7 +137,17 @@ setopt SHARE_HISTORY
 # ============== PLUGINS CONFIGS
 ZSH_ALIAS_FINDER_AUTOMATIC=true
 
+# Turn off the auto "cd" for directories
+unsetopt AUTO_CD
+
 bindkey "^ " autosuggest-accept
+
+# ============== ZSH AUTOCOMPLETE CONFIGS ===============
+zstyle ':autocomplete:*' fzf-completion yes
+# no:  Tab uses Zsh's completion system only.
+# yes: Tab first tries Fzf's completion, then falls back to Zsh's.
+# ⚠️ NOTE: This setting can NOT be changed at runtime and requires that you
+# have installed Fzf's shell extensions.
 
 # ============== TMUX ==============
 export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/
@@ -143,6 +161,9 @@ alias chv='bash ~/.config/nvim/scripts/change-host-value'
 # alias nano="subl"
 # alias e="subl"
 export EDITOR="nvim"
+
+# ============== NOTIFIER ==============
+alias notify="terminal-notifier -title 'Terminal' -message 'Done with task! Exit status: $?' -activate 'com.googlecode.iterm2'"
 
 # ============== NAVIGATION ==============
 
@@ -294,7 +315,7 @@ alias dvrm_dang='docker volume rm $(docker volume ls -q -f "dangling=true")'
 # ========= k8s =========
 
 function kbverify() {
-  namespaces=(ad-demo-platform ad-demo-platform-v2)
+  namespaces=(ad-demo-platform ad-demo-platform-v2 ad-demo-platform-dev)
   kubectl -n $(printf '%s\n' "${namespaces[@]}" | fzf) get pods 
 }
 
