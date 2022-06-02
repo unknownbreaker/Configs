@@ -12,6 +12,8 @@
 	<true/>
 	<key>AlternateMouseScroll</key>
 	<true/>
+	<key>AnimateGraphStatusBarComponents</key>
+	<false/>
 	<key>BracketedPasteMode</key>
 	<true/>
 	<key>CloseBookmarksWindowAfterOpening</key>
@@ -195,7 +197,7 @@
 			<key>AWDS Window Directory</key>
 			<string>/Users/ryang/Documents/Repos/Marvel/marvelkids</string>
 			<key>AWDS Window Option</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Ambiguous Double Width</key>
 			<false/>
 			<key>Ansi 0 Color</key>
@@ -409,7 +411,7 @@
 			<key>Disable Window Resizing</key>
 			<true/>
 			<key>Flashing Bell</key>
-			<false/>
+			<true/>
 			<key>Foreground Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1681,6 +1683,8 @@
 	<integer>6</integer>
 	<key>UseBorder</key>
 	<false/>
+	<key>UseTmuxStatusBar</key>
+	<true/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 	<key>Window Arrangements</key>
