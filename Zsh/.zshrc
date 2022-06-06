@@ -19,7 +19,7 @@ export PATH=$PATH:~/.config/nvim/scripts/change-host-value
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 export PATH="/usr/local/heroku/bin:$PATH"
 
-export PATH="/opt/homebrew/Cellar/python@3.10/3.10.4/bin:$PATH"
+export PATH="/opt/homebrew/bin/:$PATH"
 
 # Other ENVs
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
@@ -29,7 +29,7 @@ alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
 
 # nvm
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+[ -s "/usr/local/homebrew/opt/nvm/nvm.sh" ] && \. "/usr/local/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 
 # kcli
 export PATH=$PATH:~/Documents/Repos/Kargo/kcli-codebase
@@ -103,21 +103,29 @@ plugins=(
   docker
   docker-compose
   fancy-ctrl-z
-  fzf
+  fzf-zsh-plugin
   git
   gitfast
   history
-  minicube
-  osx
+  minikube
+  macos
   ripgrep
   safe-paste
   tmux
   vi-mode
   z
   zsh-autocomplete
+  zsh-autosuggestions
+  zsh-interactive-cd
   zsh-navigation-tools
   zsh-syntax-highlighting
 )
+
+# Automatic update without confirmation prompt
+# zstyle ':omz:update' mode auto
+# This will check for updates every 1 days
+# zstyle ':omz:update' frequency 0
+
 source $ZSH/oh-my-zsh.sh
 
 # Remove zcompdump file which interferes with autocomplete
@@ -207,7 +215,8 @@ cd "$currFolderPath"
 
 alias gl="git log"
 alias gs="git status"
-alias gb="git branch"
+# alias gb="git branch"
+alias gb="fzf-git-branch"
 alias gba="git branch -a"
 alias ga='git add'
 alias gap='git add -p'
@@ -215,7 +224,8 @@ alias gr='git rm'
 alias gs='git status'
 alias gc='git commit'
 alias gcm='git commit -m'
-alias gco='git checkout'
+# alias gco='git checkout'
+alias gco='fzf-git-checkout'
 alias gcom='git checkout master'
 alias gcof='git checkout $(git branch | fzf)'
 alias gp='git push'
@@ -247,6 +257,37 @@ function clone {
   fi
 
   git clone $url && cd $repo
+}
+
+function fzf-git-branch() {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  git branch --color=always --all --sort=-committerdate |
+    grep -v HEAD |
+    fzf --height 50% --ansi --no-multi --preview-window right:65% \
+      --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+    sed "s/.* //"
+}
+
+fzf-git-checkout() {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  local branch
+
+  branch=$(fzf-git-branch)
+  if [[ "$branch" = "" ]]; then
+    echo "No branch selected."
+    return
+  fi
+
+  # If branch name starts with 'remotes/' then it is a remote branch. By
+  # using --track and a remote branch name, it is the same as:
+  # git checkout -b branchName --track origin/branchName
+  if [[ "$branch" = 'remotes/'* ]]; then
+    git checkout --track $branch
+  else
+    git checkout $branch;
+  fi
 }
 
 # ========= Postgres =========
