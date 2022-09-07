@@ -1,0 +1,105 @@
+#!/bin/bash
+
+usage() {
+    echo "A stateful wrapper around kubectl."
+    echo
+    echo "The following special arguments are available. This script consumes them, so they can be combined with any arguments passed to kubectl."
+    echo
+    echo "    ,help"
+    echo "        This information."
+    echo "    ,c=CLUSTER_NAME"
+    echo "        Sets the cluster context."
+    echo "    ,c"
+    echo "        Select the cluster context with a dialog."
+    echo "    ,n=NAMESPACE_NAME"
+    echo "        Sets the namespace."
+    echo "    ,n"
+    echo "        Select the namespace with a dialog."
+    echo "    ,config"
+    echo "        Prints out the current configuration and exits."
+}
+
+# The session id is stored in the final field of the TMUX environment variable.
+# When using the id, it has to be prefixed with a $. (See the target-session
+# section of the tmux man page.)
+TMUX_SESSION="\$$(echo $TMUX | cut -d , -f 3)"
+
+set -eu
+
+env_value() {
+    cut -d = -f 2,3,4,5,6,7,8,9,10
+}
+
+set_tmux_env() {
+    k="$1"
+    v="$2"
+    tmux set-environment -t "$TMUX_SESSION" "$k" "$v"
+}
+
+
+cluster=
+namespace=
+if [[ -z "$TMUX_SESSION" ]]; then
+    >&2 echo "Get in a tmux session."
+    exit 1
+else
+    cluster="$(tmux show-environment | grep ku_cluster | env_value)"
+    namespace="$(tmux show-environment | grep ku_namespace | env_value)"
+fi
+
+if [[ "$namespace" = "" ]]; then
+    namespace=default
+fi
+
+args=()
+for arg in "$@"; do
+    case "$arg" in
+        ,c=*)
+            cluster="${arg#,c=}"
+            set_tmux_env ku_cluster "$cluster"
+            ;;
+        ,c)
+            cluster="$(kubectl config get-contexts -o=name | sort -r | awk '{print $1}' | fzf)"
+            set_tmux_env ku_cluster "$cluster"
+            clear
+            ;;
+        ,n=*)
+            namespace="${arg#,n=}"
+            set_tmux_env ku_namespace "$namespace"
+            ;;
+        ,n)
+            namespace="$(kubectl --context "$cluster" get namespaces | awk '$1 != "NAME" { print $1}' | sort -r | fzf)"
+            set_tmux_env ku_namespace "$namespace"
+            clear
+            ;;
+        ,help)
+            usage
+            exit
+            ;;
+        ,config)
+            echo "cluster=$cluster"
+            echo "namespace=$namespace"
+            exit
+            ;;
+        *)
+            args+=("$arg")
+            ;;
+    esac
+done
+
+if test -z "$cluster" -o -z "$namespace"; then
+    echo "You must provide a cluster name and a namespace. See \"ku ,help\"."
+    exit 2
+fi
+
+if [[ "${#args[@]}" -eq 0 ]]; then
+    echo "No commands or args given. Exiting.";
+    exit 3;
+fi
+
+namespace_flag="--namespace=$namespace"
+if test "$namespace" = "all"; then
+    kubectl --context="$cluster" "${args[@]}" --all-namespaces
+else
+    kubectl --context="$cluster" "$namespace_flag" "${args[@]}"
+fi

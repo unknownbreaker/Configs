@@ -14,6 +14,9 @@ export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
 export PATH=$PATH:/usr/local/bin/limelight
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 export PATH=$PATH:~/.config/nvim/scripts/change-host-value
+export PATH=$PATH:~/Documents/Repos/Configs/Zsh/scripts
+export PATH=$PATH:~/.tmux/scripts/t
+export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -98,26 +101,28 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   aliases
+  autojump
   aws
   colored-man-pages
+  dirhistory
   docker
   docker-compose
-  fancy-ctrl-z
   fzf-zsh-plugin
   git
   gitfast
   history
+  kubectl
   minikube
   macos
   ripgrep
   safe-paste
+  taskwarrior
   tmux
   vi-mode
-  z
-  zsh-autocomplete
+  # z
+  # zsh-autocomplete
   zsh-autosuggestions
-  zsh-interactive-cd
-  zsh-navigation-tools
+  # zsh-interactive-cd
   zsh-syntax-highlighting
 )
 
@@ -149,13 +154,6 @@ ZSH_ALIAS_FINDER_AUTOMATIC=true
 unsetopt AUTO_CD
 
 bindkey "^ " autosuggest-accept
-
-# ============== ZSH AUTOCOMPLETE CONFIGS ===============
-zstyle ':autocomplete:*' fzf-completion yes
-# no:  Tab uses Zsh's completion system only.
-# yes: Tab first tries Fzf's completion, then falls back to Zsh's.
-# ⚠️ NOTE: This setting can NOT be changed at runtime and requires that you
-# have installed Fzf's shell extensions.
 
 # ============== TMUX ==============
 export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/
@@ -215,8 +213,8 @@ cd "$currFolderPath"
 
 alias gl="git log"
 alias gs="git status"
-# alias gb="git branch"
-alias gb="fzf-git-branch"
+alias gb="git branch"
+# alias gb="fzf-git-branch"
 alias gba="git branch -a"
 alias ga='git add'
 alias gap='git add -p'
@@ -224,8 +222,8 @@ alias gr='git rm'
 alias gs='git status'
 alias gc='git commit'
 alias gcm='git commit -m'
-# alias gco='git checkout'
-alias gco='fzf-git-checkout'
+alias gco='git checkout'
+# alias gco='fzf-git-checkout'
 alias gcom='git checkout master'
 alias gcof='git checkout $(git branch | fzf)'
 alias gp='git push'
@@ -236,6 +234,10 @@ alias gw='git worktree'
 alias gwa='git worktree add'
 alias gwr='git worktree remove'
 alias gwrf='git worktree remove --force'
+alias gwm='git worktree move'
+alias gwp='git worktree prune'
+
+bindkey -s ^o '$(fzf-git-branch)\n'
 
 # Delete a commit
 function grbro {
@@ -296,19 +298,19 @@ alias psql='psql -h localhost'
 
 # ============== DOCKER ==============
 # Docker Compose #
-alias dco='docker-compose'
+alias dco='docker compose'
 
-alias dcb='docker-compose build'
-alias dce='docker-compose exec'
-alias dcps='docker-compose ps'
-alias dcrestart='docker-compose restart'
-alias dcrm='docker-compose rm'
-alias dcr='docker-compose run'
-alias dcstop='docker-compose stop'
-alias dcup='docker-compose up'
-alias dcdown='docker-compose down'
-alias dcl='docker-compose logs'
-alias dclf='docker-compose logs -f'
+alias dcb='docker compose build'
+alias dce='docker compose exec'
+alias dcps='docker compose ps'
+alias dcrestart='docker compose restart'
+alias dcrm='docker compose rm'
+alias dcr='docker compose run'
+alias dcstop='docker compose stop'
+alias dcup='docker compose up'
+alias dcdown='docker compose down'
+alias dcl='docker compose logs'
+alias dclf='docker compose logs -f'
 
 
 # Images #
@@ -353,13 +355,19 @@ alias dvls='docker volume ls $*'
 alias dvrm_all='docker volume rm $(docker volume ls -q)'
 alias dvrm_dang='docker volume rm $(docker volume ls -q -f "dangling=true")'
 
+# Nuclear option #
+alias dprune='docker system prune -a --volumes'
+
 # ========= k8s =========
 
+# Refer here to see aliases: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kubectl
+
 function kbverify() {
-  namespaces=(ad-demo-platform ad-demo-platform-v2 ad-demo-platform-dev)
+  namespaces=(ad-demo-platform ad-demo-platform-v2 ad-demo-platform-dev cat-team-dev)
   kubectl -n $(printf '%s\n' "${namespaces[@]}" | fzf) get pods 
 }
 
+alias k9s="k9s --readonly" # avoid making terrible mistakes on k8s
 
 # ========= RUBY =========
 
@@ -497,14 +505,6 @@ alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-securi
 
 bindkey -s ^f "tmux-sessionizer\n"
 
-function go-to-kat-project() {
-  # cd $(find ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf) > /dev/null
-  kat_projects # zsh custom script
-  ls -la
-}
-bindkey -s ^p "go-to-kat-project\n"
-# bindkey -s ^p "z $(find ~ ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf)\n"
-
 export EMACS="*term*"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -543,3 +543,13 @@ alias getnews='open "https://news.ycombinator.com"; \
 alias brewall='brew update; brew upgrade; brew doctor'
 export PATH=$HOME/bin:$PATH
 
+# ============= KARGO ==============
+bindkey -s ^p "go-to-kat-project\n"
+function go-to-kat-project() {
+  kat_projects
+}
+
+# bindkey -s ^p "z $(find ~ ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf)\n"
+
+alias yyb="nvm use && yarn && yarn build"
+alias ddb="dcdown && dcb && dcup -d"

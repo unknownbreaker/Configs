@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-worktrees=$(find ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat* -maxdepth 0 -type d)
+worktrees=$(find ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat* ~/Documents/Repos/Kargo/*.git/se* -maxdepth 0 -type d)
 regular=$(find ~/Documents/Repos/Kargo -mindepth 1 -maxdepth 1 -type d \! \( -path "*/*.git" -prune \))
-kat_projects=$($worktrees $regular)
+# kat_projects=$($worktrees $regular)
+list="$worktrees $regular"
 
-cd $(echo $kat_projects | fzf) > /dev/null
+cd $(echo $list | tr " " "\n" | sort -V | fzf)
 
