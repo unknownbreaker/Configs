@@ -14,4 +14,6 @@ read new_host
 
 sed -i '' "s/$original_host\./$new_host\./g" $developmentJson
 sed -i '' "s/ $original_host$/ $new_host/g" $dockerCompose
+sed -i '' "s/$original_host\./$new_host\./g" $dockerCompose
+sed -i '' "s/$original_host-http/$new_host-http/g" $dockerCompose
 
