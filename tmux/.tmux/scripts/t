@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# The -2 option forces 256 color mode.
+tmux='tmux -2'
+command="$1"
+
+if [[ -z "$command" ]]; then
+    command="$(find ~/Documents/Repos/Kargo -maxdepth 3 -type d -name .git 2>/dev/null | sed 's_/home/robertyang/Documents/Repos/Kargo__; s_/.git$__' | sort -r | fzf)"
+fi
+
+if test \( "$command" = "help" \); then
+    echo "This is a small wrapper around tmux."
+    echo
+    echo "Usage:"
+    echo "    t <no arguments>"
+    echo "        Opens a dialog with all the git directories under ~/code."
+    echo
+    echo "    t ls"
+    echo "        Lists the current sessions."
+    echo
+    echo "    t select"
+    echo "        Opens a dialog to select from the open sessions."
+    echo
+    echo "    t rm <session name>"
+    echo "        Kills a session."
+    echo
+    echo "    t kill"
+    echo "        Stops the server."
+    echo
+    echo "    t <session name>"
+    echo "        Initializes a session or attaches to a running one. If it's a new"
+    echo "        session and there's a directory under ~/code with the same name as the"
+    echo "        session, that directory will be set as the default for the session."
+
+elif test "$command" = "ls"; then
+    $tmux list-sessions
+
+elif test "$command" = "select"; then
+    $tmux list-sessions
+    session_name="$($tmux list-sessions | cut -d : -f 1 | sort -r | fzf)"
+    $tmux attach-session -t "$session_name"
+
+elif test "$command" = "rm"; then
+    session_name="$2"
+    $tmux kill-session -t "$session_name"
+
+elif test "$command" = "kill"; then
+    $tmux kill-server
+
+else
+    session_name="$command"
+    if $tmux has-session -t "$session_name" > /dev/null 2>&1; then
+        if test -n "$TMUX"; then
+            $tmux switch-client -t "$session_name"
+        else
+            $tmux attach-session -t "$session_name"
+        fi
+    else
+        directory="$HOME/code/$command";
+        if test -n "$directory"; then
+            $tmux new-session -d -s "$session_name" -c "$directory"
+        else
+            $tmux new-session -d -s "$session_name"
+        fi
+
+        if test -n "$TMUX"; then
+            $tmux switch-client -t "$session_name"
+        else
+            $tmux attach-session -t "$session_name"
+        fi
+    fi
+
+fi

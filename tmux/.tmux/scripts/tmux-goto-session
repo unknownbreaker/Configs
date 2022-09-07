@@ -1,6 +1,6 @@
 #!/usr/local/bin/bash
 
-current_session_name=$(tmux display-message '#S' | sed -E 's/:.*$//')
+# current_session_name=$(tmux display-message '#S' | sed -E 's/:.*$//')
 
 session_name=$(tmux list-sessions | sed -E 's/:.*$//' | grep -v "^$(tmux display-message -p '#S')\$" | fzf --reverse)
 
