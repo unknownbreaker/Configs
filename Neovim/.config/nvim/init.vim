@@ -122,6 +122,8 @@ Plug 'folke/trouble.nvim' " easier to find code issues
 Plug 'subnut/nvim-ghost.nvim', {'do': ':call nvim_ghost#installer#install()'}
 Plug 'TimUntersberger/neogit' " magit clone
 Plug 'windwp/nvim-autopairs'
+Plug 'ldelossa/litee.nvim' " Call hierarchy stuff
+Plug 'ldelossa/litee-calltree.nvim'
 call plug#end()
 
 " Start Obsession upon entering
@@ -222,7 +224,8 @@ nnoremap <silent>\f :Neoformat<CR>
 " Using Lua functions
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fG <cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>
+nnoremap <leader>fo <cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>
+nnoremap <leader>pw <cmd>lua require('telescope.builtin').grep_string ({search = vim.fn.expand("<cword>")})<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
@@ -232,7 +235,6 @@ nnoremap <leader>gf <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>tt <cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>
 nnoremap <leader>tc <cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>
 
-nnoremap <leader>` <cmd>lua require('telescope.builtin').marks()<cr>
 
 nnoremap <leader>vd <cmd>lua require('telescope.builtin').lsp_definitions()<CR>zz
 nnoremap <leader>vD <cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>zz
@@ -242,6 +244,8 @@ nnoremap <leader>vsh <cmd>lua require('telescope.builtin').signature_help()<CR>z
 nnoremap <leader>vR <cmd>lua require('telescope.builtin').rename()<CR>
 nnoremap <leader>vca <cmd>lua require('telescope.builtin').code_action()<CR>
 nnoremap <leader>vsd <cmd>lua require('telescope.builtin').diagnostics()<CR>
+nnoremap <leader>m <cmd>lua require('telescope.builtin').marks()<cr>
+
 " nnoremap <leader>vp <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>zz
 " nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>zz
 
@@ -306,7 +310,7 @@ nmap <Leader>di <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
 xmap <Leader>di <Plug>VimspectorBalloonEval
 " Debugger remaps
-nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader><leader>m :MaximizerToggle!<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
 nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
@@ -724,22 +728,6 @@ lualine.setup {
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 -- nested options are documented by accessing them with `.` (eg: `:help nvim-tree.view.mappings.list`).
 
-function nvim_tree_reveal_file (node)
-  local nvim_tree_api = require('nvim-tree.api')
-  local inject_node = require("nvim-tree.utils").inject_node
-  local current_line_num = vim.api.nvim_win_get_cursor(0)[1] 
-  echo("fdsafdsafadsfa")
-  vim.api.nvim_command("1")
-  --inject_node(function (node)
-  --  if node then
-  --    nvim_tree_api.tree.expand_all()
-  --    nvim_tree_api.search_node()
-  --  else
-  --    vim.cmd(current_line_num)
-  --  end
-  --end)
-end
-
 require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
   hijack_cursor = true,
   open_on_tab = true,
@@ -761,7 +749,6 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
       list = {
         { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
         { key = "?",                              action = "toggle_help" },
-        --{ key = "S",                              action = "reveal_file", action_cb = "nvim_tree_reveal_file" },
       },
     },
   },
@@ -977,6 +964,10 @@ cmp.event:on(
 )
 
 require("luasnip.loaders.from_vscode").lazy_load()
+
+-- Call hierarchy stuff
+require('litee.lib').setup({})
+require('litee.calltree').setup({})
 
 EOF
 
