@@ -1,13 +1,15 @@
 {
   "name": "standup-checker",
   "version": "1.0.0",
-  "source": "src/index.js",
-  "main": "dist/index.js",
+  "source": "standup-checker.js",
+  "main": "dist/standup-checker.js",
   "license": "MIT",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build",
-    "watch": "parcel watch"
+    "build": "yarn clear && parcel build && ./bin/convert ./dist/standup-checker.js",
+    "build:global": "yarn build && cp ./dist/standup-checker /usr/local/bin/",
+    "watch": "parcel watch",
+    "clear": "rm ./dist/standup-checker*"
   },
   "dependencies": {
     "moment": "^2.29.4"
