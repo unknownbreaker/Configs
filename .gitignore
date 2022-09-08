@@ -22,3 +22,4 @@ Neovim/.config/coc/extensions
 Neovim/.config/nvim/undo/*
 Neovim/.config/nvim/backup/*
 Neovim/.config/nvim/swap/*
+Karabiner/automatic_backups
