@@ -26,6 +26,8 @@ export PATH="/opt/homebrew/bin/:$PATH"
 
 # Other ENVs
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
+export OSA_LIBRARY_PATH=~/Library/Script\ Library
+export PATH=$PATH:/usr/local/bin/node-jxa
 
 # brew
 alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
@@ -553,3 +555,5 @@ function go-to-kat-project() {
 
 alias yyb="nvm use && yarn && yarn build"
 alias ddb="dcdown && dcb && dcup -d"
+
+alias mail="nvim /var/mail/$(whoami)"
