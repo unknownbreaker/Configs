@@ -16,7 +16,8 @@ export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 export PATH=$PATH:~/.config/nvim/scripts/change-host-value
 export PATH=$PATH:~/Documents/Repos/Configs/Zsh/scripts
 export PATH=$PATH:~/.tmux/scripts/t
-export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
+export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
+export PATH=$PATH:/usr/local/bin/node-jxa
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -27,7 +28,7 @@ export PATH="/opt/homebrew/bin/:$PATH"
 # Other ENVs
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 export OSA_LIBRARY_PATH=~/Library/Script\ Library
-export PATH=$PATH:/usr/local/bin/node-jxa
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 # brew
 alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
