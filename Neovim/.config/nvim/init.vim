@@ -75,6 +75,7 @@ Plug 'digitaltoad/vim-pug' " syntax highlighting for pug/jade
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects' "text objects
+Plug 'nvim-treesitter/nvim-treesitter-context' " sticky header
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -90,6 +91,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
@@ -98,7 +100,6 @@ Plug 'kyazdani42/nvim-web-devicons' "file icons
 Plug 'kyazdani42/nvim-tree.lua' "file tree
 Plug 'numToStr/Comment.nvim' "comment the code
 Plug 'JoosepAlviste/nvim-ts-context-commentstring' "comment embedded languages, like jsx/tsx
-Plug 'preservim/nerdcommenter' " more comment options
 Plug 'christoomey/vim-tmux-navigator' 
 Plug 'christoomey/vim-tmux-runner' "vim and tmux integration
 Plug 'tpope/vim-obsession' "remember vim sessions
@@ -106,7 +107,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat' "repeats more than just native commands
 Plug 'kylechui/nvim-surround'
 Plug 'szw/vim-maximizer' "maximize current pane
-Plug 'puremourning/vimspector' "debugger tool
 Plug 'tpope/vim-unimpaired' "cnext and cprev mappings
 Plug 'mhinz/vim-signify' "git symbols in gutter; faster than gitgutter
 Plug 'sbdchd/neoformat' " prettier
@@ -115,7 +115,7 @@ Plug 'junegunn/gv.vim' " peruse git commits; depends on fugitive
 Plug 'kevinhwang91/nvim-bqf' " quickfix list editing
 Plug 'ThePrimeagen/git-worktree.nvim' " git worktree telescopic
 Plug 'lukas-reineke/indent-blankline.nvim' " show me what the blanks are
-Plug 'chentau/marks.nvim' " marks
+Plug 'chentoast/marks.nvim' " marks
 Plug 'ThePrimeagen/harpoon' " manage marks/file navigation memory
 Plug 'michaelb/sniprun' " repls
 Plug 'folke/trouble.nvim' " easier to find code issues
@@ -124,6 +124,11 @@ Plug 'TimUntersberger/neogit' " magit clone
 Plug 'windwp/nvim-autopairs'
 Plug 'ldelossa/litee.nvim' " Call hierarchy stuff
 Plug 'ldelossa/litee-calltree.nvim'
+Plug 'hkupty/iron.nvim' " Repl in vim
+Plug 'mfussenegger/nvim-dap' " Debug in vim
+Plug 'rcarriga/nvim-dap-ui' " UI for DAP
+Plug 'theHamsta/nvim-dap-virtual-text' " Virtual text support
+Plug 'simrat39/symbols-outline.nvim' " symbols for different keywords
 call plug#end()
 
 " Start Obsession upon entering
@@ -150,6 +155,7 @@ endif
 " Close vim if NvimTree is the last buffer
 " nvimtree pane is not counted as a buffer
 autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'OUTLINE' . tabpagenr() | quit | endif
 
 " Search but keep very magic enabled
 nnoremap / /\v
@@ -195,9 +201,6 @@ inoremap . .<C-g>u
 inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
 
-" Marks
-nnoremap <C-e> :<C-u>marks<CR>:normal! `
-
 " quick close window without save
 nnoremap <leader>q :q<CR>
 " quick save
@@ -215,19 +218,24 @@ command! Bd execute '%bdelete|edit #|normal `"zz'
 nnoremap <silent><leader>o :Bd<CR>
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <C-n>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <C-p> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Access saved marks less awkwardly.
+nnoremap M `
+
 
 " Run Neoformat
 nnoremap <silent>\f :Neoformat<CR>
 
 " Using Lua functions
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({find_command=function (opts) return {"rg", "--files", "--color", "never", "--hidden", "--glob", "!.git/"} end})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fo <cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>
 nnoremap <leader>pw <cmd>lua require('telescope.builtin').grep_string ({search = vim.fn.expand("<cword>")})<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fm <cmd>lua require('telescope.builtin').marks()<cr>
 nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
 nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_status()<cr>
@@ -244,12 +252,13 @@ nnoremap <leader>vsh <cmd>lua require('telescope.builtin').signature_help()<CR>z
 nnoremap <leader>vR <cmd>lua require('telescope.builtin').rename()<CR>
 nnoremap <leader>vca <cmd>lua require('telescope.builtin').code_action()<CR>
 nnoremap <leader>vsd <cmd>lua require('telescope.builtin').diagnostics()<CR>
-nnoremap <leader>m <cmd>lua require('telescope.builtin').marks()<cr>
+nnoremap <leader>d <cmd>lua require('telescope.builtin').diagnostics()<cr>
 
 " nnoremap <leader>vp <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>zz
 " nnoremap <leader>vn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>zz
 
 " nnoremap <silent><C-f> <cmd>
+
 
 " lsp saga
 " lsp provider to find the cursor word definition and reference
@@ -295,41 +304,9 @@ nnoremap <leader>e :NvimTreeFindFileToggle<CR>
 " nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
-" auto completion
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-
 let g:python3_host_prog = '/usr/bin/python3'
 
-" mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
-" for normal mode - the word under the cursor
-nmap <Leader>di <Plug>VimspectorBalloonEval
-" for visual mode, the visually selected text
-xmap <Leader>di <Plug>VimspectorBalloonEval
-" Debugger remaps
 nnoremap <leader><leader>m :MaximizerToggle!<CR>
-nnoremap <leader>dd :call vimspector#Launch()<CR>
-nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
-nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
-nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
-nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
-nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
-nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
-nnoremap <leader>de :call vimspector#Reset()<CR>
-
-nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
-
-nmap <leader>dl <Plug>VimspectorStepInto
-nmap <leader>dj <Plug>VimspectorStepOver
-nmap <leader>dk <Plug>VimspectorStepOut
-nmap <leader>d_ <Plug>VimspectorRestart
-nnoremap <leader>d<space> :call vimspector#Continue()<CR>
-nmap <leader>drc <Plug>VimspectorRunToCursor
-nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
-nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 
 " fugitive maps
 " Helpful for patch mode
@@ -358,13 +335,9 @@ nnoremap <silent> <space>[ :cprevious<CR>
 
 " lua snippet
 imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
-inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
 
 snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
 snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
-
-imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
-smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 
 " undo tree toggle
 nnoremap <leader>u :UndotreeToggle<CR>
@@ -583,22 +556,7 @@ require'nvim-treesitter.configs'.setup {
   },
 
   -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-  context_commentstring = {
-    enable = true,
-    config = {
-      javascript = {
-        __default = '// %s',
-        jsx_element = '{/* %s */}',
-        jsx_fragment = '{/* %s */}',
-        jsx_attribute = '// %s',
-        comment = '// %s',
-      },
-      typescript = {
-        __default = '// %s',
-        __multiline = '/* %s */',
-      },
-    },
-  },
+  context_commentstring = { enable = true, },
 }
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.filetype_to_parsername = { "javascript", "typescript" }
@@ -618,26 +576,17 @@ local cmp = require'cmp'
       -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<Tab>'] = cmp.mapping.scroll_docs(-4),
+      ['<S-Tab>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' }, -- For luasnip users.
-    }, {
       { name = 'buffer' },
-    })
-  })
-
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-      { name = 'buffer' },
+      { name = 'cmp_tabnine' },
     })
   })
 
@@ -968,6 +917,146 @@ require("luasnip.loaders.from_vscode").lazy_load()
 -- Call hierarchy stuff
 require('litee.lib').setup({})
 require('litee.calltree').setup({})
+
+-- REPL
+require("iron.core").setup {
+  config = {
+    -- Whether a repl should be discarded or not
+    scratch_repl = true,
+    -- Your repl definitions come here
+    repl_definition = {
+      sh = {
+        command = {"zsh"}
+      }
+    },
+    -- How the repl window will be displayed
+    -- See below for more information
+    repl_open_cmd = require('iron.view').bottom(40),
+  },
+  -- Iron doesn't set keymaps by default anymore.
+  -- You can set them here or manually add keymaps to the functions in iron.core
+  keymaps = {
+    send_motion = "<space>sc",
+    visual_send = "<space>sc",
+    send_file = "<space>sf",
+    send_line = "<space>sl",
+    send_mark = "<space>sm",
+    mark_motion = "<space>mc",
+    mark_visual = "<space>mc",
+    remove_mark = "<space>md",
+    cr = "<space>s<cr>",
+    interrupt = "<space>s<space>",
+    exit = "<space>sq",
+    clear = "<space>cl",
+  },
+  -- If the highlight is on, you can change how it looks
+  -- For the available options, check nvim_set_hl
+  highlight = {
+    italic = true
+  }
+}
+
+-- DAP
+local dap = require('dap')
+
+dap.configurations = {
+  go = {
+    {
+        type = 'go';
+        name = 'Debug';
+        request = 'launch';
+        showLog = false;
+        program = "${file}";
+        dlvToolPath = vim.fn.exepath('dlv')  -- Adjust to where delve is installed
+    },
+  },
+  javascript = {
+    {
+      name = 'Launch',
+      type = 'node2',
+      request = 'launch',
+      program = '${file}',
+      cwd = vim.fn.getcwd(),
+      sourceMaps = true,
+      protocol = 'inspector',
+      console = 'integratedTerminal',
+    },
+    {
+      -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+      name = 'Attach to process',
+      type = 'node2',
+      request = 'attach',
+      processId = require'dap.utils'.pick_process,
+    },
+  },
+  typescript = {
+    name = 'Debug with Firefox',
+    type = 'firefox',
+    request = 'launch',
+    reAttach = true,
+    url = 'http://localhost:3000',
+    webRoot = '${workspaceFolder}',
+    firefoxExecutable = '/usr/bin/firefox'
+  },
+  typescriptreact = { -- change to typescript if needed
+    {
+      type = "chrome",
+      request = "attach",
+      program = "${file}",
+      cwd = vim.fn.getcwd(),
+      sourceMaps = true,
+      protocol = "inspector",
+      port = 9222,
+      webRoot = "${workspaceFolder}"
+    }
+  },
+  javascriptreact = { -- change this to javascript if needed
+    {
+      type = "chrome",
+      request = "attach",
+      program = "${file}",
+      cwd = vim.fn.getcwd(),
+      sourceMaps = true,
+      protocol = "inspector",
+      port = 9222,
+      webRoot = "${workspaceFolder}"
+    }
+  },
+}
+
+dap.adapters = {
+  go = {
+    type = 'executable';
+    command = 'node';
+    args = {os.getenv('HOME') .. '/dev/golang/vscode-go/dist/debugAdapter.js'};
+  },
+  chrome = {
+    type = "executable",
+    command = "node",
+    args = {os.getenv("HOME") .. "/path/to/vscode-chrome-debug/out/src/chromeDebug.js"} -- TODO adjust
+  },
+  firefox = {
+    type = 'executable',
+    command = 'node',
+    args = {os.getenv('HOME') .. '/path/to/vscode-firefox-debug/dist/adapter.bundle.js'},
+  },
+  node2 = {
+    type = 'executable',
+    command = 'node',
+    args = {os.getenv('HOME') .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js'},
+  },
+}
+
+require("dapui").setup()
+require("nvim-dap-virtual-text").setup()
+
+require("treesitter-context").setup()
+
+require("symbols-outline").setup({
+  show_relative_numbers = true,
+})
+
+require("marks").setup()
 
 EOF
 
