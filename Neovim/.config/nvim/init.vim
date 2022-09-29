@@ -129,6 +129,7 @@ Plug 'mfussenegger/nvim-dap' " Debug in vim
 Plug 'rcarriga/nvim-dap-ui' " UI for DAP
 Plug 'theHamsta/nvim-dap-virtual-text' " Virtual text support
 Plug 'simrat39/symbols-outline.nvim' " symbols for different keywords
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install && :call mkdp#util#install()' } " markdown live preview
 call plug#end()
 
 " Start Obsession upon entering
@@ -165,6 +166,10 @@ nnoremap <Leader>sh :vsplit<CR>
 nnoremap <Leader>sl :vsplit<CR><C-W><c-l>
 nnoremap <Leader>sj :split<CR><C-W><c-j>
 nnoremap <Leader>sk :split<CR>
+
+" move vertically by visual line with j k
+nnoremap j gj
+nnoremap k gk
 
 " move text
 vnoremap J :m '>+1<CR>gv=gv
@@ -215,7 +220,9 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 " close all open buffers and reopen last one
 " recenter cursor and last position
 command! Bd execute '%bdelete|edit #|normal `"zz'
-nnoremap <silent><leader>o :Bd<CR>
+nnoremap <silent><C-x> :Bd<CR>
+
+nnoremap <silent><leader>o :SymbolsOutline<CR>
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -236,12 +243,13 @@ nnoremap <leader>pw <cmd>lua require('telescope.builtin').grep_string ({search =
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fm <cmd>lua require('telescope.builtin').marks()<cr>
+
 nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
-nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap <leader>gf <cmd>lua require('telescope.builtin').git_files()<cr>
-nnoremap <leader>tt <cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>
-nnoremap <leader>tc <cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>
+
+nnoremap <leader>ww <cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>
+nnoremap <leader>wa <cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>
 
 
 nnoremap <leader>vd <cmd>lua require('telescope.builtin').lsp_definitions()<CR>zz
@@ -262,12 +270,12 @@ nnoremap <leader>d <cmd>lua require('telescope.builtin').diagnostics()<cr>
 
 " lsp saga
 " lsp provider to find the cursor word definition and reference
-nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+nnoremap <silent><leader>gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 " code action
 nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
 " show hover doc
-nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <silent><leader>K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 
 " scroll down hover doc or scroll in definition preview
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
@@ -319,15 +327,11 @@ nnoremap <leader><leader>m :MaximizerToggle!<CR>
 " nnoremap <leader><leader>gdl :diffget //3<CR>
 " nnoremap <leader><leader>gdh :diffget //2<CR>
 " status 
-nnoremap <leader><leader>g :G<CR>
+nnoremap <C-g> :G<CR>
 " quickfix menu of log
-nnoremap <leader><leader>gl :G log<CR>
-" fugitive patchmode
-nnoremap <leader><leader>gco :G checkout<Space>
-nnoremap <leader><leader>gP :G pull<CR>
-nnoremap <leader><leader>gpo :G push origin HEAD<CR>
-
-nnoremap <leader><leader>gap :Gdiffsplit<CR>
+nnoremap \gl :G log<CR>
+" patch mode
+nnoremap \gp :Gdiffsplit<CR>
 
 " unimpaired
 nnoremap <silent> <space>] :cnext<CR>zz
@@ -425,6 +429,7 @@ require("nvim-lsp-installer").setup {
 local lspconfig = require('lspconfig')
 lspconfig.angularls.setup {}
 lspconfig.bashls.setup {}
+lspconfig.clojure_lsp.setup{}
 lspconfig.cssls.setup {}
 -- lspconfig.cssmodules_ls.setup {}
 lspconfig.dockerls.setup {}
@@ -687,7 +692,6 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
   },
   view = {
     width = 40,
-    height = 30,
     hide_root_folder = false,
     side = "left",
     preserve_window_proportions = false,
