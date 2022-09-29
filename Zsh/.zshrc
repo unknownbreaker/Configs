@@ -366,7 +366,15 @@ alias dprune='docker system prune -a --volumes'
 # Refer here to see aliases: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kubectl
 
 function kbverify() {
-  namespaces=(ad-demo-platform ad-demo-platform-v2 ad-demo-platform-dev cat-team-dev)
+  namespaces=(
+    ad-demo-platform
+    ad-demo-platform-v2
+    ad-demo-platform-dev
+    ad-snippet-service
+    ad-snippet-service-dev
+    ad-snippet-service-staging
+    cat-team-dev
+  )
   kubectl -n $(printf '%s\n' "${namespaces[@]}" | fzf) get pods 
 }
 
