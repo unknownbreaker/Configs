@@ -1,0 +1,240 @@
+{
+  "title": "New modifier keys",
+  "rules": [
+    {
+      "description": "Change j + i to right_command",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "j"
+              },
+              {
+                "key_code": "i"
+              }
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_command"
+            }
+          ]
+
+        }
+      ]
+    },
+    {
+      "description": "Change spacebar + l to right_control",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "spacebar"
+              },
+              {
+                "key_code": "l"
+              }
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_control"
+            }
+          ]
+
+        }
+      ]
+    },
+    {
+      "description": "Change spacebar + semicolon to right_alt",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "spacebar"
+              },
+              {
+                "key_code": "semicolon"
+              }
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_alt"
+            }
+          ]
+
+        }
+      ]
+    },
+    
+    {
+      "description": "Change f + e to left_command",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "f"
+              },
+              {
+                "key_code": "e"
+              }
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command"
+            }
+          ]
+
+        }
+      ]
+    },
+    {
+      "description": "Change s + e to left_control",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "s"
+              },
+              {
+                "key_code": "e"
+              }
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ]
+
+        }
+      ]
+    },
+    {
+      "description": "Change tab + spacebar to left_alt",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "tab"
+              },
+              {
+                "key_code": "spacebar"
+              }
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_alt"
+            }
+          ]
+
+        }
+      ]
+    },
+    {
+      "description": "Change slash + spacebar to right_control",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "slash"
+              },
+              {
+                "key_code": "spacebar"
+              }
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_control"
+            }
+          ]
+
+        }
+      ]
+    },
+    {
+      "description": "Change tab to shift+left_alt if pressed with other keys.",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "tab",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_shift",
+              "modifiers": [
+                "left_alt"
+              ]
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "tab",
+              "hold_down_milliseconds": 500
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
