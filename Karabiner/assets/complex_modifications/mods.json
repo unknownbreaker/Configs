@@ -60,7 +60,7 @@
       ]
     },
     {
-      "description": "Change spacebar + semicolon to right_alt",
+      "description": "Change spacebar + semicolon to right_control",
       "manipulators": [
         {
           "type": "basic",
@@ -81,7 +81,7 @@
           },
           "to": [
             {
-              "key_code": "right_alt"
+              "key_code": "right_control"
             }
           ]
 
@@ -177,7 +177,7 @@
       ]
     },
     {
-      "description": "Change slash + spacebar to right_control",
+      "description": "Change slash + spacebar to right_alt",
       "manipulators": [
         {
           "type": "basic",
@@ -198,7 +198,7 @@
           },
           "to": [
             {
-              "key_code": "right_control"
+              "key_code": "right_alt"
             }
           ]
 

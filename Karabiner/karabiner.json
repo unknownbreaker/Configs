@@ -377,34 +377,6 @@
                         ]
                     },
                     {
-                        "description": "Change spacebar + semicolon to right_alt",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    },
-                                    "simultaneous": [
-                                        {
-                                            "key_code": "spacebar"
-                                        },
-                                        {
-                                            "key_code": "semicolon"
-                                        }
-                                    ]
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_alt"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Change tab + spacebar to left_alt",
                         "manipulators": [
                             {
@@ -426,34 +398,6 @@
                                 "to": [
                                     {
                                         "key_code": "left_alt"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Change slash + spacebar to right_control",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    },
-                                    "simultaneous": [
-                                        {
-                                            "key_code": "slash"
-                                        },
-                                        {
-                                            "key_code": "spacebar"
-                                        }
-                                    ]
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_control"
                                     }
                                 ],
                                 "type": "basic"
@@ -542,44 +486,15 @@
                         ]
                     },
                     {
-                        "description": "Change tab to shift+left_alt if pressed with other keys.",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "tab",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_shift",
-                                        "modifiers": [
-                                            "left_alt"
-                                        ]
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "hold_down_milliseconds": 500,
-                                        "key_code": "tab"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Change left_control + H/J/K/L to Arrow Keys",
+                        "description": "Change left_shift + left_control + H/J/K/L to Arrow Keys",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "k",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_control"
+                                            "left_control",
+                                            "left_shift"
                                         ],
                                         "optional": [
                                             "any"
@@ -598,7 +513,8 @@
                                     "key_code": "h",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_control"
+                                            "left_control",
+                                            "left_shift"
                                         ],
                                         "optional": [
                                             "any"
@@ -617,7 +533,8 @@
                                     "key_code": "j",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_control"
+                                            "left_control",
+                                            "left_shift"
                                         ],
                                         "optional": [
                                             "any"
@@ -636,7 +553,8 @@
                                     "key_code": "l",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_control"
+                                            "left_control",
+                                            "left_shift"
                                         ],
                                         "optional": [
                                             "any"
@@ -646,6 +564,62 @@
                                 "to": [
                                     {
                                         "key_code": "right_arrow"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Change slash + spacebar to right_alt",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    },
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "slash"
+                                        },
+                                        {
+                                            "key_code": "spacebar"
+                                        }
+                                    ]
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_alt"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Change spacebar + semicolon to right_control",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    },
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "spacebar"
+                                        },
+                                        {
+                                            "key_code": "semicolon"
+                                        }
+                                    ]
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_control"
                                     }
                                 ],
                                 "type": "basic"
