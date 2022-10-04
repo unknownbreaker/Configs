@@ -130,6 +130,7 @@ Plug 'rcarriga/nvim-dap-ui' " UI for DAP
 Plug 'theHamsta/nvim-dap-virtual-text' " Virtual text support
 Plug 'simrat39/symbols-outline.nvim' " symbols for different keywords
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install && :call mkdp#util#install()' } " markdown live preview
+Plug 'ojroques/nvim-bufdel' " Improve deletion of buffers
 call plug#end()
 
 " Start Obsession upon entering
@@ -221,6 +222,11 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 " recenter cursor and last position
 command! Bd execute '%bdelete|edit #|normal `"zz'
 nnoremap <silent><C-x> :Bd<CR>
+
+" close current buffer
+nnoremap <silent><leader>bb :BudDel<CR>`"zz'
+" close current buffer and ignore changes
+nnoremap <silent><leader>bd :BudDel!<CR>`"zz'
 
 nnoremap <silent><leader>o :SymbolsOutline<CR>
 
@@ -1061,6 +1067,11 @@ require("symbols-outline").setup({
 })
 
 require("marks").setup()
+
+require('bufdel').setup({
+  next = 'tabs',  -- or 'cycle, 'alternate'
+  quit = true,    -- quit Neovim when last buffer is closed
+})
 
 EOF
 
