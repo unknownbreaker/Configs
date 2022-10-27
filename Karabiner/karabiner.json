@@ -571,34 +571,6 @@
                         ]
                     },
                     {
-                        "description": "Change slash + spacebar to right_alt",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    },
-                                    "simultaneous": [
-                                        {
-                                            "key_code": "slash"
-                                        },
-                                        {
-                                            "key_code": "spacebar"
-                                        }
-                                    ]
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_alt"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Change spacebar + semicolon to right_control",
                         "manipulators": [
                             {
@@ -620,6 +592,34 @@
                                 "to": [
                                     {
                                         "key_code": "right_control"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Change quote + spacebar to right_alt",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    },
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "quote"
+                                        },
+                                        {
+                                            "key_code": "spacebar"
+                                        }
+                                    ]
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_alt"
                                     }
                                 ],
                                 "type": "basic"
