@@ -224,9 +224,9 @@ command! Bd execute '%bdelete|edit #|normal `"zz'
 nnoremap <silent><C-x> :Bd<CR>
 
 " close current buffer
-nnoremap <silent><leader>bb :BudDel<CR>`"zz'
+nnoremap <silent><leader>bb :BufDel<CR>`"zz'
 " close current buffer and ignore changes
-nnoremap <silent><leader>bd :BudDel!<CR>`"zz'
+nnoremap <silent><leader>bd :BufDel!<CR>`"zz'
 
 nnoremap <silent><leader>o :SymbolsOutline<CR>
 
