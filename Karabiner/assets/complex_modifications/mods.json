@@ -177,14 +177,14 @@
       ]
     },
     {
-      "description": "Change slash + spacebar to right_alt",
+      "description": "Change quote + spacebar to right_alt",
       "manipulators": [
         {
           "type": "basic",
           "from": {
             "simultaneous": [
               {
-                "key_code": "slash"
+                "key_code": "quote"
               },
               {
                 "key_code": "spacebar"
