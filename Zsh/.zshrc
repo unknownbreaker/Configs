@@ -170,7 +170,7 @@ alias chv='bash ~/.config/nvim/scripts/change-host-value'
 
 # alias nano="subl"
 # alias e="subl"
-export EDITOR="nvim"
+export EDITOR="lvim"
 
 # ============== NOTIFIER ==============
 alias notify="terminal-notifier -title 'Terminal' -message 'Done with task! Exit status: $?' -activate 'com.googlecode.iterm2'"
