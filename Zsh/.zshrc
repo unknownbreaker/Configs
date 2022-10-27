@@ -18,6 +18,7 @@ export PATH=$PATH:~/Documents/Repos/Configs/Zsh/scripts
 export PATH=$PATH:~/.tmux/scripts/t
 export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 export PATH=$PATH:/usr/local/bin/node-jxa
+export PATH=$PATH:~/.local/bin
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -240,6 +241,8 @@ alias gwr='git worktree remove'
 alias gwrf='git worktree remove --force'
 alias gwm='git worktree move'
 alias gwp='git worktree prune'
+
+alias vimdiff='nvim -d'
 
 bindkey -s ^o '$(fzf-git-branch)\n'
 
