@@ -1,14 +1,14 @@
 .DS_Store
 Session.vim
 .session.vim
-Sublime Text 3/
+Sublime Text 3
 tags.lock
 tags.temp
 **/tags.lock
 **/tags.temp
 Vim/.vimrc.swp
 Vim/.vim/undo
-Vim/.vim/bundle/
+Vim/.vim/bundle
 Vim/.vim/.netrwhist
 iTerm/com.googlecode.iterm2.plist
 Tmux/.tmux/plugins/
@@ -17,9 +17,10 @@ Tmux/.tmux/resurrect/last
 Neovim/.config/nvim/Session.vim
 Neovim/.config/nvim/.session.vim
 Neovim/.config/nvim/.netrwhist
-Neovim/.config/nvim/plugged/
+Neovim/.config/nvim/plugged
 Neovim/.config/coc/extensions
-Neovim/.config/nvim/undo/*
-Neovim/.config/nvim/backup/*
-Neovim/.config/nvim/swap/*
+Neovim/.config/nvim/undo
+Neovim/.config/nvim/backup
+Neovim/.config/nvim/swap
+Neovim/.config/nvim/session
 Karabiner/automatic_backups
