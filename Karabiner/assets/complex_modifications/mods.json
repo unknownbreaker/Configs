@@ -1,5 +1,5 @@
 {
-  "title": "New modifier keys",
+  "title": "Modifier keys",
   "rules": [
     {
       "description": "Change semicolon to right_control when pressed with other keys",
@@ -10,7 +10,7 @@
             "simultaneous": [
               {
                 "key_code": "semicolon"
-              }
+              },
               {
                 "any": "key_code"
               }
