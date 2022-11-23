@@ -7,7 +7,10 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "semicolon"
+            "key_code": "semicolon",
+            "modifiers": {
+              "optional": ["any"]
+            }
           },
           "to": [
             {
@@ -29,7 +32,10 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "quote"
+            "key_code": "quote",
+            "modifiers": {
+              "optional": ["any"]
+            }
           },
           "to": [
             {
