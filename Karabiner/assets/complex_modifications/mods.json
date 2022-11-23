@@ -7,24 +7,12 @@
         {
           "type": "basic",
           "from": {
-            "simultaneous": [
-              {
-                "key_code": "semicolon"
-              },
-              {
-                "any": "key_code"
-              }
-            ],
-            "simultaneous_options": {
-              "key_down_order": "strict"
-            },
-            "modifiers": {
-              "optional": ["any"]
-            }
+            "key_code": "semicolon"
           },
           "to": [
             {
-              "key_code": "right_control"
+              "key_code": "right_control",
+              "lazy": true
             }
           ],
           "to_if_alone": [
@@ -41,24 +29,12 @@
         {
           "type": "basic",
           "from": {
-            "simultaneous": [
-              {
-                "key_code": "quote"
-              },
-              {
-                "any": "key_code"
-              }
-            ],
-            "simultaneous_options": {
-              "key_down_order": "strict"
-            },
-            "modifiers": {
-              "optional": ["any"]
-            }
+            "key_code": "quote"
           },
           "to": [
             {
-              "key_code": "right_alt"
+              "key_code": "right_alt",
+              "lazy": true
             }
           ],
           "to_if_alone": [
@@ -70,29 +46,18 @@
       ]
     },
     {
-      "description": "Change tab to left_alt when pressed with other keys.",
+      "description": "Change tab to shift+left_alt when pressed with other keys.",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "simultaneous": [
-              {
-                "key_code": "tab"
-              },
-              {
-                "any": "key_code"
-              }
-            ],
-            "simultaneous_options": {
-              "key_down_order": "strict"
-            },
-            "modifiers": {
-              "optional": ["any"]
-            }
+            "key_code": "tab"
           },
           "to": [
             {
-              "key_code": "left_alt"
+              "key_code": "left_alt",
+              "modifiers": ["shift"],
+              "lazy": true
             }
           ],
           "to_if_alone": [
