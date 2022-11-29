@@ -164,7 +164,7 @@ export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/
 DISABLE_AUTO_TITLE=true
 
 # ============== NEOVIM ============== 
-alias chv='bash ~/.config/nvim/scripts/change-host-value'
+alias chv='bash ~/.config/zsh/scripts/change-host-value'
 
 # ============== SUBLIME ==============
 

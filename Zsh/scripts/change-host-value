@@ -1,0 +1,76 @@
+#!/usr/local/bin/bash
+
+if [[ "$PWD" =~ Kargo ]]; then
+  echo "yo yo yo yo"
+fi
+
+repos=(
+  ad-demo-platform
+  ad-composer-react
+  ad-kailtra
+  ad-snippet-service
+  ad-tag
+  ControlPanel
+  deal-manager
+  video-tag-builder
+)
+
+update_development_json () {
+  original_host=$1.krg.io
+  extra=$2
+  new_host=$1-$extra.krg.io
+
+  development_json=$(find $(pwd) -name  "development.json")
+
+  if [ -e "$development_json" ] && grep -q "$original_host" $development_json; then
+    sed -i '' "s/$original_host\./$new_host\./g" $development_json
+    echo "Updated development.json"
+  fi
+}
+
+update_docker_compose_yml () {
+  original_host=$1.krg.io
+  extra=$2
+  new_host=$1-$extra.krg.io
+
+  docker_compose_yml=$(find $(pwd) -name "docker-compose.yml")
+
+  if grep -q "$original_host" $docker_compose_yml; then
+    # Update container name
+    sed -i '' "s/\(container_name: \)\(.*\)$/\1\2-$extra/" $docker_compose_yml
+    # Update host
+    sed -i '' "s/$original_host/$new_host/g" $docker_compose_yml
+    # Update Traefik label services
+    sed -i '' "s/\(traefik\.http\.[^\.]*\.\)\([^\.]*\)\(.*\)/\1\2-$extra\3/g" $docker_compose_yml
+    echo "Updated docker-compose.yml"
+  fi
+}
+
+echo -n "Select repo:"
+current_repo=$(printf '%s\n' "${repos[@]}" | fzf)
+
+original_host=$subdomain.krg.io
+
+echo -n "Enter unique name to append: "
+read extra_name
+
+if [[ "$current_repo" =~ ad-demo-platform ]]; then
+  update_docker_compose_yml demo $extra_name
+  update_development_json demo $extra_name
+fi
+
+if [[ "$current_repo" =~ ad-composer-react ]]; then
+  update_docker_compose_yml composer $extra_name
+  update_development_json composer $extra_name
+  config_ts=$(find $(pwd) -name "config.ts")
+  if [ -e "$config_ts" ] && grep -q "API_URL: ''," $config_ts; then
+    sed -i '' "s/API_URL: '',/API_URL: 'https:\/\/composer.krg.io',/g" $config_ts
+    echo "Updated config.ts"
+  fi
+fi
+
+if [[ "$current_repo" =~ ad-tag ]]; then
+  update_docker_compose_yml ad-tag $extra_name
+  update_development_json ad-tag $extra_name
+fi
+
