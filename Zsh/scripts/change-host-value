@@ -46,6 +46,16 @@ update_docker_compose_yml () {
   fi
 }
 
+# Composer UI
+update_config_ts () {
+  config_ts=$(find $(pwd) -name "config.ts")
+
+  if [ -e "$config_ts" ] && grep -q "API_URL: ''," $config_ts; then
+    sed -i '' "s/API_URL: '',/API_URL: 'https:\/\/composer.krg.io',/g" $config_ts
+    echo "Updated config.ts"
+  fi
+}
+
 echo -n "Select repo:"
 current_repo=$(printf '%s\n' "${repos[@]}" | fzf)
 
@@ -61,12 +71,7 @@ fi
 
 if [[ "$current_repo" =~ ad-composer-react ]]; then
   update_docker_compose_yml composer $extra_name
-  update_development_json composer $extra_name
-  config_ts=$(find $(pwd) -name "config.ts")
-  if [ -e "$config_ts" ] && grep -q "API_URL: ''," $config_ts; then
-    sed -i '' "s/API_URL: '',/API_URL: 'https:\/\/composer.krg.io',/g" $config_ts
-    echo "Updated config.ts"
-  fi
+  update_config_ts
 fi
 
 if [[ "$current_repo" =~ ad-tag ]]; then
@@ -74,3 +79,4 @@ if [[ "$current_repo" =~ ad-tag ]]; then
   update_development_json ad-tag $extra_name
 fi
 
+echo "Done."
