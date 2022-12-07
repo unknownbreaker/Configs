@@ -1,19 +1,14 @@
 #!/usr/local/bin/bash
 
-if [[ "$PWD" =~ Kargo ]]; then
-  echo "yo yo yo yo"
-fi
-
-repos=(
-  ad-demo-platform
-  ad-composer-react
-  ad-kailtra
-  ad-snippet-service
-  ad-tag
-  ControlPanel
-  deal-manager
-  video-tag-builder
-)
+declare -A repos
+repos[ad-demo-platform]=demo
+repos[ad-composer-react]=composer
+repos[ad-kailtra]=kailtra
+repos[ad-snippet-service]=snippet-service
+repos[ad-tag]=ad-tag
+repos[ControlPanel]=marketplace
+repos[deal-manager]=deal-manager
+repos[video-tag-builder]=video-tag-builder
 
 update_development_json () {
   original_host=$1.krg.io
@@ -40,7 +35,9 @@ update_docker_compose_yml () {
     sed -i '' "s/\(container_name: \)\(.*\)$/\1\2-$extra/" $docker_compose_yml
     # Update host
     sed -i '' "s/$original_host/$new_host/g" $docker_compose_yml
-    # Update Traefik label services
+    # Comment out specific ports
+    sed -i '' "s/\( *\)\(- \"[0-9]*:[0-9]*\"\)/\1# \2/g" $docker_compose_yml
+    # Update Traefik services and routers
     sed -i '' "s/\(traefik\.http\.[^\.]*\.\)\([^\.]*\)\(.*\)/\1\2-$extra\3/g" $docker_compose_yml
     echo "Updated docker-compose.yml"
   fi
@@ -57,26 +54,17 @@ update_config_ts () {
 }
 
 echo -n "Select repo:"
-current_repo=$(printf '%s\n' "${repos[@]}" | fzf)
-
-original_host=$subdomain.krg.io
+current_repo=$(printf '%s\n' "${!repos[@]}" | fzf)
+echo $current_repo
 
 echo -n "Enter unique name to append: "
 read extra_name
 
-if [[ "$current_repo" =~ ad-demo-platform ]]; then
-  update_docker_compose_yml demo $extra_name
-  update_development_json demo $extra_name
-fi
+update_docker_compose_yml ${repos[$current_repo]} $extra_name
+update_development_json ${repos[$current_repo]} $extra_name
 
 if [[ "$current_repo" =~ ad-composer-react ]]; then
-  update_docker_compose_yml composer $extra_name
   update_config_ts
-fi
-
-if [[ "$current_repo" =~ ad-tag ]]; then
-  update_docker_compose_yml ad-tag $extra_name
-  update_development_json ad-tag $extra_name
 fi
 
 echo "Done."
