@@ -2,8 +2,9 @@
 **/tags.temp
 .DS_Store
 .session.vim
+.luarc.json
 Karabiner/automatic_backups
-LunarVim/plugin/packer_compiled.lua
+LunarVim/plugin
 Neovim/.config/coc/extensions
 Neovim/.config/nvim/.netrwhist
 Neovim/.config/nvim/.session.vim
