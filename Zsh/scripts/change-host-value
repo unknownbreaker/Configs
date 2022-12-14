@@ -18,7 +18,7 @@ update_development_json () {
   development_json=$(find $(pwd) -name  "development.json")
 
   if [ -e "$development_json" ] && grep -q "$original_host" $development_json; then
-    sed -i '' "s/$original_host\./$new_host\./g" $development_json
+    sed -i '' "s/$original_host/$new_host/g" $development_json
     echo "Updated development.json"
   fi
 }
