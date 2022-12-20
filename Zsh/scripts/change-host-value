@@ -69,6 +69,7 @@ update_app_js () {
     echo "Updated app.js"
   fi
 }
+
 echo -n "Select repo:"
 current_repo=$(printf '%s\n' "${!repos[@]}" | fzf)
 echo $current_repo
