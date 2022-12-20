@@ -2,8 +2,10 @@
 
 declare -A repos
 repos[ad-demo-platform]=demo
+repos[ad-composer]=composer
 repos[ad-composer-react]=composer
 repos[ad-kailtra]=kailtra
+repos[ad-krab]=ad-krab
 repos[ad-snippet-service]=snippet-service
 repos[ad-tag]=ad-tag
 repos[ControlPanel]=marketplace
@@ -45,14 +47,28 @@ update_docker_compose_yml () {
 
 # Composer UI
 update_config_ts () {
-  config_ts=$(find $(pwd) -name "config.ts")
+  config_ts=$(find . -name "config.ts" ! -path "./node_modules/*")
+  subdomain="composer"
+
+  if [ "$1" != "" ]; then
+    subdomain="composer-$1"
+  fi
 
   if [ -e "$config_ts" ] && grep -q "API_URL: ''," $config_ts; then
-    sed -i '' "s/API_URL: '',/API_URL: 'https:\/\/composer.krg.io',/g" $config_ts
+    sed -i '' "s/API_URL: '',/API_URL: 'https:\/\/$subdomain.krg.io',/g" $config_ts
     echo "Updated config.ts"
   fi
 }
 
+# Composer API
+update_app_js () {
+  app_js=$(find $(pwd) -name "app.js")
+
+  if [ -e "$app_js" ] && grep -q "const app = express();" $app_js; then
+    sed -i '' "s/const app = express();/const cors = require('cors');\nconst app = express();\napp.use(cors());\n/g" $app_js
+    echo "Updated app.js"
+  fi
+}
 echo -n "Select repo:"
 current_repo=$(printf '%s\n' "${!repos[@]}" | fzf)
 echo $current_repo
@@ -64,7 +80,23 @@ update_docker_compose_yml ${repos[$current_repo]} $extra_name
 update_development_json ${repos[$current_repo]} $extra_name
 
 if [[ "$current_repo" =~ ad-composer-react ]]; then
-  update_config_ts
+  echo -e "Change Composer API?\nPress Return or Space for no change.\nPress any other key to change the domain)."
+  while true; do
+    read -rsn1 input
+    if [ "$input" = "" ]; then
+      echo -e "composer.krg.io"
+      update_config_ts
+      break
+    else
+      echo -e "composer-$extra_name.krg.io"
+      update_config_ts $extra_name
+      break
+    fi
+  done
+fi
+
+if [[ "$current_repo" =~ ad-composer ]]; then
+  update_app_js
 fi
 
 echo "Done."
