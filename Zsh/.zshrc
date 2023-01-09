@@ -216,6 +216,8 @@ cd "$currFolderPath"
 # ============== GIT ALIASES ==============
 
 alias gl="git log"
+alias gll="git log --pretty=format:'%C(yellow)%h%Creset - %C(brightwhite)%s%Creset %C(green)(%aD)%Creset - %C(cyan)%an%Creset'"
+alias glll="git log --pretty=format:'%C(yellow)%h%Creset - %s %C(green)(%aD)%Creset - %C(blue)%an%Creset%n%n%w(64,4,4)%b%n%-C()%n'"
 alias gs="git status"
 alias gb="git branch"
 # alias gb="fzf-git-branch"
