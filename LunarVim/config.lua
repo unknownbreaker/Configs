@@ -118,6 +118,12 @@ local which_key_custom = {
     ["8"] = { "<cmd>lua require('harpoon.ui').nav_file(8)<CR>", "File 8" },
     ["9"] = { "<cmd>lua require('harpoon.ui').nav_file(9)<CR>", "File 9" },
   },
+
+-- Do not overwrite "b"
+  b = {
+    c = { "<cmd>enew<CR>", "New buffer" },
+    d = { "<cmd>bd<CR>", "Close current buffer" },
+  },
 }
 
 lvim.builtin.which_key.mappings["."] = which_key_custom["."]
@@ -127,6 +133,8 @@ lvim.builtin.which_key.mappings["p"] = which_key_custom["p"]
 lvim.builtin.which_key.mappings["t"] = which_key_custom["t"]
 lvim.builtin.which_key.mappings["g"]["d"] = which_key_custom["g"]["d"]
 lvim.builtin.which_key.mappings["s"]["w"] = which_key_custom["s"]["w"]
+lvim.builtin.which_key.mappings["b"]["c"] = which_key_custom["b"]["c"]
+lvim.builtin.which_key.mappings["b"]["d"] = which_key_custom["b"]["d"]
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
