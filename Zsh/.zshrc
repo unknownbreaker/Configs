@@ -30,6 +30,7 @@ export PATH="/opt/homebrew/bin/:$PATH"
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 export OSA_LIBRARY_PATH=~/Library/Script\ Library
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
+export KUBE_EDITOR="open -a \"lvim\" --wait"
 
 # brew
 alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
