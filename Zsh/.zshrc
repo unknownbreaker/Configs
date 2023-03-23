@@ -608,12 +608,12 @@ load-nvmrc() {
   fi
 }
 
-alias yyb="load-nvmrc && yarn && yarn build && notify -title '$(basename $PWD)' -subtitle '$(git branch --show-current)' -message 'yarn build' -group '$(git branch --show-current)'"
+alias yyb="load-nvmrc && yarn && yarn build && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'yarn build' -group $(git branch --show-current)"
 alias yw="yarn watch"
-alias ddb="dcdown && dcb && dcup -d && notify -title '$(basename $PWD)' -subtitle '$(git branch --show-current)' -message 'docker-compose up -d' -sound 'default' -group '$(git branch --show-current)'"
+alias ddb="dcdown && dcb && dcup -d && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'docker-compose up -d' -sound 'default' -group $(git branch --show-current)"
 
 make_notify() {
-  make $1 && notify -title '$(basename $PWD)' -subtitle '$(git branch --show-current)' -message 'make $1' -sound 'default' -group '$(git branch --show-current)'
+  make $1 && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'make $1' -sound 'default' -group $(git branch --show-current)
 }
 alias make="make_notify"
 
