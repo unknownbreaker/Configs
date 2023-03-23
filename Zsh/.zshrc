@@ -504,8 +504,9 @@ function scrum() {
 
 
 
-# ======== CHROME UNHINGED =====
+# ======== CHROME =====
 alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-security --allow-file-access --allow-cross-origin-auth-prompt"
+alias testchrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=~/Documents/Repos/Work/Chrome-Isolated"
 
 # ======== FZF ========
 
