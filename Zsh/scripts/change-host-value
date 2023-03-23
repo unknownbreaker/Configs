@@ -82,10 +82,10 @@ update_docker_compose_yml ${repos[$current_repo]} $extra_name
 update_development_json ${repos[$current_repo]} $extra_name
 
 if [[ "$current_repo" =~ ad-composer-react ]]; then
-  echo -e "Change Composer API?\nPress Return or Space for no change.\nPress any other key to change the domain)."
+  echo -e "Change Composer API?\nPress \"n\" for no change.\nPress any other key to change the domain."
   while true; do
     read -rsn1 input
-    if [ "$input" = "" ]; then
+    if [ "$input" = "n" ]; then
       echo -e "composer.krg.io"
       update_config_ts
       break
