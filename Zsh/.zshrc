@@ -579,6 +579,36 @@ function go-to-kat-project() {
 
 alias yyb="nvm use && yarn && yarn build"
 alias ddb="dcdown && dcb && dcup -d"
+# Auto-load the nvm use for any repo with .nvmrc file
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+  local is_old_repo="false"
+
+  if [[ "$nvmrc_path" = *"/ad-tag/"* ]]; then
+    is_old_repo="true"
+  elif [[ "$nvmrc_path" = *"/ad-snippet-service/"* ]]; then
+    is_old_repo="true"
+  elif [[ "$nvmrc_path" = *"/ad-kailtra/"* ]]; then
+    is_old_repo="true"
+  fi
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [[ "$is_old_repo" = "true" ]]; then
+      nvm use v16.15
+    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+
 
 alias mail="nvim /var/mail/$(whoami)"
 
