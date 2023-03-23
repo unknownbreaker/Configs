@@ -10,6 +10,7 @@ repos[ad-snippet-service]=snippet-service
 repos[ad-tag]=ad-tag
 repos[ControlPanel]=marketplace
 repos[deal-manager]=deal-manager
+repos[pegasus]=pegasus
 repos[video-tag-builder]=video-tag-builder
 
 update_development_json () {
