@@ -584,11 +584,10 @@ load-nvmrc() {
   local nvmrc_path="$(nvm_find_nvmrc)"
   local is_old_repo="false"
 
-  if [[ "$nvmrc_path" = *"/ad-tag/"* ]]; then
-    is_old_repo="true"
-  elif [[ "$nvmrc_path" = *"/ad-snippet-service/"* ]]; then
-    is_old_repo="true"
-  elif [[ "$nvmrc_path" = *"/ad-kailtra/"* ]]; then
+  if [[ "$nvmrc_path" = *"/ad-tag"* ]] \
+    || [[ "$nvmrc_path" = *"/ad-snippet-service"* ]] \
+    || [[ "$nvmrc_path" = *"/ad-kailtra"* ]] \
+    || [[ "$nvmrc_path" = *"/ad-kargonaut"* ]]; then
     is_old_repo="true"
   fi
 
