@@ -378,10 +378,16 @@ function kbverify() {
     ad-demo-platform
     ad-demo-platform-v2
     ad-demo-platform-dev
+    ad-composer
+    ad-composer-dev
+    ad-krab
     ad-snippet-service
     ad-snippet-service-dev
     ad-snippet-service-staging
     cat-team-dev
+    kats-service
+    video-tag-builder
+    video-tag-builder-dev
   )
   kubectl -n $(printf '%s\n' "${namespaces[@]}" | fzf) get pods 
 }
