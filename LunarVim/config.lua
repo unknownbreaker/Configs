@@ -10,6 +10,9 @@ an executable
 
 -- general
 vim.opt.wrap = true
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 99
 lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.colorscheme = "tokyonight"
@@ -183,23 +186,21 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- -- make sure server will always be installed even if the server is in skipped_servers list
 lvim.lsp.installer.setup.ensure_installed = {
-  "sumneko_lua",
-  "jsonls",
+  "angularls",
+  "bashls",
   "cssls",
   "dockerls",
   "emmet_ls",
   "gopls",
   "graphql",
-  "html-lsp",
-  "tsserver",
+  "jsonls",
   "marksman", -- Markdown
   "phpactor",
   "pyright",
   "solargraph", -- Ruby
   "sqlls",
+  "tsserver",
   "vuels",
-  "angularls",
-  "bashls",
 }
 -- -- change UI setting of `LspInstallInfo`
 -- -- see <https://github.com/williamboman/nvim-lsp-installer#default-configuration>
@@ -255,7 +256,7 @@ formatters.setup {
       "graphql",
       "html",
       "javascript",
-      "javascriptreact",
+      "jsx",
       "json",
       "jsonc",
       "less",
@@ -263,7 +264,7 @@ formatters.setup {
       "markdown.mdx",
       "scss",
       "typescript",
-      "typescriptreact",
+      "tsx",
       "vue",
       "yaml",
     },
