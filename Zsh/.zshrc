@@ -681,3 +681,13 @@ aws_cli_mfa_ensure_session() {
 
 alias aws="aws_cli_mfa_ensure_session && $AWS_BIN"
 
+# ============ FFMPEG ============
+trimvid() {
+  input_file=$1
+  silence_length=$2
+  output_file$3
+
+  ffmpeg -i $1 -hide_banner -af silencedetect=n=-50dB:d=$2 -f null – 2>&1 | python remsi.py > $3 && \
+    sh -e $3 && \
+    rm $3
+}
