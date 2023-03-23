@@ -174,7 +174,7 @@ alias chv='bash ~/.config/zsh/scripts/change-host-value'
 export EDITOR="lvim"
 
 # ============== NOTIFIER ==============
-alias notify="terminal-notifier -title 'Terminal' -message 'Done with task! Exit status: $?' -activate 'com.googlecode.iterm2'"
+alias notify="terminal-notifier"
 
 # ============== NAVIGATION ==============
 
@@ -577,8 +577,6 @@ function go-to-kat-project() {
 
 # bindkey -s ^p "z $(find ~ ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf)\n"
 
-alias yyb="nvm use && yarn && yarn build"
-alias ddb="dcdown && dcb && dcup -d"
 # Auto-load the nvm use for any repo with .nvmrc file
 load-nvmrc() {
   local node_version="$(nvm version)"
@@ -609,6 +607,14 @@ load-nvmrc() {
   fi
 }
 
+alias yyb="load-nvmrc && yarn && yarn build && notify -title '$(basename $PWD)' -subtitle '$(git branch --show-current)' -message 'yarn build' -group '$(git branch --show-current)'"
+alias yw="yarn watch"
+alias ddb="dcdown && dcb && dcup -d && notify -title '$(basename $PWD)' -subtitle '$(git branch --show-current)' -message 'docker-compose up -d' -sound 'default' -group '$(git branch --show-current)'"
+
+make_notify() {
+  make $1 && notify -title '$(basename $PWD)' -subtitle '$(git branch --show-current)' -message 'make $1' -sound 'default' -group '$(git branch --show-current)'
+}
+alias make="make_notify"
 
 alias mail="nvim /var/mail/$(whoami)"
 
