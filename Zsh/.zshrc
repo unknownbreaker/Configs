@@ -371,6 +371,7 @@ alias dprune='docker system prune -a --volumes'
 
 # ========= k8s =========
 
+
 # Refer here to see aliases: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kubectl
 
 function kbverify() {
