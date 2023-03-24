@@ -345,14 +345,6 @@
         },
         {
           "type": "basic",
-          "from": { "key_code": "spacebar" },
-          "to": [{ "key_code": "left_shift", "modifiers": ["left_option"] }],
-          "conditions": [
-            { "type": "variable_if", "name": "tab_alt_mode", "value": 1 }
-          ]
-        },
-        {
-          "type": "basic",
           "from": { "key_code": "return_or_enter" },
           "to": [{ "key_code": "return_or_enter", "modifiers": ["left_option"] }],
           "conditions": [
@@ -739,14 +731,6 @@
         },
         {
           "type": "basic",
-          "from": { "key_code": "spacebar" },
-          "to": [{ "key_code": "right_shift", "modifiers": ["right_option"] }],
-          "conditions": [
-            { "type": "variable_if", "name": "backslash_alt_mode", "value": 1 }
-          ]
-        },
-        {
-          "type": "basic",
           "from": { "key_code": "return_or_enter" },
           "to": [{ "key_code": "return_or_enter", "modifiers": ["right_option"] }],
           "conditions": [
@@ -805,6 +789,14 @@
           "type": "basic",
           "from": { "key_code": "tab" },
           "to": [{ "key_code": "tab", "modifiers": ["right_option"] }],
+          "conditions": [
+            { "type": "variable_if", "name": "backslash_alt_mode", "value": 1 }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "spacebar" },
+          "to": [{ "key_code": "spacebar", "modifiers": ["right_option"] }],
           "conditions": [
             { "type": "variable_if", "name": "backslash_alt_mode", "value": 1 }
           ]
