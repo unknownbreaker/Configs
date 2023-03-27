@@ -612,7 +612,7 @@ alias yw="yarn watch"
 alias ddb="dcdown && dcb && dcup -d && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'docker-compose up -d' -sound 'default' -group $(git branch --show-current)"
 
 make_notify() {
-  make $1 && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'make $1' -sound 'default' -group $(git branch --show-current)
+  make $1 && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message "make $1" -sound 'default' -group $(git branch --show-current)
 }
 alias make="make_notify"
 
