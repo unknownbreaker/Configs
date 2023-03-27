@@ -293,6 +293,11 @@ linters.setup {
 -- Additional Plugins
 lvim.plugins = {
   {
+    "folke/lazy.nvim",
+    version = "stable",
+  },
+
+  {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
@@ -366,7 +371,6 @@ lvim.plugins = {
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    module = "persistence",
     config = function()
       require("persistence").setup {
         dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
@@ -376,7 +380,9 @@ lvim.plugins = {
   },
 
   -- Enable repeating supported plugin maps with .
-  { "tpope/vim-repeat" },
+  {
+    "tpope/vim-repeat",
+  },
 
   {
     "tpope/vim-surround",
