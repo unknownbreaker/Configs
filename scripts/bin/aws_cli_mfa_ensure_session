@@ -1,0 +1,57 @@
+#!/usr/local/bin/bash
+
+# If you have any trouble using this, then ask about it in #devops-requests.
+#
+# This script must be SOURCED. It won't work if you just run it. When you
+# export a variable or set an alias, it's only available in subprocesses. When
+# you RUN a script, it gets a new process, so an export or alias isn't visible
+# to the parent process.
+#
+# source aws_cli_mfa.sh
+#
+# You can add that to your .bashrc or .zshrc. When you run an aws command,
+# you'll be prompted once a day for an MFA code.
+
+session_store="$HOME/.aws/aws_cli_mfa_session.json"
+modified=
+expiration=
+case "$(uname -s)" in
+  Linux)
+  modified=$(stat --format %Y "$session_store" 2>/dev/null || echo 0)
+  expiration=$(date --date '-1 day' +%s)
+  ;;
+  Darwin)
+  modified=$(stat -f %m "$session_store" 2>/dev/null || echo 0)
+  expiration=$(date -v-1d +%s)
+  ;;
+  *)
+  >&2 echo "aws_cli_mfa.sh: I am not sophisticated and I have no idea what OS you're using."
+  ;;
+esac
+
+if [[ "$modified" -lt "$expiration" ]]; then
+  if [[ $SHELL == *"zsh" ]]; then
+    read "?aws_cli_mfa.sh: Give me an AWS MFA code: " mfa_code
+  else
+    read -p "aws_cli_mfa.sh: Give me an AWS MFA code: " mfa_code
+  fi
+  unset AWS_ACCESS_KEY_ID
+  unset AWS_SECRET_ACCESS_KEY
+  unset AWS_SESSION_TOKEN
+  echo "aws_cli_mfa.sh: Starting your session. It will be stored in $session_store."
+  (outpoot="$(
+    "$AWS_BIN" sts get-session-token \
+    --serial-number "$("$AWS_BIN" iam get-user | jq -r .User.Arn | sed 's_:user/_:mfa/_')" \
+    --token-code "$mfa_code" \
+    --duration-seconds 129600
+  )" && echo "$outpoot" > "$session_store") || \
+  >&2 echo "aws_cli_mfa.sh: That didn't work. Try sourcing this script again."
+fi
+
+if [[ -f "$session_store" ]]; then
+  while read id secret token _; do
+    export AWS_ACCESS_KEY_ID="$id"
+    export AWS_SECRET_ACCESS_KEY="$secret"
+    export AWS_SESSION_TOKEN="$token"
+  done < <(jq -r '.Credentials | .AccessKeyId + " " + .SecretAccessKey + " " + .SessionToken' "$session_store")
+fi

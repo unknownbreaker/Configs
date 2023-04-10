@@ -1,0 +1,6 @@
+#!/usr/local/bin/bash
+
+# Delete a commit
+local commit=$1;
+git rebase --rebase-merges --onto $1^ $1
+

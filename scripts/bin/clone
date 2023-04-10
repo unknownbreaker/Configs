@@ -1,0 +1,12 @@
+#!/usr/local/bin/bash
+
+# Clones a repo, CDs into it, opens it in Sublime, and runs bundle. From: https://github.com/stephenplusplus/dots/blob/master/.bash_profile
+local url=$1;
+
+if [[ ${url:0:4} == 'http' || ${url:0:3} == 'git' ]]
+then
+  # just clone this thing.
+  repo=$(echo $url | awk -F/ '{print $NF}' | sed -e 's/.git$//');
+fi
+
+git clone $url && cd $repo

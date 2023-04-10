@@ -13,12 +13,12 @@ export PATH=$PATH:~/.deno/bin
 export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
 export PATH=$PATH:/usr/local/bin/limelight
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
-export PATH=$PATH:~/.config/nvim/scripts/change-host-value
 export PATH=$PATH:~/Documents/Repos/Configs/Zsh/scripts
 export PATH=$PATH:~/.tmux/scripts/t
 export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 export PATH=$PATH:/usr/local/bin/node-jxa
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/Documents/Repos/Configs/scripts/bin
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -165,7 +165,7 @@ export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/
 DISABLE_AUTO_TITLE=true
 
 # ============== NEOVIM ============== 
-alias chv='bash ~/.config/zsh/scripts/change-host-value'
+alias chv='change-host-value'
 
 # ============== SUBLIME ==============
 
@@ -187,32 +187,6 @@ alias desktop='cd ~/Desktop'
 alias b='bundle install'
 alias f='open -a Finder ./'
 alias clear="clear && printf '\e[3J'"
-
-function g() {
-
-}
-
-# Make a directory and "cd" into it.
-function mcd() {
-  mkdir -p "$1" && cd "$1"
-}
-
-# cd's into the frontmost window in macos finder
-function cdf() {
-  currFolderPath=$( /usr/bin/osascript <<EOT
-    tell application "Finder"
-      try
-    set currFolder to (folder of the front window as alias)
-      on error
-    set currFolder to (path to desktop folder as alias)
-      end try
-      POSIX path of currFolder
-    end tell
-EOT
-    )
-echo "cd to \"$currFolderPath\""
-cd "$currFolderPath"
-}
 
 # ============== GIT ALIASES ==============
 
@@ -245,63 +219,13 @@ alias gwr='git worktree remove'
 alias gwrf='git worktree remove --force'
 alias gwm='git worktree move'
 alias gwp='git worktree prune'
-
+alias grbro='delete-git-commit'
 alias vimdiff='nvim -d'
 
 bindkey -s ^o '$(fzf-git-branch)\n'
 
-# Delete a commit
-function grbro {
-  local commit=$1;
-  git rebase --rebase-merges --onto $1^ $1
-}
-
 # Opens git config file
 alias gconf='e ~/.gitconfig'
-
-# Clones a repo, CDs into it, opens it in Sublime, and runs bundle. From: https://github.com/stephenplusplus/dots/blob/master/.bash_profile
-function clone {
-  local url=$1;
-
-  if [[ ${url:0:4} == 'http' || ${url:0:3} == 'git' ]]
-  then
-    # just clone this thing.
-    repo=$(echo $url | awk -F/ '{print $NF}' | sed -e 's/.git$//');
-  fi
-
-  git clone $url && cd $repo
-}
-
-function fzf-git-branch() {
-  git rev-parse HEAD > /dev/null 2>&1 || return
-
-  git branch --color=always --all --sort=-committerdate |
-    grep -v HEAD |
-    fzf --height 50% --ansi --no-multi --preview-window right:65% \
-      --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
-    sed "s/.* //"
-}
-
-fzf-git-checkout() {
-  git rev-parse HEAD > /dev/null 2>&1 || return
-
-  local branch
-
-  branch=$(fzf-git-branch)
-  if [[ "$branch" = "" ]]; then
-    echo "No branch selected."
-    return
-  fi
-
-  # If branch name starts with 'remotes/' then it is a remote branch. By
-  # using --track and a remote branch name, it is the same as:
-  # git checkout -b branchName --track origin/branchName
-  if [[ "$branch" = 'remotes/'* ]]; then
-    git checkout --track $branch
-  else
-    git checkout $branch;
-  fi
-}
 
 # ========= Postgres =========
 
@@ -332,16 +256,7 @@ alias dbu='docker build'
 alias drmi_all='docker rmi $* $(docker images -a -q)'
 alias drmi_dang='docker rmi $* $(docker images -q -f "dangling=true")'
 alias dhi='docker history $*'
-dhi_neat() {
-  ### dhi_neat <image name> [extra `docker history` options]
-  docker history "${1}" \
-    --format "{{ .Size }}\t{{ .CreatedBy }}" \
-    ${2:-} |
-    sort \
-      --key=1 \
-      --human-numeric-sort \
-      --reverse
-}
+alias dhin='dhi_neat'
 
 # Containers #
 
@@ -371,28 +286,7 @@ alias dprune='docker system prune -a --volumes'
 
 # ========= k8s =========
 
-
-# Refer here to see aliases: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kubectl
-
-function kbverify() {
-  namespaces=(
-    ad-demo-platform
-    ad-demo-platform-v2
-    ad-demo-platform-dev
-    ad-composer
-    ad-composer-dev
-    ad-krab
-    ad-snippet-service
-    ad-snippet-service-dev
-    ad-snippet-service-staging
-    cat-team-dev
-    kats-service
-    video-tag-builder
-    video-tag-builder-dev
-  )
-  kubectl -n $(printf '%s\n' "${namespaces[@]}" | fzf) get pods 
-}
-
+alias kbv='kubernetes-verify-pod'
 alias k9s="k9s --readonly" # avoid making terrible mistakes on k8s
 
 # ========= RUBY =========
@@ -469,42 +363,6 @@ function startandroid {
   fi
 }
 
-# ======= SCRUM NOTES =======
-
-function scrum() {
-  stringDate=0
-  if [ $1 ]; then
-    stringDate=$1
-  else
-    stringDate=$(date +%Y%m%d)
-  fi
-  filename=scrum$stringDate.md
-
-  scrum_line="$(date +%A), $(date +%b) $(date +%d), $(date +%Y)\n"
-  scrum_line+="= PREVIOUSLY =\n\n"
-  scrum_line+="= TODAY =\n\n"
-  scrum_line+="= AFTER TALKS =\n\n"
-  scrum_line+="= BLOCKERS =\n\n"
-  scrum_line+="= ANSWERS / UPDATES =\n\n"
-  scrum_line+="= WFH / OOO / Offline =\n\n"
-  scrum_line+="= FOR MY OWN RECORDS =\n\n"
-  scrum_line+="= CONVERSATIONS / MEETINGS =\n"
-
-  total="$scrum_line"
-
-  if [ -f $filename ]; then
-    scrum $(date -j -f %Y%m%d -v+1d "$stringDate" +%Y%m%d)
-  elif [ $(date -j -f %Y%m%d $stringDate +%A) == Sunday ]; then
-    scrum $(date -j -f %Y%m%d -v+1d "$stringDate" +%Y%m%d)
-  elif [ $(date -j -f %Y%m%d $stringDate +%A) == Saturday ]; then
-    scrum $(date -j -f %Y%m%d -v+2d "$stringDate" +%Y%m%d)
-  else
-    echo $total > scrum$stringDate.md && echo "scrum$stringDate.md has been created"
-  fi
-}
-
-
-
 # ======== CHROME =====
 alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-security --allow-file-access --allow-cross-origin-auth-prompt"
 alias testchrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=~/Documents/Repos/Work/Chrome-Isolated"
@@ -578,35 +436,6 @@ function go-to-kat-project() {
 
 # bindkey -s ^p "z $(find ~ ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf)\n"
 
-# Auto-load the nvm use for any repo with .nvmrc file
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-  local is_old_repo="false"
-
-  if [[ "$nvmrc_path" = *"/ad-tag"* ]] \
-    || [[ "$nvmrc_path" = *"/ad-snippet-service"* ]] \
-    || [[ "$nvmrc_path" = *"/ad-kailtra"* ]] \
-    || [[ "$nvmrc_path" = *"/ad-kargonaut"* ]]; then
-    is_old_repo="true"
-  fi
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [[ "$is_old_repo" = "true" ]]; then
-      nvm use v16.15
-    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-
 alias yyb="load-nvmrc && yarn && yarn build && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'yarn build' -group $(git branch --show-current)"
 alias yw="yarn watch"
 alias ddb="dcdown && dcb && dcup -d && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'docker-compose up -d' -sound 'default' -group $(git branch --show-current)"
@@ -632,62 +461,7 @@ alias mail="nvim /var/mail/$(whoami)"
 # you'll be prompted once a day for an MFA code.
 
 AWS_BIN=$(which aws)
-
-aws_cli_mfa_ensure_session() {
-    session_store="$HOME/.aws/aws_cli_mfa_session.json"
-    modified=
-    expiration=
-    case "$(uname -s)" in
-        Linux)
-        modified=$(stat --format %Y "$session_store" 2>/dev/null || echo 0)
-        expiration=$(date --date '-1 day' +%s)
-        ;;
-        Darwin)
-        modified=$(stat -f %m "$session_store" 2>/dev/null || echo 0)
-        expiration=$(date -v-1d +%s)
-        ;;
-        *)
-        >&2 echo "aws_cli_mfa.sh: I am not sophisticated and I have no idea what OS you're using."
-        ;;
-    esac
-
-    if [[ "$modified" -lt "$expiration" ]]; then
-        if [[ $SHELL == *"zsh" ]]; then
-            read "?aws_cli_mfa.sh: Give me an AWS MFA code: " mfa_code
-        else
-            read -p "aws_cli_mfa.sh: Give me an AWS MFA code: " mfa_code
-        fi
-        unset AWS_ACCESS_KEY_ID
-        unset AWS_SECRET_ACCESS_KEY
-        unset AWS_SESSION_TOKEN
-        echo "aws_cli_mfa.sh: Starting your session. It will be stored in $session_store."
-        (outpoot="$(
-            "$AWS_BIN" sts get-session-token \
-            --serial-number "$("$AWS_BIN" iam get-user | jq -r .User.Arn | sed 's_:user/_:mfa/_')" \
-            --token-code "$mfa_code" \
-            --duration-seconds 129600
-        )" && echo "$outpoot" > "$session_store") || \
-        >&2 echo "aws_cli_mfa.sh: That didn't work. Try sourcing this script again."
-    fi
-
-    if [[ -f "$session_store" ]]; then
-      while read id secret token _; do
-        export AWS_ACCESS_KEY_ID="$id"
-        export AWS_SECRET_ACCESS_KEY="$secret"
-        export AWS_SESSION_TOKEN="$token"
-      done < <(jq -r '.Credentials | .AccessKeyId + " " + .SecretAccessKey + " " + .SessionToken' "$session_store")
-    fi
-}
-
 alias aws="aws_cli_mfa_ensure_session && $AWS_BIN"
 
 # ============ FFMPEG ============
-trimvid() {
-  input_file=$1
-  silence_length=$2
-  output_file$3
-
-  ffmpeg -i $1 -hide_banner -af silencedetect=n=-50dB:d=$2 -f null – 2>&1 | python remsi.py > $3 && \
-    sh -e $3 && \
-    rm $3
-}
+alias tvid='trim-vid'

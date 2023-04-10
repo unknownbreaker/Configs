@@ -1,0 +1,10 @@
+#!/usr/local/bin/bash
+
+### dhi_neat <image name> [extra `docker history` options]
+docker history "${1}" \
+  --format "{{ .Size }}\t{{ .CreatedBy }}" \
+  ${2:-} |
+  sort \
+    --key=1 \
+    --human-numeric-sort \
+    --reverse

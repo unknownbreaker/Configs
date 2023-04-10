@@ -1,0 +1,31 @@
+#!/usr/local/bin/bash
+
+stringDate=0
+if [ $1 ]; then
+  stringDate=$1
+else
+  stringDate=$(date +%Y%m%d)
+fi
+filename=scrum$stringDate.md
+
+scrum_line="$(date +%A), $(date +%b) $(date +%d), $(date +%Y)\n"
+scrum_line+="= PREVIOUSLY =\n\n"
+scrum_line+="= TODAY =\n\n"
+scrum_line+="= AFTER TALKS =\n\n"
+scrum_line+="= BLOCKERS =\n\n"
+scrum_line+="= ANSWERS / UPDATES =\n\n"
+scrum_line+="= WFH / OOO / Offline =\n\n"
+scrum_line+="= FOR MY OWN RECORDS =\n\n"
+scrum_line+="= CONVERSATIONS / MEETINGS =\n"
+
+total="$scrum_line"
+
+if [ -f $filename ]; then
+  scrum $(date -j -f %Y%m%d -v+1d "$stringDate" +%Y%m%d)
+elif [ $(date -j -f %Y%m%d $stringDate +%A) == Sunday ]; then
+  scrum $(date -j -f %Y%m%d -v+1d "$stringDate" +%Y%m%d)
+elif [ $(date -j -f %Y%m%d $stringDate +%A) == Saturday ]; then
+  scrum $(date -j -f %Y%m%d -v+2d "$stringDate" +%Y%m%d)
+else
+  echo $total > scrum$stringDate.md && echo "scrum$stringDate.md has been created"
+fi
