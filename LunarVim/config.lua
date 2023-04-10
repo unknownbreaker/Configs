@@ -25,6 +25,8 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 
+lvim.keys.visual_mode["<leader>sw"] = "<esc><cmd>lua require('spectre').open_visual()<CR>"
+
 -- Tmux terminal stuff
 -- lvim.keys.normal_mode["<C-S-d"] = ":lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>"
 -- lvim.keys.normal_mode["<C-S-m"] = ":lua require('harpoon.tmux').gotoTerminal(1)<CR>"
@@ -63,6 +65,8 @@ lvim.builtin.telescope.defaults.mappings = {
 
 -- Use which-key to add extra bindings with the leader-key prefix
 local which_key_custom = {
+  ["e"] = { "<cmd>Neotree toggle<CR>", "Neotree" },
+
   ["."] = {
     name = "+Dotfiles/Setups",
     v = { "<cmd>edit ~/Documents/Repos/Configs/LunarVim/config.lua<cr>", "LunarVim" },
@@ -71,15 +75,15 @@ local which_key_custom = {
     f = { "<cmd>edit ~/Documents/Repos/Personal/fresh-mac/homebrew/Brewfile<cr>", "Fresh Mac Brewfile" },
   },
 
-  P = {
-    name = "Packer",
-    c = { "<cmd>PackerCompile<cr>", "Compile" },
-    i = { "<cmd>PackerInstall<cr>", "Install" },
-    r = { "<cmd>lua require('lvim.plugin-loader').recompile()<cr>", "Re-compile" },
-    s = { "<cmd>PackerSync<cr>", "Sync" },
-    S = { "<cmd>PackerStatus<cr>", "Status" },
-    u = { "<cmd>PackerUpdate<cr>", "Update" },
-  },
+  -- P = {
+  --   name = "Packer",
+  --   c = { "<cmd>PackerCompile<cr>", "Compile" },
+  --   i = { "<cmd>PackerInstall<cr>", "Install" },
+  --   r = { "<cmd>lua require('lvim.plugin-loader').recompile()<cr>", "Re-compile" },
+  --   s = { "<cmd>PackerSync<cr>", "Sync" },
+  --   S = { "<cmd>PackerStatus<cr>", "Status" },
+  --   u = { "<cmd>PackerUpdate<cr>", "Update" },
+  -- },
 
   p = {
     "<cmd>Telescope projects<CR>", "Projects"
@@ -97,12 +101,19 @@ local which_key_custom = {
 
 -- Do not overwrite "s"
   s = {
-    w = { "<cmd>lua require('telescope.builtin').grep_string()<cr>", "Search word under cursor" }
+    w = { "<cmd>lua require('telescope.builtin').grep_string()<cr>", "Search current word" },
   },
 
 -- Do not overwrite "g"
   g = {
     d = { "<cmd>DiffviewOpen<cr>", "diffview" },
+  },
+
+  r = {
+    name = "+Spectre",
+    s = { "<cmd>lua require('spectre').open()<CR>", "Open Spectre" },
+    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search current word" },
+    p = { "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", "Search current word in current file" }
   },
 
   m = {
@@ -125,15 +136,16 @@ local which_key_custom = {
 -- Do not overwrite "b"
   b = {
     c = { "<cmd>enew<CR>", "New buffer" },
-    d = { "<cmd>bd<CR>", "Close current buffer" },
   },
 }
 
+lvim.builtin.which_key.mappings["e"] = which_key_custom["e"]
 lvim.builtin.which_key.mappings["."] = which_key_custom["."]
 lvim.builtin.which_key.mappings["m"] = which_key_custom["m"]
 lvim.builtin.which_key.mappings["P"] = which_key_custom["P"]
 lvim.builtin.which_key.mappings["p"] = which_key_custom["p"]
 lvim.builtin.which_key.mappings["t"] = which_key_custom["t"]
+lvim.builtin.which_key.mappings["r"] = which_key_custom["r"]
 lvim.builtin.which_key.mappings["g"]["d"] = which_key_custom["g"]["d"]
 lvim.builtin.which_key.mappings["s"]["w"] = which_key_custom["s"]["w"]
 lvim.builtin.which_key.mappings["b"]["c"] = which_key_custom["b"]["c"]
@@ -143,7 +155,7 @@ lvim.builtin.which_key.mappings["b"]["d"] = which_key_custom["b"]["d"]
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.terminal.active = true
+lvim.builtin.nvimtree.active = false -- NOTE: using neo-tree
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 lvim.builtin.nvimtree.setup.renderer.full_name = true
@@ -181,6 +193,7 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
+lvim.builtin.treesitter.matchup.enable = true
 
 -- generic LSP settings
 
@@ -311,6 +324,18 @@ lvim.plugins = {
     end,
   },
 
+  -- Preview line number
+  {
+    "nacro90/numb.nvim",
+    event = "BufRead",
+    config = function()
+    require("numb").setup {
+      show_numbers = true, -- Enable 'number' for the window while peeking
+      show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+    }
+    end,
+  },
+
   -- Better quickfix window
   {
     "kevinhwang91/nvim-bqf",
@@ -348,7 +373,15 @@ lvim.plugins = {
     "windwp/nvim-spectre",
     event = "BufRead",
     config = function()
-      require("spectre").setup()
+      require("spectre").setup({
+        mapping = {
+          ['send_to_qf'] = {
+            map = "<C-q>",
+            cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",
+            desc = "send all item to quickfix",
+          },
+        },
+      })
     end,
   },
 
@@ -498,6 +531,101 @@ lvim.plugins = {
   {
     "ThePrimeagen/harpoon",
   },
+
+  -- Symbols outline
+  {
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      require('symbols-outline').setup()
+    end
+  },
+
+  -- Autotag
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+
+  -- Comment string context
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    event = "BufRead",
+  },
+
+  -- Dev Icons
+  {
+    "nvim-tree/nvim-web-devicons",
+  },
+
+  -- Neo Tree
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("neo-tree").setup({
+        source_selector = {
+          winbar = true,
+          statusline = true,
+        },
+        close_if_last_window = true,
+        window = {
+          width = 30,
+          mappings = {
+            ["o"] = "open",
+            ["<cr>"] = "toggle_node",
+          },
+        },
+        buffers = {
+          follow_current_file = true,
+        },
+        filesystem = {
+          follow_current_file = true,
+          filtered_items = {
+            hide_dotfiles = false,
+            hide_gitignored = true,
+            hide_by_name = {
+              "node_modules"
+            },
+            never_show = {
+              ".DS_Store",
+              "thumbs.db"
+            },
+          },
+        },
+      })
+    end
+  },
+
+  -- Function context
+  {
+    "romgrk/nvim-treesitter-context",
+    config = function()
+      require("treesitter-context").setup{
+        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        throttle = true, -- Throttles plugin updates (may improve performance)
+        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+          -- For all filetypes
+          -- Note that setting an entry here replaces all other patterns for this entry.
+          -- By setting the 'default' entry below, you can control which nodes you want to
+          -- appear in the context window.
+          default = {
+            'class',
+            'function',
+            'method',
+          },
+        },
+      }
+    end
+  },
+
 }
 
 -- Plugin Extensions Setup
