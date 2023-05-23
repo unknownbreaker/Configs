@@ -15,7 +15,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "github_dark_high_contrast"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -51,12 +51,16 @@ lvim.builtin.telescope.defaults.mappings = {
     ["<C-k>"] = actions.move_selection_previous,
     ["<C-n>"] = actions.cycle_history_next,
     ["<C-p>"] = actions.cycle_history_prev,
+    ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+    ["<C-Q>"] = actions.send_selected_to_qflist + actions.open_qflist,
   },
---   -- for normal mode
---   n = {
+  -- for normal mode
+  n = {
 --     ["<C-j>"] = actions.move_selection_next,
 --     ["<C-k>"] = actions.move_selection_previous,
---   },
+    ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+    ["<C-Q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+  },
 }
 
 -- Change theme settings
@@ -74,16 +78,6 @@ local which_key_custom = {
     t = { "<cmd>edit ~/Documents/Repos/Configs/tmux/.tmux.conf<cr>", ".tmux.conf" },
     f = { "<cmd>edit ~/Documents/Repos/Personal/fresh-mac/homebrew/Brewfile<cr>", "Fresh Mac Brewfile" },
   },
-
-  -- P = {
-  --   name = "Packer",
-  --   c = { "<cmd>PackerCompile<cr>", "Compile" },
-  --   i = { "<cmd>PackerInstall<cr>", "Install" },
-  --   r = { "<cmd>lua require('lvim.plugin-loader').recompile()<cr>", "Re-compile" },
-  --   s = { "<cmd>PackerSync<cr>", "Sync" },
-  --   S = { "<cmd>PackerStatus<cr>", "Status" },
-  --   u = { "<cmd>PackerUpdate<cr>", "Update" },
-  -- },
 
   p = {
     "<cmd>Telescope projects<CR>", "Projects"
@@ -137,28 +131,40 @@ local which_key_custom = {
   b = {
     c = { "<cmd>enew<CR>", "New buffer" },
   },
+
+  S = {
+    name = "Session",
+    c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+    l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+    Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+  },
+
 }
 
-lvim.builtin.which_key.mappings["e"] = which_key_custom["e"]
 lvim.builtin.which_key.mappings["."] = which_key_custom["."]
-lvim.builtin.which_key.mappings["m"] = which_key_custom["m"]
 lvim.builtin.which_key.mappings["P"] = which_key_custom["P"]
+lvim.builtin.which_key.mappings["S"] = which_key_custom["S"]
+lvim.builtin.which_key.mappings["e"] = which_key_custom["e"]
+lvim.builtin.which_key.mappings["m"] = which_key_custom["m"]
 lvim.builtin.which_key.mappings["p"] = which_key_custom["p"]
-lvim.builtin.which_key.mappings["t"] = which_key_custom["t"]
 lvim.builtin.which_key.mappings["r"] = which_key_custom["r"]
-lvim.builtin.which_key.mappings["g"]["d"] = which_key_custom["g"]["d"]
-lvim.builtin.which_key.mappings["s"]["w"] = which_key_custom["s"]["w"]
+lvim.builtin.which_key.mappings["t"] = which_key_custom["t"]
 lvim.builtin.which_key.mappings["b"]["c"] = which_key_custom["b"]["c"]
 lvim.builtin.which_key.mappings["b"]["d"] = which_key_custom["b"]["d"]
+lvim.builtin.which_key.mappings["g"]["d"] = which_key_custom["g"]["d"]
+lvim.builtin.which_key.mappings["s"]["w"] = which_key_custom["s"]["w"]
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.nvimtree.active = false -- NOTE: using neo-tree
+lvim.builtin.nvimtree.active = true -- NOTE: using neo-tree
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 lvim.builtin.nvimtree.setup.renderer.full_name = true
+lvim.builtin.which_key.setup.plugins.marks = true
+lvim.builtin.which_key.setup.plugins.registers = true
+lvim.builtin.which_key.setup.plugins.presets.z = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -418,11 +424,20 @@ lvim.plugins = {
   },
 
   {
-    "tpope/vim-surround",
+    -- "tpope/vim-surround",
     -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
     -- setup = function()
     --  vim.o.timeoutlen = 500
     -- end
+  },
+
+  {
+    "kylechui/nvim-surround",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
   },
 
   -- navigate between neovim and tmux panes
@@ -469,6 +484,14 @@ lvim.plugins = {
               -- You can optionally set descriptions to the mappings (used in the desc parameter of
               -- nvim_buf_set_keymap) which plugins like which-key display
               ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+              ["ad"] = "@conditional.outer",
+              ["id"] = "@conditional.inner",
+              ["ab"] = "@block.outer",
+              ["ib"] = "@block.inner",
+              ["aa"] = "@parameter.outer",
+              ["ia"] = "@parameter.inner",
+              ["al"] = "@assignment.lhs",
+              ["ar"] = "@assignment.rhs",
             },
             -- You can choose the select mode (default is charwise 'v')
             --
@@ -491,7 +514,7 @@ lvim.plugins = {
             -- * query_string: eg '@function.inner'
             -- * selection_mode: eg 'v'
             -- and should return true of false
-            include_surrounding_whitespace = true,
+            include_surrounding_whitespace = false,
           },
           swap = {
             enable = true,
@@ -506,20 +529,31 @@ lvim.plugins = {
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
-              ["]m"] = "@function.outer",
+              ["]f"] = "@function.outer",
               ["]]"] = { query = "@class.outer", desc = "Next class start" },
             },
             goto_next_end = {
-              ["]M"] = "@function.outer",
+              ["]F"] = "@function.outer",
               ["]["] = "@class.outer",
             },
             goto_previous_start = {
-              ["[m"] = "@function.outer",
+              ["[f"] = "@function.outer",
               ["[["] = "@class.outer",
             },
             goto_previous_end = {
-              ["[M"] = "@function.outer",
+              ["[F"] = "@function.outer",
               ["[]"] = "@class.outer",
+            },
+            -- Below will go to either the start or the end, whichever is closer.
+            -- Use if you want more granular movements
+            -- Make it even more gradual by adding multiple queries and regex.
+            goto_next = {
+              ["]d"] = "@conditional.outer",
+              ["]a"] = "@parameter.inner",
+            },
+            goto_previous = {
+              ["[d"] = "@conditional.outer",
+              ["[a"] = "@parameter.inner",
             },
           },
         },
@@ -579,7 +613,7 @@ lvim.plugins = {
           width = 30,
           mappings = {
             ["o"] = "open",
-            ["<cr>"] = "toggle_node",
+            ["<cr>"] = "open",
           },
         },
         buffers = {
@@ -624,6 +658,108 @@ lvim.plugins = {
         },
       }
     end
+  },
+
+  -- LuaSnip
+  {
+    "L3MON4D3/LuaSnip",
+    config = function()
+      local ls = require "luasnip"
+      local types = require "luasnip.util.types"
+
+      ls.config.set_config {
+        history = true,
+        updateevents = "TextChanged, TextChangedI",
+      }
+
+      -- <c-k>
+      -- expand current item or jump to next item within snippet
+      vim.keymap.set({ "i", "s" }, "<c-k>", function()
+        if ls.expand_or_jumpable() then
+          ls.expand_or_jump()
+        end
+      end, { silent = true })
+
+      -- <c-j>
+      -- go back an item
+      vim.keymap.set({ "i", "s" }, "<c-j>", function()
+        if ls.jumpable(-1) then
+          ls.jump(-1)
+        end
+      end, { silent = true })
+
+      -- <c-l>
+      -- choice nodes
+      vim.keymap.set("i", "<c-l>", function()
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end)
+
+      -- refresh snippets
+      -- vim.keymap.set("n", "<leader><leader>s", "<cmd>source ")
+    end,
+  },
+
+  -- preview markdown
+  {
+    "npxbr/glow.nvim",
+    ft = {"markdown"}
+    -- build = "yay -S glow"
+  },
+
+  -- session management
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    config = function()
+      require("persistence").setup {
+        dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
+        options = { "buffers", "curdir", "tabpages", "winsize" },
+      }
+    end,
+  },
+
+-- Open URLs in browser
+  {
+    "felipec/vim-sanegx",
+    event = "BufRead",
+  },
+
+  -- Fast finding
+  {
+    "camspiers/snap",
+    config = function()
+      local snap = require "snap"
+      local layout = snap.get("layout").bottom
+      local file = snap.config.file:with { consumer = "fzf", layout = layout }
+      local vimgrep = snap.config.vimgrep:with { layout = layout }
+      snap.register.command("find_files", file { producer = "ripgrep.file" })
+      snap.register.command("buffers", file { producer = "vim.buffer" })
+      snap.register.command("oldfiles", file { producer = "vim.oldfile" })
+      snap.register.command("live_grep", vimgrep {})
+    end,
+  },
+
+  -- auto-switch between relative and absolute line numbers
+  { "sitiom/nvim-numbertoggle" },
+
+  -- GitHub theme
+  {
+    "projekt0n/github-nvim-theme",
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      vim.cmd('colorscheme github_dark_high_contrast')
+    end,
+  },
+
+  -- highlight todo comments
+  {
+    "folke/todo-comments.nvim",
+    event = "BufRead",
+    config = function()
+      require("todo-comments").setup()
+    end,
   },
 
 }
