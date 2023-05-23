@@ -7,7 +7,7 @@
   "scripts": {
     "start": "parcel",
     "build": "yarn clear && parcel build && ./bin/convert ./dist/standup-checker.js",
-    "build:global": "yarn build && cp ./dist/standup-checker /usr/local/bin/",
+    "build:global": "yarn build && cp ./dist/standup-checker ~/Documents/Repos/Configs/scripts/bin/",
     "watch": "parcel watch",
     "clear": "rm -f ./dist/*"
   },
