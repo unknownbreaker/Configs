@@ -80,11 +80,8 @@ for (let key in weeksNeeded) {
   });
 }
 
-var kme = Application("Keyboard Maestro Engine");
-
 if (needsSlack) {
-  return kme.setvariable("standupFormat", { to: "slack" });
-  // return console.log("slack");
+  return 'slack';
+} else {
+  return 'zoom';
 }
-return kme.setvariable("standupFormat", { to: "zoom" });
-// return console.log("zoom");
