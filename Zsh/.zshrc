@@ -46,7 +46,7 @@ export PATH=$PATH:~/Documents/Repos/Kargo/kcli-codebase
 
 alias vsc="'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'"
 alias vscode='vsc'
-# alias vim="nvim"
+alias vim="lvim"
 # alias vi="nvim"
 
 # ============== OH MY ZSH ==============
@@ -220,12 +220,15 @@ alias gwrf='git worktree remove --force'
 alias gwm='git worktree move'
 alias gwp='git worktree prune'
 alias grbro='delete-git-commit'
-alias vimdiff='nvim -d'
+alias vimdiff='lvim -d'
 
 bindkey -s ^o '$(fzf-git-branch)\n'
 
 # Opens git config file
 alias gconf='e ~/.gitconfig'
+
+# Lazy Git
+alias lzg='lazygit'
 
 # ========= Postgres =========
 
@@ -283,6 +286,9 @@ alias dvrm_dang='docker volume rm $(docker volume ls -q -f "dangling=true")'
 
 # Nuclear option #
 alias dprune='docker system prune -a --volumes'
+
+# Lazy Docker
+alias lzd='lazydocker'
 
 # ========= k8s =========
 
@@ -436,7 +442,7 @@ function go-to-kat-project() {
 
 # bindkey -s ^p "z $(find ~ ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf)\n"
 
-alias yyb="load-nvmrc && yarn && yarn build && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'yarn build' -group $(git branch --show-current)"
+alias yyb="nvm use && yarn && yarn build && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'yarn build' -group $(git branch --show-current)"
 alias yw="yarn watch"
 alias ddb="dcdown && dcb && dcup -d && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'docker-compose up -d' -sound 'default' -group $(git branch --show-current)"
 
@@ -460,7 +466,10 @@ alias mail="nvim /var/mail/$(whoami)"
 # You can add that to your .bashrc or .zshrc. When you run an aws command,
 # you'll be prompted once a day for an MFA code.
 
-AWS_BIN=$(which aws)
+if alias aws >/dev/null 2>&1; then
+  unalias aws
+  AWS_BIN=$(which aws)
+fi
 alias aws="aws_cli_mfa_ensure_session && $AWS_BIN"
 
 # ============ FFMPEG ============
