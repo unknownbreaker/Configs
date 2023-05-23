@@ -25,27 +25,27 @@ case "$(uname -s)" in
   expiration=$(date -v-1d +%s)
   ;;
   *)
-  >&2 echo "aws_cli_mfa.sh: I am not sophisticated and I have no idea what OS you're using."
+  >&2 echo "aws_cli_mfa_ensure_session: I am not sophisticated and I have no idea what OS you're using."
   ;;
 esac
 
 if [[ "$modified" -lt "$expiration" ]]; then
   if [[ $SHELL == *"zsh" ]]; then
-    read "?aws_cli_mfa.sh: Give me an AWS MFA code: " mfa_code
+    read "?aws_cli_mfa_ensure_session: Give me an AWS MFA code: " mfa_code
   else
-    read -p "aws_cli_mfa.sh: Give me an AWS MFA code: " mfa_code
+    read -p "aws_cli_mfa_ensure_session: Give me an AWS MFA code: " mfa_code
   fi
   unset AWS_ACCESS_KEY_ID
   unset AWS_SECRET_ACCESS_KEY
   unset AWS_SESSION_TOKEN
-  echo "aws_cli_mfa.sh: Starting your session. It will be stored in $session_store."
+  echo "aws_cli_mfa_ensure_session: Starting your session. It will be stored in $session_store."
   (outpoot="$(
     "$AWS_BIN" sts get-session-token \
     --serial-number "$("$AWS_BIN" iam get-user | jq -r .User.Arn | sed 's_:user/_:mfa/_')" \
     --token-code "$mfa_code" \
     --duration-seconds 129600
   )" && echo "$outpoot" > "$session_store") || \
-  >&2 echo "aws_cli_mfa.sh: That didn't work. Try sourcing this script again."
+  >&2 echo "aws_cli_mfa_ensure_session: That didn't work. Try sourcing this script again."
 fi
 
 if [[ -f "$session_store" ]]; then
