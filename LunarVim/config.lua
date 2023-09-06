@@ -488,10 +488,14 @@ lvim.plugins = {
               ["id"] = "@conditional.inner",
               ["ab"] = "@block.outer",
               ["ib"] = "@block.inner",
-              ["aa"] = "@parameter.outer",
-              ["ia"] = "@parameter.inner",
-              ["al"] = "@assignment.lhs",
-              ["ar"] = "@assignment.rhs",
+              ["ap"] = "@parameter.outer",
+              ["ip"] = "@parameter.inner",
+              ["ar"] = "@regex.outer",
+              ["ir"] = "@regex.inner",
+              ["aa"] = "@assignment.outer",
+              ["ia"] = "@assignment.inner",
+              ["ae"] = "@assignment.lhs",
+              ["aE"] = "@assignment.rhs",
             },
             -- You can choose the select mode (default is charwise 'v')
             --
@@ -500,11 +504,11 @@ lvim.plugins = {
             -- * method: eg 'v' or 'o'
             -- and should return the mode ('v', 'V', or '<c-v>') or a table
             -- mapping query_strings to modes.
-            selection_modes = {
-              ['@parameter.outer'] = 'v', -- charwise
-              ['@function.outer'] = 'V', -- linewise
-              ['@class.outer'] = '<c-v>', -- blockwise
-            },
+            -- selection_modes = {
+            --   ['@parameter.outer'] = 'v', -- charwise
+            --   ['@function.outer'] = 'V', -- linewise
+            --   ['@class.outer'] = '<c-v>', -- blockwise
+            -- },
             -- If you set this to `true` (default is `false`) then any textobject is
             -- extended to include preceding or succeeding whitespace. Succeeding
             -- whitespace has priority in order to act similarly to eg the built-in
