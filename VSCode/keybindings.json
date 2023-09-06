@@ -6,6 +6,11 @@
     "when": "editorTextFocus"
   },
   {
+    "key": "backspace",
+    "command": "whichkey.undoKey",
+    "when": "whichkeyVisible"
+  },
+  {
     "key": "ctrl+k",
     "command": "workbench.action.navigateUp",
     "when": "!editorTextFocus && !terminalFocus"
