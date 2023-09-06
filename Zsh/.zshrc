@@ -160,6 +160,9 @@ unsetopt AUTO_CD
 
 bindkey "^ " autosuggest-accept
 
+# 1password
+eval "$(op completion zsh)"; compdef _op op
+
 # ============== TMUX ==============
 export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/
 DISABLE_AUTO_TITLE=true
