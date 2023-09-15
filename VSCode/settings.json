@@ -41,16 +41,22 @@
       "command": "workbench.action.closeActiveEditor"
     },
     {
-      "key": "e",
-      "name": "Show tree/explorer view",
-      "type": "command",
-      "command": "workbench.view.explorer"
-    },
-    {
       "key": "k",
       "name": "Close Other Editor",
       "type": "command",
       "command": "workbench.action.closeOtherEditors"
+    },
+    {
+      "key": "e",
+      "name": "Show active file in tree/explorer view",
+      "type": "command",
+      "command": "workbench.files.action.showActiveFileInExplorer"
+    },
+    {
+      "key": "f",
+      "name": "Find file in project",
+      "type": "command",
+      "command": "workbench.action.quickOpen"
     },
     {
       "key": "E",
@@ -85,7 +91,7 @@
       ]
     },
     {
-      "key": "f",
+      "key": "F",
       "name": "+File",
       "type": "bindings",
       "bindings": [
@@ -109,12 +115,6 @@
             "workbench.files.action.showActiveFileInExplorer",
             "renameFile"
           ]
-        },
-        {
-          "key": "t",
-          "name": "Show active file in tree/explorer view",
-          "type": "command",
-          "command": "workbench.files.action.showActiveFileInExplorer"
         },
         {
           "key": "y",
@@ -297,7 +297,13 @@
           "name": "Toggle find [c]ase sensitive",
           "type": "command",
           "command": "toggleFindCaseSensitive"
-        }
+        },
+        {
+          "key": "e",
+          "name": "Show tree/explorer view",
+          "type": "command",
+          "command": "workbench.view.explorer"
+        },
       ]
     },
     {

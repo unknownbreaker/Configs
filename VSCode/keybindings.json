@@ -12,63 +12,19 @@
   },
   {
     "key": "ctrl+k",
-    "command": "workbench.action.navigateUp",
-    "when": "!editorTextFocus && !terminalFocus"
+    "command": "workbench.action.navigateUp"
   },
   {
     "key": "ctrl+j",
-    "command": "workbench.action.navigateDown",
-    "when": "!editorTextFocus && !terminalFocus"
+    "command": "workbench.action.navigateDown"
   },
   {
     "key": "ctrl+h",
-    "command": "workbench.action.navigateLeft",
-    "when": "!editorTextFocus && !terminalFocus"
+    "command": "workbench.action.navigateLeft"
   },
   {
     "key": "ctrl+l",
-    "command": "workbench.action.navigateRight",
-    "when": "!editorTextFocus && !terminalFocus"
-  },
-  {
-    "key": "ctrl+k",
-    "command": "workbench.action.navigateUp",
-    "when": "!editorTextFocus && terminalFocus"
-  },
-  {
-    "key": "ctrl+j",
-    "command": "workbench.action.navigateDown",
-    "when": "!editorTextFocus && terminalFocus"
-  },
-  {
-    "key": "ctrl+h",
-    "command": "workbench.action.navigateLeft",
-    "when": "!editorTextFocus && terminalFocus"
-  },
-  {
-    "key": "ctrl+l",
-    "command": "workbench.action.navigateRight",
-    "when": "!editorTextFocus && terminalFocus"
-  },
-  {
-    "key": "ctrl+k",
-    "command": "workbench.action.navigateUp",
-    "when": "editorTextFocus && !terminalFocus"
-  },
-  {
-    "key": "ctrl+j",
-    "command": "workbench.action.navigateDown",
-    "when": "editorTextFocus && !terminalFocus"
-  },
-  {
-    "key": "ctrl+h",
-    "command": "workbench.action.navigateLeft",
-    "when": "editorTextFocus && !terminalFocus"
-  },
-  {
-    "key": "ctrl+l",
-    "command": "workbench.action.navigateRight",
-    "when": "editorTextFocus && !terminalFocus"
+    "command": "workbench.action.navigateRight"
   },
   {
     "key": "shift+ctrl+6",
@@ -94,5 +50,65 @@
     "key": "g r",
     "command": "editor.action.goToReferences",
     "when": "editorTextFocus && neovim.mode === 'normal'"
+  },
+  {
+    "key": "g g",
+    "command": "cursorTop",
+    "when": "editorTextFocus && neovim.mode === 'normal'"
+  },
+  {
+    "key": "shift g",
+    "command": "cursorBottom",
+    "when": "editorTextFocus && neovim.mode === 'normal'"
+  },
+  {
+    "key": "space w",
+    "command": "workbench.action.files.save",
+    "when": "editorTextFocus && neovim.mode === 'normal'"
+  },
+  {
+    "key": "space q",
+    "command": "workbench.action.closeEditorsInGroup",
+    "when": "editorTextFocus && neovim.mode === 'normal'"
+  },
+  {
+    "key": "u",
+    "command": "undo",
+    "when": "editorTextFocus && neovim.mode === 'normal'"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "runCommands",
+    "when": "editorTextFocus && neovim.mode === 'normal' || editorTextFocus && neovim.mode === 'visual'",
+    "args": {
+      "commands": [
+        "cursorPageUp",
+        "cursorUp",
+        "scrollPageUp",
+        {
+          "command": "cursorMove",
+          "args": {
+            "to": "viewPortCenter"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "ctrl+d",
+    "command": "runCommands",
+    "when": "editorTextFocus && neovim.mode === 'normal' || editorTextFocus && neovim.mode === 'visual'",
+    "args": {
+      "commands": [
+        "cursorPageDown",
+        "scrollPageDown",
+        {
+          "command": "cursorMove",
+          "args": {
+            "to": "viewPortCenter"
+          }
+        }
+      ]
+    }
   }
 ]
