@@ -27,6 +27,8 @@ lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 
 lvim.keys.visual_mode["<leader>sw"] = "<esc><cmd>lua require('spectre').open_visual()<CR>"
 
+lvim.keys.normal_mode["gg"] = "gg^"
+
 -- Tmux terminal stuff
 -- lvim.keys.normal_mode["<C-S-d"] = ":lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>"
 -- lvim.keys.normal_mode["<C-S-m"] = ":lua require('harpoon.tmux').gotoTerminal(1)<CR>"
@@ -765,6 +767,11 @@ lvim.plugins = {
       require("todo-comments").setup()
     end,
   },
+
+  -- Remote containers
+  {
+    "jamestthompson3/nvim-remote-containers",
+  }
 
 }
 
