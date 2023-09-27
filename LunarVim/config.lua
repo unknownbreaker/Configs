@@ -75,7 +75,7 @@ local which_key_custom = {
 
   ["."] = {
     name = "+Dotfiles/Setups",
-    v = { "<cmd>edit ~/Documents/Repos/Configs/LunarVim/config.lua<cr>", "LunarVim" },
+    l = { "<cmd>edit ~/Documents/Repos/Configs/LunarVim/config.lua<cr>", "LunarVim" },
     z = { "<cmd>edit ~/Documents/Repos/Configs/Zsh/.zshrc<cr>", ".zshrc" },
     t = { "<cmd>edit ~/Documents/Repos/Configs/tmux/.tmux.conf<cr>", ".tmux.conf" },
     f = { "<cmd>edit ~/Documents/Repos/Personal/fresh-mac/homebrew/Brewfile<cr>", "Fresh Mac Brewfile" },
