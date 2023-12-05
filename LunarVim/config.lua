@@ -218,7 +218,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   "marksman", -- Markdown
   "phpactor",
   "pyright",
-  "solargraph", -- Ruby
   "sqlls",
   "tsserver",
   "vuels",

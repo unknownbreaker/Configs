@@ -3,15 +3,14 @@
 export PATH="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/mysql/bin:$PYTHON_SHARE:$PATH"
 export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247/bin:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247@global/bin:/Users/robertyang/.rvm/rubies/ruby-2.0.0-p247/bin:/Users/robertyang/.rvm/bin:/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/mysql/bin::/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
 export PATH="$HOME/.rbenv/bin:$PATH"
-export ANDROID_HOME=/Users/$USER/Library/Android/sdk
-export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+# export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+# export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=$PATH:/usr/local/share/npm/bin/
 export PATH=$PATH:/usr/local/bin/vim
 export PATH=$PATH:/usr/local/bin/rg
 export PATH=$PATH:~/.emacs.d/bin
 export PATH=$PATH:~/.deno/bin
 export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
-export PATH=$PATH:/usr/local/bin/limelight
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 export PATH=$PATH:~/Documents/Repos/Configs/Zsh/scripts
 export PATH=$PATH:~/.tmux/scripts/t
@@ -166,6 +165,8 @@ eval "$(op completion zsh)"; compdef _op op
 # ============== TMUX ==============
 export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/
 DISABLE_AUTO_TITLE=true
+
+alias tm="tmux new-session -A -s main"
 
 # ============== NEOVIM ============== 
 alias chv='change-host-value'
@@ -444,10 +445,9 @@ function go-to-kat-project() {
 }
 
 # bindkey -s ^p "z $(find ~ ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf)\n"
-
-alias yyb="nvm use && yarn && yarn build && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'yarn build' -group $(git branch --show-current)"
+alias yyb="nvm use && yarn && yarn build && notify -title $(basename $PWD) -subtitle $( git branch --show-current) -message 'yarn build' -group $( git branch --show-current)"
 alias yw="yarn watch"
-alias ddb="dcdown && dcb && dcup -d && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message 'docker-compose up -d' -sound 'default' -group $(git branch --show-current)"
+alias ddb="dcdown && dcb && dcup -d && notify -title $(basename $PWD) -subtitle $( git branch --show-current) -message 'docker-compose up -d' -sound 'default' -group $( git branch --show-current)"
 
 make_notify() {
   make $1 && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message "make $1" -sound 'default' -group $(git branch --show-current)
@@ -477,3 +477,20 @@ alias aws="aws_cli_mfa_ensure_session && $AWS_BIN"
 
 # ============ FFMPEG ============
 alias tvid='trim-vid'
+
+# ============ FLIGHTAWARE ============
+alias hopnu="ssh -A hopnu.hou.flightaware.com"
+
+# ============ DATABASE ============
+#
+# Open connection to prod asdidata.
+function asdi() { psql -U rob.yang -h asdidata-1.db.flightaware.com asdidata; }
+
+# ============ SSH =============
+# Requires https://github.com/wwalker/ssh-find-agent
+emulate ksh -c "source ~/Documents/Repos/ssh-find-agent/ssh-find-agent.sh"
+if [ -z "$SSH_AUTH_SOCK" ]
+then
+   eval $(ssh-agent) > /dev/null
+   ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
+fi
