@@ -303,7 +303,6 @@ alias k9s="k9s --readonly" # avoid making terrible mistakes on k8s
 
 # [[ -s "/Users/$USER/.rvm/scripts/rvm" ]] && source "/Users/$USER/.rvm/scripts/rvm"
 
-
 eval "$(rbenv init -)"
 
 # Initialize rbenv
@@ -480,6 +479,8 @@ alias tvid='trim-vid'
 
 # ============ FLIGHTAWARE ============
 alias hopnu="ssh -A hopnu.hou.flightaware.com"
+alias gogan="ssh -A gogan.hou.flightaware.com"
+alias nuxly="ssh -A nuxly.hou.flightaware.com"
 
 # ============ DATABASE ============
 #
