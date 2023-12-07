@@ -303,7 +303,6 @@ alias k9s="k9s --readonly" # avoid making terrible mistakes on k8s
 
 # [[ -s "/Users/$USER/.rvm/scripts/rvm" ]] && source "/Users/$USER/.rvm/scripts/rvm"
 
-
 eval "$(rbenv init -)"
 
 # Initialize rbenv
@@ -445,14 +444,14 @@ function go-to-kat-project() {
 }
 
 # bindkey -s ^p "z $(find ~ ~/Documents/Repos/Kargo/*.git/ ~/Documents/Repos/Kargo/*.git/kat-* -maxdepth 0 -type d | fzf)\n"
-alias yyb="nvm use && yarn && yarn build && notify -title $(basename $PWD) -subtitle $( git branch --show-current) -message 'yarn build' -group $( git branch --show-current)"
-alias yw="yarn watch"
-alias ddb="dcdown && dcb && dcup -d && notify -title $(basename $PWD) -subtitle $( git branch --show-current) -message 'docker-compose up -d' -sound 'default' -group $( git branch --show-current)"
+# alias yyb="nvm use && yarn && yarn build && notify -title $(basename $PWD) -subtitle $( git branch --show-current) -message 'yarn build' -group $( git branch --show-current)"
+# alias yw="yarn watch"
+# alias ddb="dcdown && dcb && dcup -d && notify -title $(basename $PWD) -subtitle $( git branch --show-current) -message 'docker-compose up -d' -sound 'default' -group $( git branch --show-current)"
 
-make_notify() {
-  make $1 && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message "make $1" -sound 'default' -group $(git branch --show-current)
-}
-alias make="make_notify"
+# make_notify() {
+#   make $1 && notify -title $(basename $PWD) -subtitle $(git branch --show-current) -message "make $1" -sound 'default' -group $(git branch --show-current)
+# }
+# alias make="make_notify"
 
 alias mail="nvim /var/mail/$(whoami)"
 
@@ -469,17 +468,19 @@ alias mail="nvim /var/mail/$(whoami)"
 # You can add that to your .bashrc or .zshrc. When you run an aws command,
 # you'll be prompted once a day for an MFA code.
 
-if alias aws >/dev/null 2>&1; then
-  unalias aws
-  AWS_BIN=$(which aws)
-fi
-alias aws="aws_cli_mfa_ensure_session && $AWS_BIN"
+# if alias aws >/dev/null 2>&1; then
+#   unalias aws
+#   AWS_BIN=$(which aws)
+# fi
+# alias aws="aws_cli_mfa_ensure_session && $AWS_BIN"
 
 # ============ FFMPEG ============
 alias tvid='trim-vid'
 
 # ============ FLIGHTAWARE ============
 alias hopnu="ssh -A hopnu.hou.flightaware.com"
+alias gogan="ssh -A gogan.hou.flightaware.com"
+alias nuxly="ssh -A nuxly.hou.flightaware.com"
 
 # ============ DATABASE ============
 #
@@ -489,6 +490,7 @@ function asdi() { psql -U rob.yang -h asdidata-1.db.flightaware.com asdidata; }
 # ============ SSH =============
 # Requires https://github.com/wwalker/ssh-find-agent
 emulate ksh -c "source ~/Documents/Repos/ssh-find-agent/ssh-find-agent.sh"
+ssh-find-agent -a
 if [ -z "$SSH_AUTH_SOCK" ]
 then
    eval $(ssh-agent) > /dev/null
