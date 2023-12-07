@@ -19,7 +19,6 @@ Session.vim
 Sublime Text 3
 tmux/.tmux/plugins/
 !tmux/.tmux/plugins/tpm
-tmux/.tmux/resurrect/
 Vim/.vim/.netrwhist
 Vim/.vim/bundle
 Vim/.vim/undo
