@@ -773,7 +773,7 @@ lvim.plugins = {
   -- Remote containers
   {
     "jamestthompson3/nvim-remote-containers",
-  }
+  },
 
 }
 
