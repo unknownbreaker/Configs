@@ -1,2 +1,7 @@
---glob
 !.git/
+--context=1
+--glob
+--max-columns-preview
+--max-columns=150
+--smart-case
+--type-add=tcl:*.rvt
