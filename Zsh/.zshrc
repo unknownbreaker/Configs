@@ -485,7 +485,7 @@ alias nuxly="ssh -A nuxly.hou.flightaware.com"
 # ============ DATABASE ============
 #
 # Open connection to prod asdidata.
-function asdi() { psql -U rob.yang -h asdidata-1.db.flightaware.com asdidata; }
+function asdi() { psql -U ryang -h asdidata-1.db.flightaware.com asdidata; }
 
 # ============ SSH =============
 # Requires https://github.com/wwalker/ssh-find-agent
