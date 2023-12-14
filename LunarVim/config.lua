@@ -800,3 +800,17 @@ end
 vim.api.nvim_create_autocmd("BufEnter", {
   command = "highlight Normal guibg=none",
 })
+vim.api.nvim_create_autocmd("BufEnter", {
+  command = "packadd cfilter",
+})
+
+-- FLIGHTAWARE
+vim.cmd [[
+set smarttab
+set noexpandtab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+autocmd BufNewFile,BufRead *.rvt set filetype=tcl
+autocmd BufWritePre *.tcl,*.rvt :%s/\s\+$//e
+]]
