@@ -45,7 +45,7 @@ export PATH=$PATH:~/Documents/Repos/Kargo/kcli-codebase
 
 alias vsc="'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'"
 alias vscode='vsc'
-alias vim="nvim"
+alias vim="lvim"
 # alias vi="nvim"
 
 # ============== OH MY ZSH ==============
