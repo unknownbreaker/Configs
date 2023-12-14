@@ -18,6 +18,9 @@ export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 export PATH=$PATH:/usr/local/bin/node-jxa
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/Documents/Repos/Configs/scripts/bin
+export PATH=$PATH:~/nvim-linux64/bin
+export PATH=$PATH:~/.nvm
+export PATH=$PATH:~/Documents/Repos/lazygit
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -36,7 +39,7 @@ alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
 
 # nvm
 export NVM_DIR=~/.nvm
-[ -s "/usr/local/homebrew/opt/nvm/nvm.sh" ] && \. "/usr/local/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # kcli
 export PATH=$PATH:~/Documents/Repos/Kargo/kcli-codebase
