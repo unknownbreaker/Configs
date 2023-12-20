@@ -6,8 +6,8 @@ local wk = require("which-key")
 
 -- Harpoon keymaps
 wk.register({
-  h = {
-    name = "harpoon",
+  ["<leader>h"] = {
+    name = "+harpoon",
     a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "add file" },
     r = { "<cmd>lua require('harpoon.mark').rm_file()<cr>", "remove file" },
     m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "harpoon menu" },
@@ -17,8 +17,8 @@ wk.register({
     ["2"] = { "<cmd> lua require('harpoon.ui').nav_file(2)<cr>", "file 2" },
     ["3"] = { "<cmd> lua require('harpoon.ui').nav_file(3)<cr>", "file 3" },
   },
-  H = {
-    name = "help/debug/conceal",
+  ["<leader>H"] = {
+    name = "+help/debug/conceal",
     c = {
       name = "conceal",
       h = { ":set conceallevel=1<cr>", "hide/conceal" },

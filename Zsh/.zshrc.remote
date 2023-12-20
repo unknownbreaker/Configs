@@ -243,6 +243,21 @@ alias gconf='e ~/.gitconfig'
 # Lazy Git
 alias lzg='lazygit'
 
+# ========= GITHUB ==========
+function genssh {
+  echo "Input email address:"
+  read email
+  while [ "$email" = "" ]
+  do
+    echo "Input email address:"
+    read email
+  done
+    
+  cd $HOME/.ssh
+  ssh-keygen -t ed25519 -C $email
+  cd -
+}
+
 # ========= Postgres =========
 
 alias psql='psql -h localhost'
@@ -483,11 +498,16 @@ alias tvid='trim-vid'
 
 # ============ FLIGHTAWARE ============
 alias hopnu="ssh -A hopnu.hou.flightaware.com"
+alias gogan="ssh -A gogan.hou.flightaware.com"
+alias nuxly="ssh -A nuxly.hou.flightaware.com"
 
 # ============ DATABASE ============
-#
 # Open connection to prod asdidata.
-function asdi() { psql -U ryang -h asdidata-1.db.flightaware.com asdidata; }
+alias asdidata="psql -U ryang -h asdidata-1.db.flightaware.com asdidata"
+
+# Open connection to dev asdidata.
+alias musiq="psql ryang -d asdidata -h musiq"
+alias chken="psql ryang -d asdidata -h chken"
 
 # ============ SSH =============
 # Requires https://github.com/wwalker/ssh-find-agent
