@@ -3,10 +3,7 @@ return {
 	-- Deno plugin
 	{
 		"sigmaSd/deno-nvim",
-		dependencies = {
-			"neovim/nvim-lspconfig",
-			"mfussenegger/nvim-dap",
-		},
+		dependencies = { "neovim/nvim-lspconfig" },
 	},
 
 	-- Lua plugin
