@@ -1,5 +1,4 @@
 return {
-
   -- navigate between neovim and tmux panes
   {
     'alexghergh/nvim-tmux-navigation',
@@ -13,6 +12,5 @@ return {
       { "<C-l>", "<cmd>NvimTmuxNavigateRight<cr>", desc = "Move right Tmux pane" },
     },
   },
-
 }
 

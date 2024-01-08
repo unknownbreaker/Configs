@@ -212,39 +212,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		opts = {
-			ensure_installed = {
-				-- Formatters
-				"black",
-				"isort",
-				"fish_indent",
-				"flake8",
-				"goimports",
-				"gofumt",
-				"jq",
-				"prettierd",
-				"shellcheck",
-				"shfmt",
-				"sql-formatter",
-				"sqlfluff",
-				"stylua",
-
-				-- LSPs
-				"css-lsp",
-				"docker-compose-language-service",
-				"dockerfile-language-server",
-				"emmet-ls",
-				"gopls",
-				"graphql-language-service-cli",
-				"html-lsp",
-				"json-lsp",
-				"ruff-lsp", -- python
-				"rust-analyzer",
-				"sqlls",
-				"tailwindcss-language-server",
-				"typescript-language-server",
-				"vue-language-server",
-				"yaml-language-server",
-			},
+			ensure_installed = {},
 		},
 	},
 

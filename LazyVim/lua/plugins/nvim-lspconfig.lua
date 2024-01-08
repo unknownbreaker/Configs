@@ -1,0 +1,25 @@
+return {
+  -- Add more LSPs
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        cssls = {},
+        docker_compose_language_service = {},
+        dockerls = {},
+        emmet_ls = {},
+        gopls = {},
+        graphql = {},
+        html = {},
+        jsonls = {},
+        ruff_lsp = {},
+        rust_analyzer = {},
+        sqlls = {},
+        tailwindcss = {},
+        tsserver = {},
+        volar = {},
+        yamlls = {},
+      },
+    },
+  },
+}

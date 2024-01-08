@@ -1,18 +1,5 @@
 return {
-
-	-- Comment string context
-	{
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		event = "BufRead",
-		opts = function()
-			require("ts_context_commentstring").setup({
-				enable_autocmd = false,
-			})
-		end,
-	},
-
-	-- Harpoon
-	{
+  {
 		"ThePrimeagen/harpoon",
 		-- keys = {
 		--   { "<leader>ha", "<cmd>require('harpoon.mark').add_file()<cr>", "Mark file with Harpoon", },
