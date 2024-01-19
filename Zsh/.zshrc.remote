@@ -21,6 +21,7 @@ export PATH=$PATH:~/Documents/Repos/Configs/scripts/bin
 export PATH=$PATH:~/nvim-linux64/bin
 export PATH=$PATH:~/.nvm
 export PATH=$PATH:~/Documents/Repos/lazygit
+export PATH=$PATH:~/local/bat
 
 LD_LIBRARY_PATH=$HOME/local/lib
 MANPATH=$HOME/local/share/man
@@ -497,6 +498,8 @@ alias mail="nvim /var/mail/$(whoami)"
 alias tvid='trim-vid'
 
 # ============ FLIGHTAWARE ============
+export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+
 alias hopnu="ssh -A hopnu.hou.flightaware.com"
 alias gogan="ssh -A gogan.hou.flightaware.com"
 alias nuxly="ssh -A nuxly.hou.flightaware.com"
