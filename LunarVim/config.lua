@@ -112,22 +112,22 @@ local which_key_custom = {
     p = { "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", "Search current word in current file" }
   },
 
-  m = {
-    name = "+Marks",
-    a = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Add" },
-    e = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Quick Menu" },
-    j = { "<cmd>lua require('harpoon.ui').nav_prev()<CR>", "Previous" },
-    k = { "<cmd>lua require('harpoon.ui').nav_next()<CR>", "Next" },
-    ["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", "File 1" },
-    ["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", "File 2" },
-    ["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", "File 3" },
-    ["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", "File 4" },
-    ["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<CR>", "File 5" },
-    ["6"] = { "<cmd>lua require('harpoon.ui').nav_file(6)<CR>", "File 6" },
-    ["7"] = { "<cmd>lua require('harpoon.ui').nav_file(7)<CR>", "File 7" },
-    ["8"] = { "<cmd>lua require('harpoon.ui').nav_file(8)<CR>", "File 8" },
-    ["9"] = { "<cmd>lua require('harpoon.ui').nav_file(9)<CR>", "File 9" },
-  },
+  -- m = {
+  --   name = "+Marks",
+  --   a = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Add" },
+  --   e = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Quick Menu" },
+  --   j = { "<cmd>lua require('harpoon.ui').nav_prev()<CR>", "Previous" },
+  --   k = { "<cmd>lua require('harpoon.ui').nav_next()<CR>", "Next" },
+  --   ["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", "File 1" },
+  --   ["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", "File 2" },
+  --   ["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", "File 3" },
+  --   ["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", "File 4" },
+  --   ["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<CR>", "File 5" },
+  --   ["6"] = { "<cmd>lua require('harpoon.ui').nav_file(6)<CR>", "File 6" },
+  --   ["7"] = { "<cmd>lua require('harpoon.ui').nav_file(7)<CR>", "File 7" },
+  --   ["8"] = { "<cmd>lua require('harpoon.ui').nav_file(8)<CR>", "File 8" },
+  --   ["9"] = { "<cmd>lua require('harpoon.ui').nav_file(9)<CR>", "File 9" },
+  -- },
 
 -- Do not overwrite "b"
   b = {
@@ -147,7 +147,7 @@ lvim.builtin.which_key.mappings["."] = which_key_custom["."]
 lvim.builtin.which_key.mappings["P"] = which_key_custom["P"]
 lvim.builtin.which_key.mappings["S"] = which_key_custom["S"]
 lvim.builtin.which_key.mappings["e"] = which_key_custom["e"]
-lvim.builtin.which_key.mappings["m"] = which_key_custom["m"]
+-- lvim.builtin.which_key.mappings["m"] = which_key_custom["m"]
 lvim.builtin.which_key.mappings["p"] = which_key_custom["p"]
 lvim.builtin.which_key.mappings["r"] = which_key_custom["r"]
 lvim.builtin.which_key.mappings["t"] = which_key_custom["t"]
@@ -208,7 +208,7 @@ lvim.builtin.treesitter.matchup.enable = true
 -- -- make sure server will always be installed even if the server is in skipped_servers list
 lvim.lsp.installer.setup.ensure_installed = {
   "angularls",
-  "bashls",
+  -- "bashls",
   "cssls",
   "dockerls",
   "emmet_ls",
@@ -218,7 +218,6 @@ lvim.lsp.installer.setup.ensure_installed = {
   "marksman", -- Markdown
   "phpactor",
   "pyright",
-  "solargraph", -- Ruby
   "sqlls",
   "tsserver",
   "vuels",
@@ -394,13 +393,13 @@ lvim.plugins = {
   },
 
   -- Navigate and highlight matching words
-  {
-    "andymass/vim-matchup",
-    event = "CursorMoved",
-    config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end,
-  },
+  -- {
+  --   "andymass/vim-matchup",
+  --   event = "CursorMoved",
+  --   config = function()
+  --     vim.g.matchup_matchparen_offscreen = { method = "popup" }
+  --   end,
+  -- },
 
   -- Interactive scratchpad
   {
@@ -568,9 +567,9 @@ lvim.plugins = {
   },
 
   -- Harpoon
-  {
-    "ThePrimeagen/harpoon",
-  },
+  -- {
+  --   "ThePrimeagen/harpoon",
+  -- },
 
   -- Symbols outline
   {
@@ -592,6 +591,11 @@ lvim.plugins = {
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     event = "BufRead",
+	config = function()
+      require("ts_context_commentstring").setup({
+        enable_autocmd = false,
+      })
+    end,
   },
 
   -- Dev Icons
@@ -774,15 +778,15 @@ lvim.plugins = {
   -- Remote containers
   {
     "jamestthompson3/nvim-remote-containers",
-  }
+  },
 
 }
 
 -- Plugin Extensions Setup
 -- Telescope extensions
-lvim.builtin.telescope.on_config_done = function (telescope)
-  pcall(telescope.load_extension, "harpoon")
-end
+-- lvim.builtin.telescope.on_config_done = function (telescope)
+--   pcall(telescope.load_extension, "harpoon")
+-- end
 
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -801,3 +805,17 @@ end
 vim.api.nvim_create_autocmd("BufEnter", {
   command = "highlight Normal guibg=none",
 })
+vim.api.nvim_create_autocmd("BufEnter", {
+  command = "packadd cfilter",
+})
+
+-- FLIGHTAWARE
+vim.cmd [[
+set smarttab
+set noexpandtab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+autocmd BufNewFile,BufRead *.rvt set filetype=tcl
+autocmd BufWritePre *.tcl,*.rvt :%s/\s\+$//e
+]]

@@ -1,3 +1,7 @@
 [submodule "KeyboardMaestro/jxa/standup-checker"]
   path = KeyboardMaestro/jxa/standup-checker
 	url = git@github.com:unknownbreaker/standup-checker
+
+[submodule "tmux/.tmux/plugins/tpm"]
+  path = tmux/.tmux/plugins/tpm
+  url = https://github.com/tmux-plugins/tpm.git

@@ -4,7 +4,9 @@
 .session.vim
 .luarc.json
 Karabiner/automatic_backups
+LunarVim/lazy-lock.json
 LunarVim/plugin
+LunarVim/session
 Neovim/.config/coc/extensions
 Neovim/.config/nvim/.netrwhist
 Neovim/.config/nvim/.session.vim
@@ -16,9 +18,8 @@ Neovim/.config/nvim/swap
 Neovim/.config/nvim/undo
 Session.vim
 Sublime Text 3
-Tmux/.tmux/plugins/
-Tmux/.tmux/resurrect/
-Tmux/.tmux/resurrect/last
+tmux/.tmux/plugins/**
+!tmux/.tmux/plugins/tpm
 Vim/.vim/.netrwhist
 Vim/.vim/bundle
 Vim/.vim/undo
