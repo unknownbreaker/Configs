@@ -19,6 +19,7 @@ export PATH=$PATH:/usr/local/bin/node-jxa
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/Documents/Repos/Configs/scripts/bin
 export PATH=$PATH:~/nvim-linux64/bin
+export PATH=$PATH:~/local/nvim-linux64/bin
 export PATH=$PATH:~/.nvm
 export PATH=$PATH:~/Documents/Repos/lazygit
 export PATH=$PATH:~/local/bat
