@@ -509,7 +509,7 @@ alias chken="psql ryang -d asdidata -h chken"
 
 # ============ SSH =============
 # Requires https://github.com/wwalker/ssh-find-agent
-emulate ksh -c "source ~/Documents/Repos/ssh-find-agent/ssh-find-agent.sh"
+emulate ksh -c "source ~/Documents/Repos/Personal/ssh-find-agent/ssh-find-agent.sh"
 ssh-find-agent -a
 if [ -z "$SSH_AUTH_SOCK" ]
 then
