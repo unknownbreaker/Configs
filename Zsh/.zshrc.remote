@@ -44,10 +44,9 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export KUBE_EDITOR="open -a \"nvim\" --wait"
 
 # OPENSSH
-export PATH=$HOME/local/openssl/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/local/openssl/lib64
-# export LC_ALL="en_US.UTF-8"
-export LDFLAGS="-L /home/rob.yang/local/openssl/lib64 -Wl,-rpath,/home/rob.yang/local/openssl/lib64"
+# export PATH=$HOME/local/openssl/bin:$PATH
+# export LD_LIBRARY_PATH=$HOME/local/openssl/lib64
+# export LDFLAGS="-L /home/rob.yang/local/openssl/lib64 -Wl,-rpath,/home/rob.yang/local/openssl/lib64"
 
 # brew
 alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"

@@ -119,8 +119,5 @@ rm -rf ~/.config/nvim/.git
 LazyGit
 
 ```console
-git clone https://github.com/jesseduffield/lazygit.git ~/lazygit
-cd ~/lazygit
-go install
-cd .. && rm -rf lazygit
+go install github.com/jesseduffield/lazygit@latest
 ```
