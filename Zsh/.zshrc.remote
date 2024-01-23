@@ -19,9 +19,11 @@ export PATH=$PATH:/usr/local/bin/node-jxa
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/Documents/Repos/Configs/scripts/bin
 export PATH=$PATH:~/nvim-linux64/bin
+export PATH=$PATH:~/local/nvim-linux64/bin
 export PATH=$PATH:~/.nvm
 export PATH=$PATH:~/Documents/Repos/lazygit
 export PATH=$PATH:~/local/bat
+export PATH=$PATH:~/local/go/bin
 
 LD_LIBRARY_PATH=$HOME/local/lib
 MANPATH=$HOME/local/share/man
@@ -40,6 +42,11 @@ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 export OSA_LIBRARY_PATH=~/Library/Script\ Library
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export KUBE_EDITOR="open -a \"nvim\" --wait"
+
+# OPENSSH
+# export PATH=$HOME/local/openssl/bin:$PATH
+# export LD_LIBRARY_PATH=$HOME/local/openssl/lib64
+# export LDFLAGS="-L /home/rob.yang/local/openssl/lib64 -Wl,-rpath,/home/rob.yang/local/openssl/lib64"
 
 # brew
 alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
