@@ -1,13 +1,13 @@
 return {
-  "jay-babu/mason-null-ls.nvim",
-  event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    "williamboman/mason.nvim",
-    "nvimtools/none-ls.nvim",
-  },
-  config = function()
-    require("mason-null-ls").setup({
-      ensure_installed = {
+	"jay-babu/mason-null-ls.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"williamboman/mason.nvim",
+		"nvimtools/none-ls.nvim",
+	},
+	config = function()
+		require("mason-null-ls").setup({
+			ensure_installed = {
 				-- Formatters
 				-- "black", -- Python
 				"isort", -- Python
@@ -21,8 +21,8 @@ return {
 				"sql-formatter",
 				"stylua",
 
-        -- Linters
-        -- "eslint_d",
+				-- Linters
+				"eslint_d",
 				"shellcheck",
 				"sqlfluff",
 
@@ -42,9 +42,9 @@ return {
 				-- "typescript-language-server",
 				"vue-language-server",
 				-- "yaml-language-server",
-      },
-      automatic_installation = false,
-      handlers = {},
-    })
-  end,
+			},
+			automatic_installation = false,
+			handlers = {},
+		})
+	end,
 }
