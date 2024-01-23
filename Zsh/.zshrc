@@ -29,7 +29,7 @@ export PATH="/opt/homebrew/bin/:$PATH"
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 export OSA_LIBRARY_PATH=~/Library/Script\ Library
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
-export KUBE_EDITOR="open -a \"nvim\" --wait"
+export KUBE_EDITOR="nvim"
 
 # brew
 alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
@@ -496,6 +496,8 @@ alias tvid='trim-vid'
 alias hopnu="ssh -A hopnu.hou.flightaware.com"
 alias gogan="ssh -A gogan.hou.flightaware.com"
 alias nuxly="ssh -A nuxly.hou.flightaware.com"
+alias campa="ssh -A campa.hou.flightaware.com"
+alias dev="ssh -A robyang.devenv.d.hou.flightaware.com"
 
 # ============ DATABASE ============
 # Open connection to prod asdidata.
@@ -514,3 +516,7 @@ then
    eval $(ssh-agent) > /dev/null
    ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
 fi
+
+# ============= LOCAL DEVELOPMENT ================
+# Run reverse proxy
+alias rproxy="local-ssl-proxy --key ~/.ssl/_wildcard.flightaware.com-key.pem --cert ~/.ssl/_wildcard.flightaware.com.pem --source 443 --target 3000"
