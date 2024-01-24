@@ -131,3 +131,9 @@ tar xf lazygit.tar.gz lazygit
 install lazygit ~/local/bin
 rm lazygit.tar.gz
 ```
+
+### Misc
+
+```console
+git clone https://github.com/wwalker/ssh-find-agent.git ~/Documents/Repos/ssh-find-agent
+```
