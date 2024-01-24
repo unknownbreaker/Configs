@@ -8,7 +8,7 @@ NVM
 
 ```console
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-nvm install latest
+nvm install --lts
 ```
 
 Golang
