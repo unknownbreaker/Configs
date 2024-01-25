@@ -47,14 +47,11 @@ OpenSSL
 wget https://www.openssl.org/source/openssl-3.2.0.tar.gz && \
 tar zxvf openssl-3.2.0.tar.gz && \
 cd openssl-3.2.0 && \
-USERNAME=XXX \
+USERNAME=$(whoami) \
 ./config --prefix=/home/$USERNAME/local/openssl --openssldir=/home/$USERNAME/local/openssl no-ssl2
-
-make
-
-make test
-
-make install
+make && \
+make test && \
+make install && \
 ```
 
 ```console
