@@ -20,6 +20,7 @@ Session.vim
 Sublime Text 3
 tmux/.tmux/notify/**
 tmux/.tmux/plugins/**
+tmux/.tmux/resurrect/**
 !tmux/.tmux/plugins/tpm
 Vim/.vim/.netrwhist
 Vim/.vim/bundle
