@@ -5,10 +5,7 @@
 Setup new ~/local/bin folder
 
 ```console
-cd ~ && \
-mkdir local && \
-mkdir bin && \
-cd ~
+mkdir -p ~/local/bin && cd ~
 ```
 
 ### Runtime Environments
