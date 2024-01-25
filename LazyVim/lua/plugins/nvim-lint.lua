@@ -12,6 +12,7 @@ return {
 				javascriptreact = { "eslint_d" },
 				sh = { "shellcheck" },
 				sql = { "sqlfluff" },
+				tcl = { "tcl" },
 				typescript = { "eslint_d" },
 				typescriptreact = { "eslint_d" },
 				vue = { "eslint_d" },
