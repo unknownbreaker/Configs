@@ -22,7 +22,6 @@ return {
         "stylua",
 
         -- Linters
-        "eslint_d",
         "shellcheck",
         "sqlfluff",
 
@@ -31,6 +30,7 @@ return {
         "docker-compose-language-service",
         "dockerfile-language-server",
         "emmet-ls",
+        -- "eslint-lsp",
         "gopls",
         "graphql-language-service-cli",
         "html-lsp",
