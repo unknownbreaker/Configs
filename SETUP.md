@@ -44,18 +44,19 @@ OpenSSL
 wget https://www.openssl.org/source/openssl-3.2.0.tar.gz && \
 tar zxvf openssl-3.2.0.tar.gz && \
 cd openssl-3.2.0 && \
-USERNAME=$(whoami) \
-./config --prefix=/home/$USERNAME/local/openssl --openssldir=/home/$USERNAME/local/openssl no-ssl2
+./config --prefix=$HOME/local/openssl --openssldir=$HOME/local/openssl no-ssl2
 make && \
 make test && \
-make install
+make install && \
+cd $HOME && \
+rm openssl-3.2.0.tar.gz && \
+rm -rf openssl-3.2.0
 ```
 
 ```console
 openssl version -d
 
-CONFIGURE_OPTS="-with-openssl=/home/$USERNAME/local/openssl" \
-LDFLAGS="-Wl,-rpath,/home/$USERNAME/local/openssl/lib" \
+CONFIGURE_OPTS="-with-openssl=$HOME/local/openssl" \
 pyenv install -v 3
 ```
 
