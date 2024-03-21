@@ -55,7 +55,8 @@ make install
 openssl version -d
 
 CONFIGURE_OPTS="-with-openssl=/home/$USERNAME/local/openssl" \
-pyenv install 3
+LDFLAGS="-Wl,-rpath,/home/$USERNAME/local/openssl/lib" \
+pyenv install -v 3
 ```
 
 Ruby
