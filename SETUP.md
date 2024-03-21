@@ -48,7 +48,7 @@ USERNAME=$(whoami) \
 ./config --prefix=/home/$USERNAME/local/openssl --openssldir=/home/$USERNAME/local/openssl no-ssl2
 make && \
 make test && \
-make install && \
+make install
 ```
 
 ```console
