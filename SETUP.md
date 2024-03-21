@@ -146,6 +146,14 @@ install lazygit ~/local/bin && \
 rm lazygit.tar.gz
 ```
 
+Nagelfar
+
+```console
+curl -Lo nagelfar133.tar.gz https://sourceforge.net/projects/nagelfar/files/Rel_133/nagelfar133.tar.gz/download && \
+tar -C ~/local -xzf nagelfar133.tar.gz && \
+rm nagelfar133.tar.gz
+```
+
 ### Misc
 
 ssh-find-agent
