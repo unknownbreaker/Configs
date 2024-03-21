@@ -54,7 +54,7 @@ make install && \
 ```console
 openssl version -d
 
-CONFIGURE_OPTS="-with-openssl=<openssl install prefix>" \
+CONFIGURE_OPTS="-with-openssl=/home/$USERNAME/local/openssl" \
 pyenv install 3
 ```
 
