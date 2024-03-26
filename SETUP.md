@@ -44,18 +44,20 @@ OpenSSL
 wget https://www.openssl.org/source/openssl-3.2.0.tar.gz && \
 tar zxvf openssl-3.2.0.tar.gz && \
 cd openssl-3.2.0 && \
-USERNAME=$(whoami) \
-./config --prefix=/home/$USERNAME/local/openssl --openssldir=/home/$USERNAME/local/openssl no-ssl2
+./config --prefix=$HOME/local/openssl --openssldir=$HOME/local/openssl no-ssl2
 make && \
 make test && \
 make install && \
+cd $HOME && \
+rm openssl-3.2.0.tar.gz && \
+rm -rf openssl-3.2.0
 ```
 
 ```console
 openssl version -d
 
-CONFIGURE_OPTS="-with-openssl=<openssl install prefix>" \
-pyenv install 3
+CONFIGURE_OPTS="-with-openssl=$HOME/local/openssl" \
+pyenv install -v 3
 ```
 
 Ruby
@@ -144,6 +146,14 @@ curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/lates
 tar xf lazygit.tar.gz lazygit && \
 install lazygit ~/local/bin && \
 rm lazygit.tar.gz
+```
+
+Nagelfar
+
+```console
+curl -Lo nagelfar133.tar.gz https://sourceforge.net/projects/nagelfar/files/Rel_133/nagelfar133.tar.gz/download && \
+tar -C ~/local -xzf nagelfar133.tar.gz && \
+rm nagelfar133.tar.gz
 ```
 
 ### Misc
