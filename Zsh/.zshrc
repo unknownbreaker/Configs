@@ -520,3 +520,8 @@ fi
 # ============= LOCAL DEVELOPMENT ================
 # Run reverse proxy
 alias rproxy="local-ssl-proxy --key ~/.ssl/_wildcard.flightaware.com-key.pem --cert ~/.ssl/_wildcard.flightaware.com.pem --source 443 --target 3000"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
