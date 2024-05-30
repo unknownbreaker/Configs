@@ -16,18 +16,18 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local function is_flightaware_repo()
-      path = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
-      return string.find(path, "fa_web")
+      local path = vim.api.nvim_buf_get_name(0)
+      return string.find(path, "fa_web") or string.find(path, "FlightAware")
     end
 
     if is_flightaware_repo() then
-      vim.cmd [[
+      vim.cmd([[
       set smarttab
       set noexpandtab
       set shiftwidth=4
       set tabstop=4
-      set softtabstop=4
-      ]]
+      set softtabstop=2
+      ]])
     end
   end,
 })
@@ -40,9 +40,8 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.tcl", "*.rvt" },
   callback = function()
-    vim.cmd [[
+    vim.cmd([[
     %s/\s\+$//e
-    ]]
+    ]])
   end,
 })
-

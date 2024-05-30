@@ -18,6 +18,7 @@ Neovim/.config/nvim/swap
 Neovim/.config/nvim/undo
 Session.vim
 Sublime Text 3
+tmux/.tmux/notify/**
 tmux/.tmux/plugins/**
 tmux/.tmux/resurrect/**
 !tmux/.tmux/plugins/tpm
