@@ -16,7 +16,7 @@ return {
         "goimports",
         "gofumpt",
         "jq",
-        "prettier",
+        -- "prettier",
         "shfmt",
         "sql-formatter",
         "stylua",
