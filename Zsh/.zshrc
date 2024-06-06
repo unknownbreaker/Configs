@@ -503,6 +503,9 @@ alias dev="ssh -A robyang.devenv.d.hou.flightaware.com"
 # Open connection to prod asdidata.
 alias asdidata="psql -U ryang -h asdidata-1.db.flightaware.com asdidata"
 
+# Open connection to prod global_beacon.
+alias akeem="psql -U ryang -d global_beacon -h akeem"
+
 # Open connection to dev asdidata.
 alias musiq="psql ryang -d asdidata -h musiq"
 alias chken="psql ryang -d asdidata -h chken"
