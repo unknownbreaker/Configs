@@ -9,14 +9,12 @@ return {
     require("mason-null-ls").setup({
       ensure_installed = {
         -- Formatters
-        "black", -- Python
         "isort", -- Python
         "fish_indent",
         "flake8",
         "goimports",
         "gofumpt",
         "jq",
-        -- "prettier",
         "shfmt",
         "sql-formatter",
         "stylua",
@@ -27,21 +25,9 @@ return {
 
         -- LSPs
         "css-lsp",
-        "docker-compose-language-service",
-        "dockerfile-language-server",
         "emmet-ls",
-        -- "eslint-lsp",
-        "gopls",
         "graphql-language-service-cli",
         "html-lsp",
-        "json-lsp",
-        "ruff-lsp", -- python
-        "rust-analyzer",
-        "sqlls",
-        "tailwindcss-language-server",
-        -- "typescript-language-server",
-        "vue-language-server",
-        "yaml-language-server",
       },
       automatic_installation = false,
       handlers = {},
