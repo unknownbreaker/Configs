@@ -151,7 +151,7 @@ rm lazygit.tar.gz
 Nagelfar
 
 ```console
-curl -Lo nagelfar133.tar.gz https://sourceforge.net/projects/nagelfar/files/Rel_133/nagelfar133.tar.gz/download && \
+curl -Lo nagelfar133.tar.gz https://pilotfiber.dl.sourceforge.net/project/nagelfar/Rel_133/nagelfar133.tar.gz && \
 tar -C ~/local -xzf nagelfar133.tar.gz && \
 rm nagelfar133.tar.gz
 ```
