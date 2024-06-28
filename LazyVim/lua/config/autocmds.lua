@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local function is_flightaware_repo()
       local path = vim.api.nvim_buf_get_name(0)
-      return string.find(path, "fa_web") or string.find(path, "FlightAware")
+      return string.find(path, "FlightAware")
     end
 
     if is_flightaware_repo() then
