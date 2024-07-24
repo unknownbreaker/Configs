@@ -499,6 +499,8 @@ alias nuxly="ssh -A nuxly.hou.flightaware.com"
 alias campa="ssh -A campa.hou.flightaware.com"
 alias dev="ssh -A robyang.devenv.d.hou.flightaware.com"
 
+alias update="gco main && ggpull && npm i && gfa"
+
 # ============ DATABASE ============
 # Open connection to prod asdidata.
 alias asdidata="psql -U ryang -h asdidata-1.db.flightaware.com asdidata"
