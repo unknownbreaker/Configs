@@ -25,6 +25,9 @@ return {
               k = false,
               j = false,
             },
+            ["<Esc>"] = {
+              ["<Esc>"] = "<C-\\><C-n>",
+            },
           },
         },
       })
