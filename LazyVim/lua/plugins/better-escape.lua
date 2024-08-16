@@ -20,6 +20,12 @@ return {
               j = false,
             },
           },
+          t = {
+            j = {
+              k = false,
+              j = false,
+            },
+          },
         },
       })
     end,
