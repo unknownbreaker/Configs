@@ -313,6 +313,7 @@ alias lzd='lazydocker'
 
 alias kbv='kubernetes-verify-pod'
 alias k9s="k9s --readonly" # avoid making terrible mistakes on k8s
+alias pr="kubectl get deployments --context=hou-dev --namespace=web-pr"
 
 # ========= RUBY =========
 
