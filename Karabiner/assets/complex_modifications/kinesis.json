@@ -22,8 +22,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -51,8 +55,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -81,8 +89,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -111,8 +123,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -140,8 +156,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -169,8 +189,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -198,8 +222,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -227,8 +255,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -256,8 +288,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -285,8 +321,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
@@ -314,8 +354,12 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 10730,
-                  "product_id": 258
+                  "product_id": 258,
+                  "vendor_id": 10730
+                },
+                {
+                  "product_id": 866,
+                  "vendor_id": 10730
                 },
                 {
                   "product_id": 24926,
