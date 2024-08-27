@@ -118,7 +118,6 @@ plugins=(
   kubectl
   minikube
   macos
-  ripgrep
   safe-paste
   taskwarrior
   tmux
@@ -312,7 +311,7 @@ alias lzd='lazydocker'
 # ========= k8s =========
 
 alias kbv='kubernetes-verify-pod'
-alias k9s="k9s --readonly" # avoid making terrible mistakes on k8s
+# alias k9s="k9s --readonly" # avoid making terrible mistakes on k8s
 alias pr="kubectl get deployments --context=hou-dev --namespace=web-pr"
 
 # ========= RUBY =========
@@ -515,7 +514,7 @@ alias chken="psql ryang -d asdidata -h chken"
 
 # ============ SSH =============
 # Requires https://github.com/wwalker/ssh-find-agent
-emulate ksh -c "source ~/Documents/Repos/Personal/ssh-find-agent/ssh-find-agent.sh"
+emulate ksh -c "source ~/Documents/Repos/ssh-find-agent/ssh-find-agent.sh"
 ssh-find-agent -a
 if [ -z "$SSH_AUTH_SOCK" ]
 then
