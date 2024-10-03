@@ -1,11 +1,18 @@
-module.exports = {
-  handlers: [
-    // Browserosaurus
-    {
-      match: () => finicky.getKeys().option,
-      browser: "Browserosaurus",
-    },
+const isUrlDefenseRedirect = (string) => string.includes("urldefense.com");
+const zoomMatch =
+  (custom) =>
+  ({ url }) => {
+    const DOMAINS = ["zoomgov.com", "zoom.us"];
+    const checkDomain = (domain) =>
+      isUrlDefenseRedirect(url.host)
+        ? url.pathname.includes(domain + custom)
+        : url.host.includes(domain) && url.pathname.includes(custom);
+    return DOMAINS.some(checkDomain);
+  };
 
+module.exports = {
+  defaultBrowser: "Browserosaurus",
+  handlers: [
     // Chrome
     {
       match: ({ url }) =>
@@ -34,39 +41,35 @@ module.exports = {
 
     // Zoom
     {
-      match: finicky.matchHostnames([
-        "flightaware.zoom.us",
-        "collins.zoomgov.com",
-        "www.zoomgov.com",
-      ]),
+      match: zoomMatch("/join"),
       browser: "us.zoom.xos",
     },
   ],
   rewrite: [
     {
-      match: ({ urlString, url }) =>
-        /flightaware\.zoom\.us|collins\.zoomgov\.com/.test(urlString) &&
-        url.pathname.includes("/j/"),
-      url({ url }) {
+      match: zoomMatch("/j/"),
+      url: ({ url }) => {
         let pass = "";
         try {
           pass = url.search.match(/pwd=(\w*)/)[1];
         } catch {}
         const conf = url.pathname.match(/\/j\/(\d+)/)[1];
 
-        if (url.host.includes("urldefense.com")) {
+        if (isUrlDefenseRedirect(url.host)) {
           const pathname = url.pathname.replace(
             /(^\/v3\/__)https:\/\/(.+)\/j\/\d+/,
             "$1zoommtg://$2/join",
           );
 
           return {
+            ...url,
             pathname,
             search: `confno=${conf}&${url.search}`,
           };
         }
 
         return {
+          ...url,
           search: `confno=${conf}&pwd=${pass}`,
           pathname: "/join",
           protocol: "zoommtg",
