@@ -41,7 +41,7 @@ module.exports = {
 
     // Zoom
     {
-      match: zoomMatch("/join"),
+      match: zoomMatch("/join"), // after rewrite
       browser: "us.zoom.xos",
     },
   ],
