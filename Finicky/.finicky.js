@@ -29,8 +29,16 @@ module.exports = {
 
     // Firefox
     {
-      match: ["https://www.reddit.com/*"],
-      browser: "Firefox",
+      match: finicky.matchHostnames([
+        /(www\.)?amazon\.com/,
+        /(www\.)?disneyplus\.com/,
+        /(www\.)?github\.com/,
+        /(www\.)?lazyvim\.org/,
+        /(www\.)?netflix\.com/,
+        /(www\.)?reddit\.com/,
+        /(www\.)?venmo\.com/,
+      ]),
+      browser: "Firefox Developer Edition",
     },
 
     // Microsft Teams
