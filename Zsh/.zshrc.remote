@@ -151,7 +151,6 @@ plugins=(
   kubectl
   minikube
   macos
-  ripgrep
   safe-paste
   taskwarrior
   tmux
