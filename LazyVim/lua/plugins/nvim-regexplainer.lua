@@ -1,0 +1,5 @@
+return {
+  {
+    "bennypowers/nvim-regexplainer",
+  },
+}
