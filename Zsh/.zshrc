@@ -105,7 +105,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   aliases
-  autojump
+  # autojump
   aws
   colored-man-pages
   dirhistory
@@ -530,3 +530,6 @@ alias rproxy="local-ssl-proxy --key ~/.ssl/_wildcard.flightaware.com-key.pem --c
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# ============== MUST BE AT END OF FILE ===================
+eval "$(zoxide init zsh)"
