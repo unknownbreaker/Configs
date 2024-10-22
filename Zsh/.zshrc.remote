@@ -526,7 +526,7 @@ alias hopnu="ssh -A hopnu.hou.flightaware.com"
 alias gogan="ssh -A gogan.hou.flightaware.com"
 alias nuxly="ssh -A nuxly.hou.flightaware.com"
 
-alias update="gco main && ggpull && npm i && gfa"
+alias update="gco main && ggpull && npm i && gfa && git prune remote origin"
 
 # ============ DATABASE ============
 # Open connection to prod asdidata.
