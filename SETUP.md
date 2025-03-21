@@ -127,7 +127,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```console
 wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz && \
 tar zxvf nvim-linux-x86_64.tar.gz && \
-mv nvim-linux64 ~/local
+mv nvim-linux-x86_64 ~/local
 ```
 
 ### LazyVim
