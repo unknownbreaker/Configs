@@ -109,7 +109,7 @@ autojump
 ```console
 git clone https://github.com/wting/autojump.git ~/autojump && \
 cd ~/autojump && \
-./install.py && \
+./install.py -f && \
 cd ~ && \
 rm -rf ~/autojump
 ```
