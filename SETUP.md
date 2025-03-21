@@ -128,7 +128,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir -p ~/local/bin
 cd ~/local/bin
 wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.appimage && \
-chmod u+x nvim-linux-arm64.appimage && \
+chmod u+x nvim-linux-x86_64.appimage && \
 cd -
 ```
 
