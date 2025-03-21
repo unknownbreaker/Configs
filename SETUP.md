@@ -125,11 +125,12 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ### Neovim
 
 ```console
-mkdir -p ~/local/bin
-cd ~/local/bin
-wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.appimage && \
-chmod u+x nvim-linux-x86_64.appimage && \
-cd -
+mkdir -p ~/local
+cd ~/local
+wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz && \
+tar zxvf nvim-linux-x86_64.tar.gz && \
+mv nvim-linux-x86_64 ~/local/nvim-linux64 && \
+cd ~
 ```
 
 ### LazyVim
