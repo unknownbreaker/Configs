@@ -139,7 +139,11 @@ cd ~
 mkdir -p ~/.config/nvim && \
 mv ~/.config/nvim{,.bak} && \
 git clone https://github.com/LazyVim/starter ~/.config/nvim && \
-rm -rf ~/.config/nvim/.git
+rm -rf ~/.config/nvim/.git && \
+cd ~/.config/nvim && \
+mv lua lua.bak && \
+ln -s ~/Configs/LazyVim/lua lua && \
+cd ~
 ```
 
 LazyGit
