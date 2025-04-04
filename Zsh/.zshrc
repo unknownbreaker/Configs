@@ -161,6 +161,9 @@ bindkey "^ " autosuggest-accept
 # 1password
 eval "$(op completion zsh)"; compdef _op op
 
+# ============== REPLACMENTS ============
+alias ls='eza'
+
 # ============== TMUX ==============
 export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/
 DISABLE_AUTO_TITLE=true
@@ -497,9 +500,11 @@ alias hopnu="ssh -A hopnu.den.flightaware.com"
 alias gogan="ssh -A gogan.den.flightaware.com"
 alias nuxly="ssh -A nuxly.den.flightaware.com"
 alias campa="ssh -A campa.den.flightaware.com"
+alias baats="ssh -A baats.den.flightaware.com"
 alias dev="ssh -A robyang.devenv.d.den.flightaware.com"
 
 alias update="gco main && ggpull && npm i && gfa"
+alias prune="gfa && git remote prune origin"
 
 prerelease() {
   while true; do
@@ -623,7 +628,8 @@ fi
 
 # ============= LOCAL DEVELOPMENT ================
 # Run reverse proxy
-alias rproxy="local-ssl-proxy --key ~/.ssl/_wildcard.flightaware.com-key.pem --cert ~/.ssl/_wildcard.flightaware.com.pem --source 443 --target 3000"
+alias rproxy="local-ssl-proxy --key ~/.ssl/_wildcard.flightaware.com-key.pem --cert ~/.ssl/_wildcard.flightaware.com.pem --source 443 --target"
+
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export NVM_DIR="$HOME/.nvm"
