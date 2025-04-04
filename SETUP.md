@@ -109,7 +109,7 @@ autojump
 ```console
 git clone https://github.com/wting/autojump.git ~/autojump && \
 cd ~/autojump && \
-./install.py && \
+./install.py -f && \
 cd ~ && \
 rm -rf ~/autojump
 ```
@@ -125,17 +125,25 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ### Neovim
 
 ```console
-wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz && \
-tar zxvf nvim-linux64.tar.gz && \
-mv nvim-linux64 ~/local
+mkdir -p ~/local
+cd ~/local
+wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz && \
+tar zxvf nvim-linux-x86_64.tar.gz && \
+mv nvim-linux-x86_64 ~/local/nvim-linux64 && \
+cd ~
 ```
 
 ### LazyVim
 
 ```console
+mkdir -p ~/.config/nvim && \
 mv ~/.config/nvim{,.bak} && \
 git clone https://github.com/LazyVim/starter ~/.config/nvim && \
-rm -rf ~/.config/nvim/.git
+rm -rf ~/.config/nvim/.git && \
+cd ~/.config/nvim && \
+mv lua lua.bak && \
+ln -s ~/Configs/LazyVim/lua lua && \
+cd ~
 ```
 
 LazyGit
