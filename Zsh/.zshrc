@@ -105,7 +105,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   aliases
-  autojump
+  # autojump
   aws
   colored-man-pages
   dirhistory
@@ -160,6 +160,9 @@ bindkey "^ " autosuggest-accept
 
 # 1password
 eval "$(op completion zsh)"; compdef _op op
+
+# ============== REPLACMENTS ============
+alias ls='eza'
 
 # ============== TMUX ==============
 export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/
@@ -493,13 +496,114 @@ alias mail="nvim /var/mail/$(whoami)"
 alias tvid='trim-vid'
 
 # ============ FLIGHTAWARE ============
-alias hopnu="ssh -A hopnu.hou.flightaware.com"
-alias gogan="ssh -A gogan.hou.flightaware.com"
-alias nuxly="ssh -A nuxly.hou.flightaware.com"
-alias campa="ssh -A campa.hou.flightaware.com"
-alias dev="ssh -A robyang.devenv.d.hou.flightaware.com"
+alias hopnu="ssh -A hopnu.den.flightaware.com"
+alias gogan="ssh -A gogan.den.flightaware.com"
+alias nuxly="ssh -A nuxly.den.flightaware.com"
+alias campa="ssh -A campa.den.flightaware.com"
+alias baats="ssh -A baats.den.flightaware.com"
+alias dev="ssh -A robyang.devenv.d.den.flightaware.com"
 
 alias update="gco main && ggpull && npm i && gfa"
+alias prune="gfa && git remote prune origin"
+
+prerelease() {
+  while true; do
+    echo "Choose an action:"
+    echo "1) New pre-release"
+    echo "2) Existing pre-release"
+    echo -n "Enter a number: "
+    read action
+
+    case $action in
+      1)
+        while true; do
+          echo "Choose a version type to bump:"
+          echo "1) major"
+          echo "2) minor"
+          echo "3) patch"
+          echo -n "Enter a number: "
+          read version_type
+
+          case $version_type in
+            1) version_type="major"; break ;;
+            2) version_type="minor"; break ;;
+            3) version_type="patch"; break ;;
+            *) echo "Invalid option. Please enter 1, 2, or 3." ;;
+          esac
+        done
+
+        echo -n "Enter a preid: "
+        read preid
+
+        # Constructing the dynamic version bump command
+        npm version pre$version_type --preid "$preid"
+
+        echo -n "Enter a tag name: "
+        read tag_name
+
+        npm publish --tag "$tag_name"
+
+        # Display the final version number
+        final_version=$(node -p "require('./package.json').version")
+        echo "Process completed. Final version: $final_version"
+        break
+        ;;
+
+      2)
+        # Capture the old version number
+        old_version=$(node -p "require('./package.json').version")
+
+        # Increment the existing pre-release version
+        npm version prerelease > /dev/null
+
+        # Capture the new version number
+        new_version=$(node -p "require('./package.json').version")
+
+        # Display only the transition from old to new version
+        echo "$old_version => $new_version"
+
+        # Prompt for a tag to publish as
+        echo "Choose a tag to publish as, or provide a new tag name:"
+
+        # Fetch existing tags from the codebase
+        existing_tags=()
+        while IFS= read -r tag; do
+          existing_tags+=("$tag")
+        done < <(git tag)
+
+        if [ ${#existing_tags[@]} -eq 0 ]; then
+          echo "No existing tags found. You must enter a new tag name."
+        else
+          for i in "${!existing_tags[@]}"; do
+            index=$((i + 1)) # zsh-compatible increment
+            echo "$index) ${existing_tags[i]}"
+          done
+        fi
+
+        echo -n "Enter an option or a new name: "
+        read tag_input
+
+        if [[ $tag_input =~ ^[0-9]+$ && $tag_input -le ${#existing_tags[@]} && $tag_input -gt 0 ]]; then
+          # Ensure the array index is valid before accessing
+          tag_name="${existing_tags[$((tag_input - 1))]}"
+        elif [[ -n $tag_input ]]; then
+          # Use input as the new tag name if it’s not empty
+          tag_name="$tag_input"
+        else
+          echo "Invalid input. Exiting."
+          break
+        fi
+
+        npm publish --tag "$tag_name"
+        echo "Published with tag: $tag_name"
+        break
+        ;;
+
+      *)
+        echo "Invalid option. Please enter 1 or 2." ;;
+    esac
+  done
+}
 
 # ============ DATABASE ============
 # Open connection to prod asdidata.
@@ -509,7 +613,7 @@ alias asdidata="psql -U ryang -h asdidata-1.db.flightaware.com asdidata"
 alias akeem="psql -U ryang -d global_beacon -h akeem"
 
 # Open connection to dev asdidata.
-alias musiq="psql ryang -d asdidata -h musiq"
+alias kozvo="psql ryang -d asdidata -h kozvo"
 alias chken="psql ryang -d asdidata -h chken"
 
 # ============ SSH =============
@@ -524,9 +628,16 @@ fi
 
 # ============= LOCAL DEVELOPMENT ================
 # Run reverse proxy
-alias rproxy="local-ssl-proxy --key ~/.ssl/_wildcard.flightaware.com-key.pem --cert ~/.ssl/_wildcard.flightaware.com.pem --source 443 --target 3000"
+alias rproxy="local-ssl-proxy --key ~/.ssl/_wildcard.flightaware.com-key.pem --cert ~/.ssl/_wildcard.flightaware.com.pem --source 443 --target"
+
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# ============== MUST BE AT END OF FILE ===================
+eval "$(zoxide init zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/rob.yang/.cache/lm-studio/bin"

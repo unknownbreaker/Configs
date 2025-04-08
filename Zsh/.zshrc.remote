@@ -522,9 +522,9 @@ alias tvid='trim-vid'
 # ============ FLIGHTAWARE ============
 export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
 
-alias hopnu="ssh -A hopnu.hou.flightaware.com"
-alias gogan="ssh -A gogan.hou.flightaware.com"
-alias nuxly="ssh -A nuxly.hou.flightaware.com"
+alias hopnu="ssh -A hopnu.den.flightaware.com"
+alias gogan="ssh -A gogan.den.flightaware.com"
+alias nuxly="ssh -A nuxly.den.flightaware.com"
 
 alias update="gco main && ggpull && npm i && gfa"
 
@@ -536,7 +536,7 @@ alias asdidata="psql -U ryang -h asdidata-1.db.flightaware.com asdidata"
 alias akeem="psql -U ryang -d global_beacon -h akeem"
 
 # Open connection to dev asdidata.
-alias musiq="psql ryang -d asdidata -h musiq"
+alias kozvo="psql ryang -d asdidata -h kozvo"
 alias chken="psql ryang -d asdidata -h chken"
 
 # ============ SSH =============
