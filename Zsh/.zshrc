@@ -17,6 +17,7 @@ export PATH=$PATH:~/.tmux/scripts/t
 export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 export PATH=$PATH:/usr/local/bin/node-jxa
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.rover/bin
 export PATH=$PATH:~/Documents/Repos/Configs/scripts/bin
 
 # Added by the Heroku Toolbelt
