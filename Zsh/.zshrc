@@ -504,7 +504,6 @@ alias campa="ssh -A campa.den.flightaware.com"
 alias baats="ssh -A baats.den.flightaware.com"
 alias dev="ssh -A robyang.devenv.d.den.flightaware.com"
 
-alias update="gco main && ggpull && npm i && gfa"
 alias prune="gfa && git remote prune origin"
 
 prerelease() {
@@ -604,6 +603,89 @@ prerelease() {
         echo "Invalid option. Please enter 1 or 2." ;;
     esac
   done
+}
+
+update() {
+    # Check if we're in a git repository
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
+        echo "❌ Not in a git repository"
+        return 1
+    fi
+
+    # Get current branch name
+    current_branch=$(git branch --show-current)
+    
+    echo "🔄 Starting update process..."
+    echo "📍 Current branch: $current_branch"
+
+    # Fetch latest changes from remote
+    echo "📥 Fetching latest changes..."
+    git fetch origin
+
+    # Function to check if package files changed
+    package_files_changed() {
+        git diff --name-only "$1" "$2" | grep -q '^package\.\(json\|lock\.json\)$'
+    }
+
+    # Check if we're on main branch
+    if [[ "$current_branch" == "main" ]]; then
+        echo "✅ Already on main branch"
+        
+        # Check what changed before pulling
+        old_head=$(git rev-parse HEAD)
+        
+        # Pull latest changes on main
+        echo "⬇️  Pulling latest changes..."
+        git pull origin main
+        
+        # Check if package files changed and run npm install if needed
+        if [[ -f "package.json" ]] && package_files_changed "$old_head" "HEAD"; then
+            echo "📦 Package files changed - running npm install..."
+            npm install
+        elif [[ -f "package.json" ]]; then
+            echo "📦 No package changes - skipping npm install"
+        fi
+        
+    else
+        echo "🔀 Switching to main branch..."
+        
+        # Check for uncommitted changes
+        if ! git diff-index --quiet HEAD --; then
+            echo "⚠️  You have uncommitted changes. Please commit or stash them first."
+            return 1
+        fi
+        
+        # Switch to main and pull
+        git checkout main
+        
+        # Check what changed before pulling on main
+        old_main_head=$(git rev-parse HEAD)
+        
+        echo "⬇️  Pulling latest changes on main..."
+        git pull origin main
+        
+        # Switch back to original branch and merge main
+        echo "🔀 Switching back to $current_branch..."
+        git checkout "$current_branch"
+        
+        echo "🔄 Merging main into $current_branch..."
+        git merge main
+        
+        # Run npm install after merging if package files changed
+        if [[ -f "package.json" ]] && package_files_changed "$old_main_head" "origin/main"; then
+            echo "📦 Package files changed - running npm install..."
+            npm install
+        elif [[ -f "package.json" ]]; then
+            echo "📦 No package changes - skipping npm install"
+        fi
+    fi
+
+    echo "🎉 Update process completed successfully!"
+    
+    # Show current status
+    echo "📊 Current status:"
+    echo "   Branch: $(git branch --show-current)"
+    echo "   Latest commit: $(git log -1 --oneline)"
 }
 
 # ============ DATABASE ============
