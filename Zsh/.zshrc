@@ -31,6 +31,8 @@ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 export OSA_LIBRARY_PATH=~/Library/Script\ Library
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export KUBE_EDITOR="nvim"
+export WEMI_PRIVATE_KEY=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
+export HASURA_GRAPHQL_ADMIN_SECRET=asdjfq4wjr8
 
 # brew
 alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
