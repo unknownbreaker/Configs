@@ -34,3 +34,10 @@ wk.register({
     },
   },
 })
+
+if vim.g.vscode then
+  -- Always yank to system clipboard
+  vim.keymap.set({ "n", "v" }, "y", '"+y')
+  vim.keymap.set({ "n", "v" }, "p", '"+p')
+  vim.keymap.set({ "n", "v" }, "P", '"+P')
+end
