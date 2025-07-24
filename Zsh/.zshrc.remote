@@ -21,7 +21,6 @@ export PATH=$PATH:$HOME/local/bat
 export PATH=$PATH:$HOME/local/bin
 export PATH=$PATH:$HOME/local/go/bin
 export PATH=$PATH:$HOME/local/nvim-linux64/bin
-export PATH=$PATH:$HOME/nvim-linux64/bin
 export PATH=$PATH:$PYTHON_SHARE
 export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
