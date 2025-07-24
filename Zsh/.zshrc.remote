@@ -59,6 +59,7 @@ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 export OSA_LIBRARY_PATH=~/Library/Script\ Library
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export KUBE_EDITOR="open -a \"nvim\" --wait"
+export GH_TOKEN="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"
 
 # OPENSSH
 # export PATH=$HOME/local/openssl/bin:$PATH
