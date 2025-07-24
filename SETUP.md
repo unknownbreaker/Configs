@@ -122,6 +122,12 @@ TPM
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
+Sesh
+
+```console
+curl -L https://github.com/joshmedeski/sesh/releases/download/v2.17.1/sesh_Linux_x86_64.tar.gz | tar xz && mv sesh ~/local/bin
+```
+
 ### Neovim
 
 ```console
