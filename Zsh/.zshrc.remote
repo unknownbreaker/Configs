@@ -155,7 +155,7 @@ plugins=(
   taskwarrior
   tmux
   vi-mode
-  # z
+  z
   # zsh-autocomplete
   zsh-autosuggestions
   # zsh-interactive-cd
