@@ -1,30 +1,45 @@
 # ============== PATH ==============
-
-export PATH="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/mysql/bin:$PYTHON_SHARE:$PATH"
-export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247/bin:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247@global/bin:/Users/robertyang/.rvm/rubies/ruby-2.0.0-p247/bin:/Users/robertyang/.rvm/bin:/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/mysql/bin::/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
-export PATH="$HOME/.rbenv/bin:$PATH"
-# export ANDROID_HOME=/Users/$USER/Library/Android/sdk
-# export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-export PATH=$PATH:/usr/local/share/npm/bin/
-export PATH=$PATH:/usr/local/bin/vim
-export PATH=$PATH:/usr/local/bin/rg
-export PATH=$PATH:~/.emacs.d/bin
-export PATH=$PATH:~/.deno/bin
-export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
+PATH=""
+export PATH=$HOME/.rbenv/bin:$PATH
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
-export PATH=$PATH:~/Documents/Repos/Configs/Zsh/scripts
-export PATH=$PATH:~/.tmux/scripts/t
-export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
+export PATH=$PATH:/Users/robertyang/.rvm/bin
+export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247/bin
+export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247@global/bin
+export PATH=$PATH:/Users/robertyang/.rvm/rubies/ruby-2.0.0-p247/bin
+export PATH=$PATH:/bin
+export PATH=$PATH:/opt/homebrew/bin/
+export PATH=$PATH:/sbin
+export PATH=$PATH:/usr/X11/bin
+export PATH=$PATH:/usr/bin
+export PATH=$PATH:/usr/local
+export PATH=$PATH:/usr/local
+export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/local/bin/node-jxa
+export PATH=$PATH:/usr/local/bin/rg
+export PATH=$PATH:/usr/local/bin/vim
+export PATH=$PATH:/usr/local/git/bin
+export PATH=$PATH:/usr/local/mysql/bin
+export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
+export PATH=$PATH:/usr/local/sbin
+export PATH=$PATH:/usr/local/share/npm/bin/
+export PATH=$PATH:/usr/sbin
+export PATH=$PATH:~/.deno/bin
+export PATH=$PATH:~/.emacs.d/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.rover/bin
+export PATH=$PATH:~/.tmux/scripts/t
+export PATH=$PATH:~/Documents/Repos/Configs/Zsh/scripts
 export PATH=$PATH:~/Documents/Repos/Configs/scripts/bin
+export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
+export PATH=$PATH:$PYTHON_SHARE
+
+# export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+# export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 # Added by the Heroku Toolbelt
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH=$PATH:/usr/local/heroku/bin
 
-export PATH="/opt/homebrew/bin/:$PATH"
 
 # Other ENVs
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
