@@ -628,32 +628,42 @@ update() {
         echo "❌ Not in a git repository"
         return 1
     fi
-
-    # Get current branch name
+    
+    # Get current branch name and repository name
     current_branch=$(git branch --show-current)
+    repo_name=$(basename "$(git rev-parse --show-toplevel)")
+    
+    # Determine the default branch based on repository
+    if [[ "$repo_name" == "fa_web" ]]; then
+        default_branch="master"
+    else
+        default_branch="main"
+    fi
     
     echo "🔄 Starting update process..."
     echo "📍 Current branch: $current_branch"
-
+    echo "📁 Repository: $repo_name"
+    echo "🌟 Default branch: $default_branch"
+    
     # Fetch latest changes from remote
     echo "📥 Fetching latest changes..."
     git fetch origin
-
+    
     # Function to check if package files changed
     package_files_changed() {
         git diff --name-only "$1" "$2" | grep -q '^package\.\(json\|lock\.json\)$'
     }
-
-    # Check if we're on main branch
-    if [[ "$current_branch" == "main" ]]; then
-        echo "✅ Already on main branch"
+    
+    # Check if we're on the default branch
+    if [[ "$current_branch" == "$default_branch" ]]; then
+        echo "✅ Already on $default_branch branch"
         
         # Check what changed before pulling
         old_head=$(git rev-parse HEAD)
         
-        # Pull latest changes on main
+        # Pull latest changes on default branch
         echo "⬇️  Pulling latest changes..."
-        git pull origin main
+        git pull origin "$default_branch"
         
         # Check if package files changed and run npm install if needed
         if [[ -f "package.json" ]] && package_files_changed "$old_head" "HEAD"; then
@@ -664,7 +674,7 @@ update() {
         fi
         
     else
-        echo "🔀 Switching to main branch..."
+        echo "🔀 Switching to $default_branch branch..."
         
         # Check for uncommitted changes
         if ! git diff-index --quiet HEAD --; then
@@ -672,31 +682,31 @@ update() {
             return 1
         fi
         
-        # Switch to main and pull
-        git checkout main
+        # Switch to default branch and pull
+        git checkout "$default_branch"
         
-        # Check what changed before pulling on main
-        old_main_head=$(git rev-parse HEAD)
+        # Check what changed before pulling on default branch
+        old_default_head=$(git rev-parse HEAD)
         
-        echo "⬇️  Pulling latest changes on main..."
-        git pull origin main
+        echo "⬇️  Pulling latest changes on $default_branch..."
+        git pull origin "$default_branch"
         
-        # Switch back to original branch and merge main
+        # Switch back to original branch and merge default branch
         echo "🔀 Switching back to $current_branch..."
         git checkout "$current_branch"
         
-        echo "🔄 Merging main into $current_branch..."
-        git merge main
+        echo "🔄 Merging $default_branch into $current_branch..."
+        git merge "$default_branch"
         
         # Run npm install after merging if package files changed
-        if [[ -f "package.json" ]] && package_files_changed "$old_main_head" "origin/main"; then
+        if [[ -f "package.json" ]] && package_files_changed "$old_default_head" "origin/$default_branch"; then
             echo "📦 Package files changed - running npm install..."
             npm install
         elif [[ -f "package.json" ]]; then
             echo "📦 No package changes - skipping npm install"
         fi
     fi
-
+    
     echo "🎉 Update process completed successfully!"
     
     # Show current status
