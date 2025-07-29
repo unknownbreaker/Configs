@@ -1,7 +1,7 @@
 # ============== PATH ==============
 export USERNAME=$(whoami)
 PATH=""
-export PATH=$PATH/.rbenv/bin
+export PATH=$PATH:$HOME/.rbenv/bin
 export PATH=$PATH:$HOME/.deno/bin
 export PATH=$PATH:$HOME/.emacs.d/bin
 export PATH=$PATH:$HOME/.local/bin
@@ -41,7 +41,13 @@ export PATH=$PATH:/usr/sbin
 # export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 # export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-LD_LIBRARY_PATH=$HOME/local/lib
+export LD_LIBRARY_PATH=$HOME/local/lib
+export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export C_INCLUDE_PATH=$HOME/local/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=$HOME/local/include:$CPLUS_INCLUDE_PATH
+export CONFIGURE_OPTS="--with-libffi-dir=$HOME/local --with-libyaml-dir=$HOME/local"
+export CPPFLAGS="-I$HOME/local/include"
+export LDFLAGS="-L$HOME/local/lib"
 MANPATH=$HOME/local/share/man
 
 export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
