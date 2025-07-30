@@ -537,6 +537,7 @@ alias dev="ssh -A robyang.devenv.d.den.flightaware.com"
 
 alias prune="gfa && git remote prune origin"
 
+# alias update="git pull && gco master && gfa && git pull && gco - && git merge master"
 update() {
     # Check if we're in a git repository
     if ! git rev-parse --git-dir >/dev/null 2>&1; then
@@ -564,11 +565,6 @@ update() {
     echo "📥 Fetching latest changes..."
     git fetch origin
     
-    # Function to check if package files changed
-    package_files_changed() {
-        git diff --name-only "$1" "$2" | grep -q '^package\.\(json\|lock\.json\)$'
-    }
-    
     # Check if we're on the default branch
     if [[ "$current_branch" == "$default_branch" ]]; then
         echo "✅ Already on $default_branch branch"
@@ -579,15 +575,6 @@ update() {
         # Pull latest changes on default branch
         echo "⬇️  Pulling latest changes..."
         git pull origin "$default_branch"
-        
-        # Check if package files changed and run npm install if needed
-        if [[ -f "package.json" ]] && package_files_changed "$old_head" "HEAD"; then
-            echo "📦 Package files changed - running npm install..."
-            npm install
-        elif [[ -f "package.json" ]]; then
-            echo "📦 No package changes - skipping npm install"
-        fi
-        
     else
         echo "🔀 Switching to $default_branch branch..."
         
@@ -612,14 +599,6 @@ update() {
         
         echo "🔄 Merging $default_branch into $current_branch..."
         git merge "$default_branch"
-        
-        # Run npm install after merging if package files changed
-        if [[ -f "package.json" ]] && package_files_changed "$old_default_head" "origin/$default_branch"; then
-            echo "📦 Package files changed - running npm install..."
-            npm install
-        elif [[ -f "package.json" ]]; then
-            echo "📦 No package changes - skipping npm install"
-        fi
     fi
     
     echo "🎉 Update process completed successfully!"
