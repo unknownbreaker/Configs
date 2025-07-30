@@ -123,7 +123,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   aliases
-  # autojump
+  autojump
   aws
   colored-man-pages
   dirhistory
