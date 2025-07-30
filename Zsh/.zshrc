@@ -634,7 +634,7 @@ update() {
     repo_name=$(basename "$(git rev-parse --show-toplevel)")
     
     # Determine the default branch based on repository
-    if [[ "$repo_name" == "fa_web" ]]; then
+    if [[ "$repo_name" =~ "fa_web" ]]; then
         default_branch="master"
     else
         default_branch="main"
