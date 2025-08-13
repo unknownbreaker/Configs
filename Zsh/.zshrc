@@ -235,7 +235,10 @@ unsetopt AUTO_CD
 bindkey "^ " autosuggest-accept
 
 # 1password
-eval "$(op completion zsh)"; compdef _op op
+if [[ -n "$SSH_CLIENT" ]] && echo "$ssh_hostnames" | grep -q "$(hostname)"; then
+else
+  eval "$(op completion zsh)"; compdef _op op
+fi
 
 # ============== REPLACMENTS ============
 alias ls='eza'
