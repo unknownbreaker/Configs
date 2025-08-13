@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = { "*.rvt" },
+  pattern = { "*.rvt", "*.tcl" },
   command = "set filetype=tcl",
 })
 
