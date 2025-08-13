@@ -4,6 +4,7 @@ ssh_hostnames="hopnu gogan nuxly campa baats asdidata akeem kozvo chken foxeb"
 if [[ -n "$SSH_CLIENT" ]] && echo "$ssh_hostnames" | grep -q "$(hostname)"; then
   export USERNAME=$(whoami)
   PATH=""
+  export PATH=$PATH:$HOME/.nix-profile/bin
   export PATH=$PATH:$HOME/.rbenv/bin
   export PATH=$PATH:$HOME/.deno/bin
   export PATH=$PATH:$HOME/.emacs.d/bin
