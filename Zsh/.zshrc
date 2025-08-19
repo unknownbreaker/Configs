@@ -50,10 +50,12 @@ else
   export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247/bin
   export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247@global/bin
   export PATH=$PATH:/Users/robertyang/.rvm/rubies/ruby-2.0.0-p247/bin
+  export PATH=$PATH:$HOME/Documents/Repos/lsp-tcl
   export PATH=$PATH:/bin
   export PATH=$PATH:/nix/var/nix/profiles/default/bin
   export PATH=$PATH:/opt/homebrew/bin/
   export PATH=$PATH:/opt/homebrew/opt/tcl-tk@8/bin
+  export PATH=$PATH:/opt/local/bin
   export PATH=$PATH:/sbin
   export PATH=$PATH:/usr/X11/bin
   export PATH=$PATH:/usr/bin
@@ -98,6 +100,8 @@ if [[ -n "$SSH_CLIENT" ]] && echo "$ssh_hostnames" | grep -q "$(hostname)"; then
 
   export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
   export MANPATH=$HOME/local/share/man:$MANPATH
+else
+  export TCLLIBPATH="$(brew --prefix tcl-tk@8)/lib"
 fi
 
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
@@ -389,7 +393,10 @@ alias dvrm_dang='docker volume rm $(docker volume ls -q -f "dangling=true")'
 alias dprune='docker system prune -a --volumes'
 
 # Lazy Docker
-alias lzd='lazydocker'
+function lzd() {
+  export DOCKER_HOST=$(docker context inspect --format '{{.Endpoints.docker.Host}}')
+  lazydocker
+}
 
 # ========= k8s =========
 
