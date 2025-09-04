@@ -588,7 +588,7 @@ alias gogan="ssh -A gogan.den.flightaware.com"
 alias nuxly="ssh -A nuxly.den.flightaware.com"
 alias campa="ssh -A campa.den.flightaware.com"
 alias baats="ssh -A baats.den.flightaware.com"
-alias dev="ssh -A robyang.devenv.d.den.flightaware.com"
+alias dev="ssh -A robyang.devenv.d.hou.flightaware.com"
 
 alias prune="gfa && git remote prune origin"
 
