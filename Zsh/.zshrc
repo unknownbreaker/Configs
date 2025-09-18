@@ -430,6 +430,11 @@ alias seeds='be rake db:drop; be rake db:create && be rake db:migrate && be rake
 
 # eval "$(nodenv init -)"
 
+# ========= PYTHON =========
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
 # ========= ANDROID EMULATOR FOR LOCAL SERVER DEBUG =========
 # remounts emulator to allow for briefly pushing a custom hosts file
 # must run this every time if want to view local server
