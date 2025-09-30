@@ -19,6 +19,7 @@ return {
         "cmakelint", -- CMake
         "erb-lint", -- Ruby
         "flake8", -- Python
+        "markdownlint", -- Markdown
         -- "hadolint", -- Docker
         "phpcs", -- PHP
         "shellcheck", -- Bash
