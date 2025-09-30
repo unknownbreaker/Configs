@@ -2,6 +2,7 @@
 ssh_hostnames="hopnu gogan nuxly campa baats asdidata akeem kozvo chken foxeb"
 
 if [[ -n "$SSH_CLIENT" ]] && echo "$ssh_hostnames" | grep -q "$(hostname)"; then
+  export SHELL=/bin/zsh
   export USERNAME=$(whoami)
   PATH=""
   export PATH=$PATH:$HOME/.nix-profile/bin
