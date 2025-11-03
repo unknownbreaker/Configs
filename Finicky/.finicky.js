@@ -18,7 +18,7 @@ module.exports = {
       match: ({ url }) =>
         /localhost|flightaware|rtx|collins|globalbeacon/.test(url.host) &&
         !/zoom|teams/.test(url.host),
-      browser: "Google Chrome",
+      browser: "Arc",
     },
 
     // Figma
