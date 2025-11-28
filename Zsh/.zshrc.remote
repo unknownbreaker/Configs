@@ -1,7 +1,7 @@
 # ============== PATH ==============
 export USERNAME=$(whoami)
 PATH=""
-export PATH=$PATH/.rbenv/bin
+export PATH=$PATH:$HOME/.rbenv/bin
 export PATH=$PATH:$HOME/.deno/bin
 export PATH=$PATH:$HOME/.emacs.d/bin
 export PATH=$PATH:$HOME/.local/bin
@@ -21,7 +21,6 @@ export PATH=$PATH:$HOME/local/bat
 export PATH=$PATH:$HOME/local/bin
 export PATH=$PATH:$HOME/local/go/bin
 export PATH=$PATH:$HOME/local/nvim-linux64/bin
-export PATH=$PATH:$HOME/nvim-linux64/bin
 export PATH=$PATH:$PYTHON_SHARE
 export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
@@ -42,7 +41,13 @@ export PATH=$PATH:/usr/sbin
 # export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 # export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-LD_LIBRARY_PATH=$HOME/local/lib
+export LD_LIBRARY_PATH=$HOME/local/lib
+export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export C_INCLUDE_PATH=$HOME/local/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=$HOME/local/include:$CPLUS_INCLUDE_PATH
+export CONFIGURE_OPTS="--with-libffi-dir=$HOME/local --with-libyaml-dir=$HOME/local"
+export CPPFLAGS="-I$HOME/local/include"
+export LDFLAGS="-L$HOME/local/lib"
 MANPATH=$HOME/local/share/man
 
 export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
@@ -59,6 +64,7 @@ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 export OSA_LIBRARY_PATH=~/Library/Script\ Library
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export KUBE_EDITOR="open -a \"nvim\" --wait"
+export GH_TOKEN="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"
 
 # OPENSSH
 # export PATH=$HOME/local/openssl/bin:$PATH
@@ -525,8 +531,83 @@ export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
 alias hopnu="ssh -A hopnu.den.flightaware.com"
 alias gogan="ssh -A gogan.den.flightaware.com"
 alias nuxly="ssh -A nuxly.den.flightaware.com"
+alias campa="ssh -A campa.den.flightaware.com"
+alias baats="ssh -A baats.den.flightaware.com"
+alias dev="ssh -A robyang.devenv.d.den.flightaware.com"
 
-alias update="gco main && ggpull && npm i && gfa"
+alias prune="gfa && git remote prune origin"
+
+# alias update="git pull && gco master && gfa && git pull && gco - && git merge master"
+update() {
+    # Check if we're in a git repository
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
+        echo "❌ Not in a git repository"
+        return 1
+    fi
+    
+    # Get current branch name and repository name
+    current_branch=$(git branch --show-current)
+    repo_name=$(basename "$(git rev-parse --show-toplevel)")
+    
+    # Determine the default branch based on repository
+    if [[ "$repo_name" =~ "fa_web" ]]; then
+        default_branch="master"
+    else
+        default_branch="main"
+    fi
+    
+    echo "🔄 Starting update process..."
+    echo "📍 Current branch: $current_branch"
+    echo "📁 Repository: $repo_name"
+    echo "🌟 Default branch: $default_branch"
+    
+    # Fetch latest changes from remote
+    echo "📥 Fetching latest changes..."
+    git fetch origin
+    
+    # Check if we're on the default branch
+    if [[ "$current_branch" == "$default_branch" ]]; then
+        echo "✅ Already on $default_branch branch"
+        
+        # Check what changed before pulling
+        old_head=$(git rev-parse HEAD)
+        
+        # Pull latest changes on default branch
+        echo "⬇️  Pulling latest changes..."
+        git pull origin "$default_branch"
+    else
+        echo "🔀 Switching to $default_branch branch..."
+        
+        # Check for uncommitted changes
+        if ! git diff-index --quiet HEAD --; then
+            echo "⚠️  You have uncommitted changes. Please commit or stash them first."
+            return 1
+        fi
+        
+        # Switch to default branch and pull
+        git checkout "$default_branch"
+        
+        # Check what changed before pulling on default branch
+        old_default_head=$(git rev-parse HEAD)
+        
+        echo "⬇️  Pulling latest changes on $default_branch..."
+        git pull origin "$default_branch"
+        
+        # Switch back to original branch and merge default branch
+        echo "🔀 Switching back to $current_branch..."
+        git checkout "$current_branch"
+        
+        echo "🔄 Merging $default_branch into $current_branch..."
+        git merge "$default_branch"
+    fi
+    
+    echo "🎉 Update process completed successfully!"
+    
+    # Show current status
+    echo "📊 Current status:"
+    echo "   Branch: $(git branch --show-current)"
+    echo "   Latest commit: $(git log -1 --oneline)"
+}
 
 # ============ DATABASE ============
 # Open connection to prod asdidata.

@@ -2,8 +2,18 @@
 
 # current_session_name=$(tmux display-message '#S' | sed -E 's/:.*$//')
 
-session_name=$(tmux list-sessions | sed -E 's/:.*$//' | grep -v "^$(tmux display-message -p '#S')\$" | fzf --reverse)
+# session_name=$(tmux list-sessions | sed -E 's/:.*$//' | grep -v "^$(tmux display-message -p '#S')\$" | fzf --reverse)
+#
+# if [[ -n $session_name ]]; then
+# 	tmux switch-client -t "$session_name"
+# fi
 
-if [[ -n $session_name ]]; then
-	tmux switch-client -t "$session_name"
+# Display fzf in a tmux popup and attach to the selected session
+
+session=$(tmux list-sessions -F "#{session_name}" | fzf)
+
+if [[ -n "$session" ]]; then
+	tmux attach-session -t "$session"
+else
+	echo "No session selected."
 fi

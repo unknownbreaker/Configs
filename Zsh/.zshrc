@@ -1,35 +1,117 @@
 # ============== PATH ==============
+ssh_hostnames="hopnu gogan nuxly campa baats asdidata akeem kozvo chken foxeb"
 
-export PATH="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/mysql/bin:$PYTHON_SHARE:$PATH"
-export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247/bin:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247@global/bin:/Users/robertyang/.rvm/rubies/ruby-2.0.0-p247/bin:/Users/robertyang/.rvm/bin:/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/mysql/bin::/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
-export PATH="$HOME/.rbenv/bin:$PATH"
+if [[ -n "$SSH_CLIENT" ]] && echo "$ssh_hostnames" | grep -q "$(hostname)"; then
+  export SHELL=/bin/zsh
+  export USERNAME=$(whoami)
+  PATH=""
+  export PATH=$PATH:$HOME/.nix-profile/bin
+  export PATH=$PATH:$HOME/.rbenv/bin
+  export PATH=$PATH:$HOME/.deno/bin
+  export PATH=$PATH:$HOME/.emacs.d/bin
+  export PATH=$PATH:$HOME/.local/bin
+  export PATH=$PATH:$HOME/.nvm
+  export PATH=$PATH:$HOME/.rbenv/bin
+  export PATH=$PATH:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin
+  export PATH=$PATH:$HOME/.rvm/bin
+  export PATH=$PATH:$HOME/.rvm/gems/ruby-2.0.0-p247/bin
+  export PATH=$PATH:$HOME/.rvm/gems/ruby-2.0.0-p247@global/bin
+  export PATH=$PATH:$HOME/.rvm/rubies/ruby-2.0.0-p247/bin
+  export PATH=$PATH:$HOME/.tmux/scripts/t
+  export PATH=$PATH:$HOME/Documents/Repos/Configs/Zsh/scripts
+  export PATH=$PATH:$HOME/Documents/Repos/Configs/scripts/bin
+  export PATH=$PATH:$HOME/Documents/Repos/Kargo/kcli-codebase
+  export PATH=$PATH:$HOME/Documents/Repos/lazygit
+  export PATH=$PATH:$HOME/local/bat
+  export PATH=$PATH:$HOME/local/bin
+  export PATH=$PATH:$HOME/local/go/bin
+  export PATH=$PATH:$HOME/local/nvim-linux64/bin
+  export PATH=$PATH:$PYTHON_SHARE
+  export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
+  export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
+  export PATH=$PATH:/bin
+  export PATH=$PATH:/sbin
+  export PATH=$PATH:/usr/X11/bin
+  export PATH=$PATH:/usr/bin
+  export PATH=$PATH:/usr/local
+  export PATH=$PATH:/usr/local/bin
+  export PATH=$PATH:/usr/local/bin/node-jxa
+  export PATH=$PATH:/usr/local/git/bin
+  export PATH=$PATH:/usr/local/mysql/bin
+  export PATH=$PATH:/usr/local/opt/postgresql@12/bin
+  export PATH=$PATH:/usr/local/sbin
+  export PATH=$PATH:/usr/local/share/npm/bin/
+  export PATH=$PATH:/usr/sbin
+else
+  PATH=""
+  export PATH=$HOME/.rbenv/bin
+  export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
+  export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
+  export PATH=$PATH:/Users/robertyang/.rvm/bin
+  export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247/bin
+  export PATH=$PATH:/Users/robertyang/.rvm/gems/ruby-2.0.0-p247@global/bin
+  export PATH=$PATH:/Users/robertyang/.rvm/rubies/ruby-2.0.0-p247/bin
+  export PATH=$PATH:$HOME/Documents/Repos/lsp-tcl
+  export PATH=$PATH:/bin
+  export PATH=$PATH:/nix/var/nix/profiles/default/bin
+  export PATH=$PATH:/opt/homebrew/bin/
+  export PATH=$PATH:/opt/homebrew/opt/tcl-tk@8/bin
+  export PATH=$PATH:/opt/local/bin
+  export PATH=$PATH:/sbin
+  export PATH=$PATH:/usr/X11/bin
+  export PATH=$PATH:/usr/bin
+  export PATH=$PATH:/usr/local
+  export PATH=$PATH:/usr/local
+  export PATH=$PATH:/usr/local/bin
+  export PATH=$PATH:/usr/local/bin/node-jxa
+  export PATH=$PATH:/usr/local/bin/rg
+  export PATH=$PATH:/usr/local/bin/vim
+  export PATH=$PATH:/usr/local/git/bin
+  export PATH=$PATH:/usr/local/heroku/bin
+  export PATH=$PATH:/usr/local/mysql/bin
+  export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
+  export PATH=$PATH:/usr/local/sbin
+  export PATH=$PATH:/usr/local/share/npm/bin/
+  export PATH=$PATH:/usr/sbin
+  export PATH=$PATH:~/.deno/bin
+  export PATH=$PATH:~/.emacs.d/bin
+  export PATH=$PATH:~/.local/bin
+  export PATH=$PATH:~/.rover/bin
+  export PATH=$PATH:~/.tmux/scripts/t
+  export PATH=$PATH:~/Documents/Repos/Configs/Zsh/scripts
+  export PATH=$PATH:~/Documents/Repos/Configs/scripts/bin
+  export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
+  export PATH=$PATH:$PYTHON_SHARE
+fi
+
 # export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 # export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-export PATH=$PATH:/usr/local/share/npm/bin/
-export PATH=$PATH:/usr/local/bin/vim
-export PATH=$PATH:/usr/local/bin/rg
-export PATH=$PATH:~/.emacs.d/bin
-export PATH=$PATH:~/.deno/bin
-export PATH=$PATH:/usr/local/opt/postgresql@12/bin/
-export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
-export PATH=$PATH:~/Documents/Repos/Configs/Zsh/scripts
-export PATH=$PATH:~/.tmux/scripts/t
-export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
-export PATH=$PATH:/usr/local/bin/node-jxa
-export PATH=$PATH:~/.local/bin
-export PATH=$PATH:~/Documents/Repos/Configs/scripts/bin
-
-# Added by the Heroku Toolbelt
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
-export PATH="/usr/local/heroku/bin:$PATH"
-
-export PATH="/opt/homebrew/bin/:$PATH"
 
 # Other ENVs
+
+if [[ -n "$SSH_CLIENT" ]] && echo "$ssh_hostnames" | grep -q "$(hostname)"; then
+  export LD_LIBRARY_PATH=$HOME/local/lib
+  export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig:$PKG_CONFIG_PATH
+  export C_INCLUDE_PATH=$HOME/local/include:$C_INCLUDE_PATH
+  export CPLUS_INCLUDE_PATH=$HOME/local/include:$CPLUS_INCLUDE_PATH
+  export CONFIGURE_OPTS="--with-libffi-dir=$HOME/local --with-libyaml-dir=$HOME/local"
+  export CPPFLAGS="-I$HOME/local/include"
+  export LDFLAGS="-L$HOME/local/lib"
+  MANPATH=$HOME/local/share/man
+
+  export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH
+  export MANPATH=$HOME/local/share/man:$MANPATH
+else
+  export TCLLIBPATH="$(brew --prefix tcl-tk@8)/lib"
+fi
+
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 export OSA_LIBRARY_PATH=~/Library/Script\ Library
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export KUBE_EDITOR="nvim"
+export WEMI_PRIVATE_KEY=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
+export HASURA_API_ADMIN_SECRET=asdjfq4wjr8
+export GH_TOKEN="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"
 
 # brew
 alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
@@ -105,7 +187,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   aliases
-  # autojump
+  autojump
   aws
   colored-man-pages
   dirhistory
@@ -159,7 +241,10 @@ unsetopt AUTO_CD
 bindkey "^ " autosuggest-accept
 
 # 1password
-eval "$(op completion zsh)"; compdef _op op
+if [[ -n "$SSH_CLIENT" ]] && echo "$ssh_hostnames" | grep -q "$(hostname)"; then
+else
+  eval "$(op completion zsh)"; compdef _op op
+fi
 
 # ============== REPLACMENTS ============
 alias ls='eza'
@@ -309,7 +394,10 @@ alias dvrm_dang='docker volume rm $(docker volume ls -q -f "dangling=true")'
 alias dprune='docker system prune -a --volumes'
 
 # Lazy Docker
-alias lzd='lazydocker'
+function lzd() {
+  export DOCKER_HOST=$(docker context inspect --format '{{.Endpoints.docker.Host}}')
+  lazydocker
+}
 
 # ========= k8s =========
 
@@ -342,6 +430,11 @@ alias seeds='be rake db:drop; be rake db:create && be rake db:migrate && be rake
 # ========= NODE =========
 
 # eval "$(nodenv init -)"
+
+# ========= PYTHON =========
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
 # ========= ANDROID EMULATOR FOR LOCAL SERVER DEBUG =========
 # remounts emulator to allow for briefly pushing a custom hosts file
@@ -501,9 +594,8 @@ alias gogan="ssh -A gogan.den.flightaware.com"
 alias nuxly="ssh -A nuxly.den.flightaware.com"
 alias campa="ssh -A campa.den.flightaware.com"
 alias baats="ssh -A baats.den.flightaware.com"
-alias dev="ssh -A robyang.devenv.d.den.flightaware.com"
+alias dev="ssh -A robyang.devenv.d.hou.flightaware.com"
 
-alias update="gco main && ggpull && npm i && gfa"
 alias prune="gfa && git remote prune origin"
 
 prerelease() {
@@ -603,6 +695,99 @@ prerelease() {
         echo "Invalid option. Please enter 1 or 2." ;;
     esac
   done
+}
+
+update() {
+    # Check if we're in a git repository
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
+        echo "❌ Not in a git repository"
+        return 1
+    fi
+    
+    # Get current branch name and repository name
+    current_branch=$(git branch --show-current)
+    repo_name=$(basename "$(git rev-parse --show-toplevel)")
+    
+    # Determine the default branch based on repository
+    if [[ "$repo_name" =~ "fa_web" ]]; then
+        default_branch="master"
+    else
+        default_branch="main"
+    fi
+    
+    echo "🔄 Starting update process..."
+    echo "📍 Current branch: $current_branch"
+    echo "📁 Repository: $repo_name"
+    echo "🌟 Default branch: $default_branch"
+    
+    # Fetch latest changes from remote
+    echo "📥 Fetching latest changes..."
+    git fetch origin
+    
+    # Function to check if package files changed
+    package_files_changed() {
+        git diff --name-only "$1" "$2" | grep -q '^package\.\(json\|lock\.json\)$'
+    }
+    
+    # Check if we're on the default branch
+    if [[ "$current_branch" == "$default_branch" ]]; then
+        echo "✅ Already on $default_branch branch"
+        
+        # Check what changed before pulling
+        old_head=$(git rev-parse HEAD)
+        
+        # Pull latest changes on default branch
+        echo "⬇️  Pulling latest changes..."
+        git pull origin "$default_branch"
+        
+        # Check if package files changed and run npm install if needed
+        if [[ -f "package.json" ]] && package_files_changed "$old_head" "HEAD"; then
+            echo "📦 Package files changed - running npm install..."
+            npm install
+        elif [[ -f "package.json" ]]; then
+            echo "📦 No package changes - skipping npm install"
+        fi
+        
+    else
+        echo "🔀 Switching to $default_branch branch..."
+        
+        # Check for uncommitted changes
+        if ! git diff-index --quiet HEAD --; then
+            echo "⚠️  You have uncommitted changes. Please commit or stash them first."
+            return 1
+        fi
+        
+        # Switch to default branch and pull
+        git checkout "$default_branch"
+        
+        # Check what changed before pulling on default branch
+        old_default_head=$(git rev-parse HEAD)
+        
+        echo "⬇️  Pulling latest changes on $default_branch..."
+        git pull origin "$default_branch"
+        
+        # Switch back to original branch and merge default branch
+        echo "🔀 Switching back to $current_branch..."
+        git checkout "$current_branch"
+        
+        echo "🔄 Merging $default_branch into $current_branch..."
+        git merge "$default_branch"
+        
+        # Run npm install after merging if package files changed
+        if [[ -f "package.json" ]] && package_files_changed "$old_default_head" "origin/$default_branch"; then
+            echo "📦 Package files changed - running npm install..."
+            npm install
+        elif [[ -f "package.json" ]]; then
+            echo "📦 No package changes - skipping npm install"
+        fi
+    fi
+    
+    echo "🎉 Update process completed successfully!"
+    
+    # Show current status
+    echo "📊 Current status:"
+    echo "   Branch: $(git branch --show-current)"
+    echo "   Latest commit: $(git log -1 --oneline)"
 }
 
 # ============ DATABASE ============

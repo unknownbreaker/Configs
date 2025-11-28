@@ -6,6 +6,7 @@ return {
       vim.list_extend(opts.ensure_installed, {
         "bash",
         "css",
+        "dockerfile",
         "html",
         "lua",
         "make",
@@ -14,7 +15,7 @@ return {
         "query",
         "regex",
         "scss",
-        "tcl",
+        -- "tcl",
         "tsx",
         "vim",
         "xml",
