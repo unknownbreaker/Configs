@@ -88,3 +88,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     ]])
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*.md" },
+  callback = function()
+    vim.opt_local.colorcolumn = "85"
+    vim.opt_local.textwidth = 85
+  end,
+})
