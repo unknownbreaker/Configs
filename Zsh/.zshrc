@@ -813,7 +813,8 @@ fi
 
 # ============= LOCAL DEVELOPMENT ================
 # Run reverse proxy
-alias rproxy="local-ssl-proxy --key ~/.ssl/_wildcard.flightaware.com-key.pem --cert ~/.ssl/_wildcard.flightaware.com.pem --source 443 --target"
+alias rproxy="local-ssl-proxy --key $HOME/.ssl/_wildcard.flightaware.com-key.pem --cert $HOME/.ssl/_wildcard.flightaware.com.pem --source 443 --target"
+alias mrproxy="concurrently \"nx serve live --port=4200\" \"nx serve homepage --port=4201\" \"mlsp --key=$HOME/.ssl/_wildcard.flightaware.com-key.pem --cert=$HOME/.ssl/_wildcard.flightaware.com.pem --source=443 --routing=$HOME/.ssl/routing-table.json\""
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
